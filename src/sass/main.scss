@@ -1,0 +1,106 @@
+@import "./resets";
+@import "./variables";
+@import "./animations";
+
+@mixin flex-center($direction: row) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: $direction;
+}
+
+@mixin flex-space($direction: row) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: $direction;
+}
+
+// Main
+
+body {
+  font-family: $primary-font, $tertiary-font;
+  background-color: $dark-primary;
+  color: $light-primary;
+}
+
+// Typography
+
+h1 {
+  font-size: 7.6rem;
+}
+
+p {
+  font-size: 1.6rem;
+}
+
+// Colorful typography
+
+.text-gradient {
+  background: $primary-gradient;
+  background-clip: text;
+  color: transparent;
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  animation: move-gradient 4s ease-in-out infinite alternate;
+}
+
+// Links
+
+a {
+  font-size: 1.6rem;
+  text-decoration: none;
+  color: $light-primary;
+}
+
+// Buttons
+
+button,
+.btn {
+  font-size: 1.4rem;
+  padding: 1rem 1.2rem;
+  border-radius: 3px;
+  border: none;
+  background-color: $dark-primary;
+  color: $light-primary;
+  font-family: $primary-font;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-container {
+  display: inline-block;
+  padding: 0.3rem;
+  border-radius: 5px;
+  background: $primary-gradient;
+}
+
+// Home
+
+.home-page {
+  padding: $home-page-padding;
+}
+
+.home-header {
+  @include flex-space;
+  padding: 2.4rem 4.4rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  &-button:nth-child(n) {
+    margin-left: 2.8rem;
+  }
+}
+
+.hero {
+  @include flex-center(column);
+  height: 100vh;
+  gap: 1.8rem;
+
+  &-description {
+    font-family: $secondary-font;
+    font-size: 2rem;
+  }
+}
