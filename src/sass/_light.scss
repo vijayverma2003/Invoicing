@@ -1,0 +1,21 @@
+.light {
+  color: darken($light-primary, 100%);
+  background: lighten($dark-primary, 100%);
+
+  .input-container {
+    background-color: lighten($dark-secondary, 76%);
+  }
+
+  input {
+    color: darken($light-secondary, 100%);
+  }
+
+  button {
+    color: darken($light-primary, 100%);
+    background-color: lighten($dark-primary, 100%);
+  }
+
+  a {
+    color: black;
+  }
+}

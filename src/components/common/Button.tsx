@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface buttonProps {
   children: string;
@@ -7,15 +7,15 @@ interface buttonProps {
 }
 
 function Button({ children, className, href }: buttonProps): JSX.Element {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (href) navigate(href);
+  };
+
   return (
     <div className={`btn-container ${className}`}>
-      {href ? (
-        <Link className="btn" to={href}>
-          <button>{children}</button>
-        </Link>
-      ) : (
-        <button>{children}</button>
-      )}
+      <button onClick={handleClick}>{children}</button>
     </div>
   );
 }

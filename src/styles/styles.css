@@ -62,7 +62,7 @@ html {
   top: 30rem;
   left: 14.4rem;
   width: 360px;
-  box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.1);
 }
 
 #home-invoice-2 {
@@ -110,7 +110,7 @@ html {
 .home-features .home-feature-card {
   padding: 3.2rem 2rem;
   border-radius: 8px;
-  box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.1);
 }
 .home-features .home-feature-card img {
   width: 30px;
@@ -148,6 +148,24 @@ html {
   display: block;
   margin-bottom: 1rem;
   font-size: 1.2rem;
+}
+
+.light {
+  color: black;
+  background: white;
+}
+.light .input-container {
+  background-color: #f2f2f2;
+}
+.light input {
+  color: black;
+}
+.light button {
+  color: black;
+  background-color: white;
+}
+.light a {
+  color: black;
 }
 
 body {
@@ -210,7 +228,7 @@ a {
 }
 
 .link-primary {
-  color: dodgerblue;
+  color: dodgerblue !important;
 }
 
 button,
@@ -247,7 +265,7 @@ button,
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
 }
 

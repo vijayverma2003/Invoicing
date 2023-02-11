@@ -3,9 +3,9 @@
 @import "./mixins";
 @import "./animations";
 @import "./home";
+@import "./light";
 
 // Main
-
 body {
   font-family: $primary-font, $tertiary-font;
   background-color: $dark-primary;
@@ -66,7 +66,7 @@ a {
 }
 
 .link-primary {
-  color: $color-accent;
+  color: $color-accent !important;
 }
 
 // Buttons
