@@ -2,6 +2,7 @@ import { InputInterface } from "../../models/login";
 import emailSVG from "../../svg/email.svg";
 import Form from "../common/Form";
 import passwordSVG from "../../svg/password.svg";
+import { Link } from "react-router-dom";
 
 function LoginForm() {
   const data = { email: "", password: "" };
@@ -30,9 +31,9 @@ function LoginForm() {
         <Form button={{ text: "Login" }} state={data} inputs={inputs} />
         <p className="login-description">
           Don't have an account?{" "}
-          <a href="#" className="link-primary">
+          <Link to="/register" className="link-primary">
             Register
-          </a>
+          </Link>
         </p>
       </div>
     </section>

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 interface buttonProps {
   children: string;
   className?: string;
@@ -8,9 +10,9 @@ function Button({ children, className, href }: buttonProps): JSX.Element {
   return (
     <div className={`btn-container ${className}`}>
       {href ? (
-        <a className="btn" href={href}>
+        <Link className="btn" to={href}>
           <button>{children}</button>
-        </a>
+        </Link>
       ) : (
         <button>{children}</button>
       )}

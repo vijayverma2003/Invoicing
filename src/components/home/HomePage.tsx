@@ -2,6 +2,7 @@ import Button from "../common/Button";
 import invoiceSVG from "../../svg/invoice.svg";
 import productSVG from "../../svg/product.svg";
 import cardSVG from "../../svg/card.svg";
+import { Link } from "react-router-dom";
 
 function HomePage(): JSX.Element {
   return (
@@ -9,10 +10,10 @@ function HomePage(): JSX.Element {
       <header className="home-header">
         <h3>V Business</h3>
         <div>
-          <a className="home-header-button" href="#">
+          <Link to="/login" className="home-header-button">
             Login
-          </a>
-          <Button href="#" className="home-header-button">
+          </Link>
+          <Button href="/register" className="home-header-button">
             Join Now
           </Button>
         </div>
