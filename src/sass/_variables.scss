@@ -8,8 +8,10 @@ $tertiary-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto
 // Color
 
 $dark-primary: #1c1c1c;
+$dark-secondary: #303030;
 
 $light-primary: #fff;
+$light-secondary: #dadada;
 
 $color-accent: dodgerblue;
 
@@ -32,4 +34,4 @@ $home-page-padding: 0 4.4rem;
 
 // Shadows
 
-$primary-shadow: 4px 4px 20px 10px rgba(0, 0, 0, 0.5);
+$primary-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.3);

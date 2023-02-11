@@ -21,6 +21,135 @@ html {
     background-position: 100% 0;
   }
 }
+.home-page {
+  padding: 0 4.4rem;
+}
+
+.home-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding: 2.4rem 4.4rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.home-header-button:nth-child(n) {
+  margin-left: 2.8rem;
+}
+
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  gap: 1.8rem;
+}
+.hero-description {
+  font-size: 2rem;
+}
+
+.home-invoice-showcase {
+  position: relative;
+  padding: 0 14rem;
+  height: 120vh;
+}
+.home-invoice-showcase .home-invoice-image {
+  position: absolute;
+  top: 30rem;
+  left: 14.4rem;
+  width: 360px;
+  box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.3);
+}
+
+#home-invoice-2 {
+  width: 280px;
+  left: auto;
+  right: 24.4rem;
+  top: 10rem;
+}
+
+.home-dashboard {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.home-dashboard-heading {
+  z-index: -1;
+  font-size: 3.6rem;
+}
+.home-dashboard img {
+  width: 70%;
+}
+.home-dashboard-description {
+  font-size: 1.8rem;
+  width: 50%;
+  text-align: center;
+}
+
+.home-features {
+  margin: 12rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.home-features-grid {
+  display: grid;
+  grid-template: repeat(1, 1fr)/repeat(3, 1fr);
+  gap: 6rem;
+  width: 100%;
+  margin: 8rem auto;
+  width: 70%;
+}
+.home-features .home-feature-card {
+  padding: 3.2rem 2rem;
+  border-radius: 8px;
+  box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.3);
+}
+.home-features .home-feature-card img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+.home-features .home-feature-card-heading {
+  margin-top: 2rem;
+}
+.home-features .home-feature-card-description {
+  margin-top: 2rem;
+}
+
+.home-more-features {
+  margin: 8rem auto;
+  padding: 14.4rem;
+}
+.home-more-features-list {
+  padding-left: 1.8rem;
+  margin-top: 6rem;
+}
+.home-more-features-list li {
+  font-size: 1.6rem;
+  margin-top: 2.4rem;
+  letter-spacing: 1.2px;
+}
+
+.home-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+.home-footer-link {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
 body {
   font-family: "Lato", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background-color: #1c1c1c;
@@ -87,7 +216,7 @@ a {
 button,
 .btn {
   font-size: 1.4rem;
-  padding: 1rem 1.2rem;
+  padding: 0.8rem 1.2rem;
   border-radius: 3px;
   border: none;
   background-color: #1c1c1c;
@@ -104,133 +233,72 @@ button,
   background: linear-gradient(to right, #a148af, #982ebd, #3256d4, #2c7cc6, #952cc6);
 }
 
-.home-page {
-  padding: 0 4.4rem;
-}
-
-.home-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: row;
-  padding: 2.4rem 4.4rem;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-}
-.home-header-button:nth-child(n) {
-  margin-left: 2.8rem;
-}
-
-.hero {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+.page {
   height: 100vh;
-  gap: 1.8rem;
-}
-.hero-description {
-  font-size: 2rem;
-}
-
-.home-invoice-showcase {
-  position: relative;
-  padding: 0 14rem;
-  height: 120vh;
-}
-.home-invoice-showcase .home-invoice-image {
-  position: absolute;
-  top: 30rem;
-  left: 14.4rem;
-  width: 360px;
-  box-shadow: 4px 4px 20px 10px rgba(0, 0, 0, 0.5);
-}
-
-#home-invoice-2 {
-  width: 280px;
-  left: auto;
-  right: 24.4rem;
-  top: 10rem;
-}
-
-.home-dashboard {
-  position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-.home-dashboard-heading {
-  z-index: -1;
-  font-size: 3.6rem;
-}
-.home-dashboard img {
-  width: 70%;
-}
-.home-dashboard-description {
-  font-size: 1.8rem;
-  width: 50%;
-  text-align: center;
-}
-
-.home-features {
-  margin: 12rem auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-.home-features-grid {
-  display: grid;
-  grid-template: repeat(1, 1fr)/repeat(3, 1fr);
-  gap: 6rem;
-  width: 100%;
-  margin: 8rem auto;
-  width: 70%;
-}
-.home-features .home-feature-card {
-  padding: 3.2rem 2rem;
-  border-radius: 8px;
-  box-shadow: 4px 4px 20px 10px rgba(0, 0, 0, 0.5);
-}
-.home-features .home-feature-card img {
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-}
-.home-features .home-feature-card-heading {
-  margin-top: 2rem;
-}
-.home-features .home-feature-card-description {
-  margin-top: 2rem;
-}
-
-.home-more-features {
-  margin: 8rem auto;
-  padding: 14.4rem;
-}
-.home-more-features-list {
-  padding-left: 1.8rem;
-  margin-top: 6rem;
-}
-.home-more-features-list li {
-  font-size: 1.6rem;
-  margin-top: 2.4rem;
-  letter-spacing: 1.2px;
-}
-
-.home-footer {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
   flex-direction: row;
 }
-.home-footer-link {
-  display: block;
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
+
+.login {
+  padding: 0 2.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+}
+
+.login-heading {
+  margin: 5rem 0;
+}
+
+.login-description {
+  font-size: 1rem;
+  margin-bottom: 2.4rem;
+  letter-spacing: 1px;
+}
+.login-description a {
+  font-size: 1rem;
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.8rem;
+  background-color: #303030;
+  padding: 0.8rem 1rem;
+  border-radius: 5px;
+  width: 300px;
+  margin: 1.6rem 0;
+}
+
+input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #dadada;
+  font-size: 1.6rem;
+  font-family: "Lato";
+  font-weight: bold;
+}
+
+.input-svg {
+  width: 25px;
+  height: 25px;
+}
+
+::placeholder {
+  font-weight: bold;
+}
+
+.form-button {
+  margin: 5rem 0;
 }
 
 /*# sourceMappingURL=styles.css.map */

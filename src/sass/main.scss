@@ -1,29 +1,8 @@
 @import "./resets";
 @import "./variables";
+@import "./mixins";
 @import "./animations";
-
-@mixin flex-center($direction: row) {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: $direction;
-}
-
-@mixin flex-space($direction: row) {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: $direction;
-}
-
-@mixin text-gradient($gradient: $primary-gradient) {
-  background: $gradient;
-  background-clip: text;
-  background-position: 100% 0;
-  background-size: 200% 100%;
-  color: transparent;
-  animation: move-gradient 4s ease-in-out infinite alternate;
-}
+@import "./home";
 
 // Main
 
@@ -95,7 +74,7 @@ a {
 button,
 .btn {
   font-size: 1.4rem;
-  padding: 1rem 1.2rem;
+  padding: 0.8rem 1.2rem;
   border-radius: 3px;
   border: none;
   background-color: $dark-primary;
@@ -112,132 +91,64 @@ button,
   background: $primary-gradient;
 }
 
-// Home
+// Input
 
-.home-page {
-  padding: $home-page-padding;
-}
-
-.home-header {
-  @include flex-space;
-  padding: 2.4rem 4.4rem;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-
-  &-button:nth-child(n) {
-    margin-left: 2.8rem;
-  }
-}
-
-.hero {
-  @include flex-center(column);
+.page {
   height: 100vh;
-  gap: 1.8rem;
-
-  &-description {
-    font-size: 2rem;
-  }
+  @include flex-center();
 }
 
-.home-invoice-showcase {
-  position: relative;
-  padding: 0 14rem;
-  height: 120vh;
-
-  .home-invoice-image {
-    position: absolute;
-    top: 30rem;
-    left: 14.4rem;
-    width: 360px;
-    box-shadow: $primary-shadow;
-  }
-}
-
-#home-invoice-2 {
-  width: 280px;
-  left: auto;
-  right: 24.4rem;
-  top: 10rem;
-}
-
-.home-dashboard {
-  position: relative;
+.login {
+  padding: 0 2.8rem;
   @include flex-center(column);
+  box-shadow: $primary-shadow;
+  border-radius: 12px;
+}
 
-  &-heading {
-    z-index: -1;
-    font-size: 3.6rem;
-  }
+.login-heading {
+  margin: 5rem 0;
+}
 
-  img {
-    width: 70%;
-  }
+.login-description {
+  font-size: 1rem;
+  margin-bottom: 2.4rem;
+  letter-spacing: 1px;
 
-  &-description {
-    font-size: 1.8rem;
-    width: 50%;
-    text-align: center;
+  a {
+    font-size: 1rem;
   }
 }
 
-.home-features {
-  margin: 12rem auto;
-  @include flex-center(column);
-
-  &-grid {
-    display: grid;
-    grid-template: repeat(1, 1fr) / repeat(3, 1fr);
-    gap: 6rem;
-    width: 100%;
-    margin: 8rem auto;
-    width: 70%;
-  }
-
-  .home-feature-card {
-    padding: 3.2rem 2rem;
-    border-radius: 8px;
-    box-shadow: $primary-shadow;
-
-    img {
-      width: 30px;
-      height: 30px;
-      object-fit: contain;
-    }
-
-    &-heading {
-      margin-top: 2rem;
-    }
-
-    &-description {
-      margin-top: 2rem;
-    }
-  }
+.input-container {
+  @include flex-center();
+  gap: 0.8rem;
+  background-color: $dark-secondary;
+  padding: 0.8rem 1rem;
+  border-radius: 5px;
+  width: 300px;
+  margin: 1.6rem 0;
 }
 
-.home-more-features {
-  margin: 8rem auto;
-  padding: 14.4rem;
-
-  &-list {
-    padding-left: 1.8rem;
-    margin-top: 6rem;
-
-    li {
-      font-size: 1.6rem;
-      margin-top: 2.4rem;
-      letter-spacing: 1.2px;
-    }
-  }
+input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: $light-secondary;
+  font-size: 1.6rem;
+  font-family: $primary-font;
+  font-weight: bold;
 }
 
-.home-footer {
-  @include flex-space();
+.input-svg {
+  width: 25px;
+  height: 25px;
+}
 
-  &-link {
-    display: block;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-  }
+::placeholder {
+  font-weight: bold;
+}
+
+.form-button {
+  margin: 5rem 0;
 }

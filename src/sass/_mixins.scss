@@ -1,0 +1,22 @@
+@mixin flex-center($direction: row) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: $direction;
+}
+
+@mixin flex-space($direction: row) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: $direction;
+}
+
+@mixin text-gradient($gradient: $primary-gradient) {
+  background: $gradient;
+  background-clip: text;
+  background-position: 100% 0;
+  background-size: 200% 100%;
+  color: transparent;
+  animation: move-gradient 4s ease-in-out infinite alternate;
+}

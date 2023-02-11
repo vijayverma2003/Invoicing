@@ -1,0 +1,129 @@
+// Home
+
+.home-page {
+  padding: $home-page-padding;
+}
+
+.home-header {
+  @include flex-space;
+  padding: 2.4rem 4.4rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  &-button:nth-child(n) {
+    margin-left: 2.8rem;
+  }
+}
+
+.hero {
+  @include flex-center(column);
+  height: 100vh;
+  gap: 1.8rem;
+
+  &-description {
+    font-size: 2rem;
+  }
+}
+
+.home-invoice-showcase {
+  position: relative;
+  padding: 0 14rem;
+  height: 120vh;
+
+  .home-invoice-image {
+    position: absolute;
+    top: 30rem;
+    left: 14.4rem;
+    width: 360px;
+    box-shadow: $primary-shadow;
+  }
+}
+
+#home-invoice-2 {
+  width: 280px;
+  left: auto;
+  right: 24.4rem;
+  top: 10rem;
+}
+
+.home-dashboard {
+  position: relative;
+  @include flex-center(column);
+
+  &-heading {
+    z-index: -1;
+    font-size: 3.6rem;
+  }
+
+  img {
+    width: 70%;
+  }
+
+  &-description {
+    font-size: 1.8rem;
+    width: 50%;
+    text-align: center;
+  }
+}
+
+.home-features {
+  margin: 12rem auto;
+  @include flex-center(column);
+
+  &-grid {
+    display: grid;
+    grid-template: repeat(1, 1fr) / repeat(3, 1fr);
+    gap: 6rem;
+    width: 100%;
+    margin: 8rem auto;
+    width: 70%;
+  }
+
+  .home-feature-card {
+    padding: 3.2rem 2rem;
+    border-radius: 8px;
+    box-shadow: $primary-shadow;
+
+    img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+    }
+
+    &-heading {
+      margin-top: 2rem;
+    }
+
+    &-description {
+      margin-top: 2rem;
+    }
+  }
+}
+
+.home-more-features {
+  margin: 8rem auto;
+  padding: 14.4rem;
+
+  &-list {
+    padding-left: 1.8rem;
+    margin-top: 6rem;
+
+    li {
+      font-size: 1.6rem;
+      margin-top: 2.4rem;
+      letter-spacing: 1.2px;
+    }
+  }
+}
+
+.home-footer {
+  @include flex-space();
+
+  &-link {
+    display: block;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+}
