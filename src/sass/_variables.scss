@@ -11,6 +11,8 @@ $dark-primary: #1c1c1c;
 
 $light-primary: #fff;
 
+$color-accent: dodgerblue;
+
 // Gradients
 
 $primary-gradient: linear-gradient(
@@ -22,6 +24,12 @@ $primary-gradient: linear-gradient(
   #952cc6
 );
 
+$indian-gradient: linear-gradient(to right, #ef732e, #fff, #227a35);
+
 // Paddings
 
 $home-page-padding: 0 4.4rem;
+
+// Shadows
+
+$primary-shadow: 4px 4px 20px 10px rgba(0, 0, 0, 0.5);
