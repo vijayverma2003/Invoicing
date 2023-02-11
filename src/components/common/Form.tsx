@@ -7,7 +7,15 @@ type Data = {
   [key: string]: any;
 };
 
-function Form({ inputs, state }: { inputs: InputInterface[]; state: Data }) {
+function Form({
+  inputs,
+  state,
+  button,
+}: {
+  inputs: InputInterface[];
+  state: Data;
+  button: Data;
+}) {
   const [data, setData] = useState(state);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +38,7 @@ function Form({ inputs, state }: { inputs: InputInterface[]; state: Data }) {
         />
       ))}
 
-      <Button className="form-button">Login</Button>
+      <Button className="form-button">{button.text}</Button>
     </>
   );
 }

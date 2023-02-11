@@ -3,7 +3,7 @@ import emailSVG from "../../svg/email.svg";
 import Form from "../common/Form";
 import passwordSVG from "../../svg/password.svg";
 
-function LoginForm() {
+function RegisterForm() {
   const data = { email: "", password: "" };
 
   const inputs: InputInterface[] = [
@@ -22,16 +22,15 @@ function LoginForm() {
       value: "",
     },
   ];
-
   return (
     <section className="page">
       <div className="login">
-        <h2 className="text-gradient login-heading">Login</h2>
-        <Form button={{ text: "Login" }} state={data} inputs={inputs} />
+        <h2 className="text-gradient login-heading">Register</h2>
+        <Form button={{ text: "Register" }} state={data} inputs={inputs} />
         <p className="login-description">
-          Don't have an account?{" "}
+          Already have an account?{" "}
           <a href="#" className="link-primary">
-            Register
+            Login
           </a>
         </p>
       </div>
@@ -39,4 +38,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default RegisterForm;
