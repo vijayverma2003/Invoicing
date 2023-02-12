@@ -336,6 +336,7 @@ button,
   font-family: "Lato";
   font-weight: bold;
   cursor: pointer;
+  outline: none;
 }
 
 .btn-container {

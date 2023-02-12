@@ -1,13 +1,16 @@
-import filterSVG from "../../svg/filter.svg";
 import { FilterSVG, ScreenModeSVG, SettingsSVG, UserSVG } from "../common/SVG";
 
 function Dashboard() {
+  const handleScreenMode = () => {
+    document.querySelector("body")?.classList.toggle("light");
+  };
+
   return (
     <section className="page">
       <header className="page-header">
         <h4>V Business</h4>
         <div className="page-header-icons">
-          <button className="btn-icon">
+          <button onClick={handleScreenMode} className="btn-icon">
             <ScreenModeSVG />
           </button>
           <button className="btn-icon">
