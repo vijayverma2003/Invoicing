@@ -1,34 +1,22 @@
-import { InputInterface } from "../../models/login";
-import emailSVG from "../../svg/email.svg";
-import Form from "../common/Form";
-import passwordSVG from "../../svg/password.svg";
 import { Link } from "react-router-dom";
+import { loginForm as lf } from "../../models/models";
+import Input from "../common/Input";
+import useForm from "../../hooks/useForm";
 
 function LoginForm() {
-  const data = { email: "", password: "" };
-
-  const inputs: InputInterface[] = [
-    {
-      name: "email",
-      placeholder: "Email Address",
-      svg: emailSVG,
-      type: "email",
-      value: "",
-    },
-    {
-      name: "password",
-      placeholder: "Password",
-      svg: passwordSVG,
-      type: "password",
-      value: "",
-    },
-  ];
+  const { state, handleChange } = useForm(lf.initialState, lf.model);
+  const [data] = state;
 
   return (
     <section className="form-page">
       <div className="login">
         <h2 className="text-gradient login-heading">Login</h2>
-        <Form button={{ text: "Login" }} state={data} inputs={inputs} />
+        <Input {...lf.model.email} value={data.email} onChange={handleChange} />
+        <Input
+          {...lf.model.password}
+          value={data.password}
+          onChange={handleChange}
+        />
         <p className="login-description">
           Don't have an account?{" "}
           <Link to="/register" className="link-primary">

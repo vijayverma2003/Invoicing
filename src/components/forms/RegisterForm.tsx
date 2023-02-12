@@ -1,4 +1,4 @@
-import { InputInterface } from "../../models/login";
+import { InputInterface } from "../../models/form";
 import emailSVG from "../../svg/email.svg";
 import Form from "../common/Form";
 import passwordSVG from "../../svg/password.svg";

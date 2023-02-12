@@ -62,7 +62,7 @@ html {
   top: 30rem;
   left: 14.4rem;
   width: 360px;
-  box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 4px 20px 5px rgb(0, 0, 0);
 }
 
 #home-invoice-2 {
@@ -110,7 +110,7 @@ html {
 .home-features .home-feature-card {
   padding: 3.2rem 2rem;
   border-radius: 8px;
-  box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 4px 20px 5px rgb(0, 0, 0);
 }
 .home-features .home-feature-card img {
   width: 30px;
@@ -364,7 +364,7 @@ button,
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 4px 20px 5px rgb(0, 0, 0);
   border-radius: 12px;
 }
 
