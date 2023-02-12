@@ -3,6 +3,7 @@
 @import "./mixins";
 @import "./animations";
 @import "./home";
+@import "./dashboard";
 @import "./light";
 
 // Main
@@ -30,6 +31,11 @@ h4 {
   font-size: 1.4rem;
 }
 
+h5 {
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
 p {
   font-size: 1.6rem;
   line-height: 1.4;
@@ -49,10 +55,6 @@ p {
   color: #909090;
 }
 
-// .text-secondary {
-//   // font-family: $secondary-font;
-// }
-
 .text-right {
   text-align: right;
 }
@@ -60,7 +62,6 @@ p {
 // Links
 
 a {
-  font-size: 1.6rem;
   text-decoration: none;
   color: $light-primary;
 }
@@ -91,9 +92,13 @@ button,
   background: $primary-gradient;
 }
 
+.btn-icon {
+  padding: 0;
+}
+
 // Input
 
-.page {
+.form-page {
   height: 100vh;
   @include flex-center();
 }
@@ -151,4 +156,62 @@ input {
 
 .form-button {
   margin: 5rem 0;
+}
+
+// Dashboard
+.page {
+  border-left: 1px dotted $light-secondary;
+  margin-left: 180px;
+  min-height: 100vh;
+
+  &-header {
+    @include flex-space;
+    padding: 0.8rem 2rem;
+    border-bottom: 1px solid $light-secondary;
+
+    &-icons button:nth-child(n) {
+      margin-left: 1.8rem;
+    }
+  }
+
+  &-content {
+    padding: 0.8rem 2rem;
+  }
+}
+
+// Tables
+
+table {
+  width: 100%;
+}
+
+.page-table {
+  width: 75%;
+
+  td,
+  th {
+    font-size: 1.25rem;
+  }
+}
+
+.td-left {
+  text-align: left;
+}
+
+.td-center {
+  text-align: center;
+}
+
+th {
+  color: #909090;
+}
+
+td {
+  text-align: center;
+}
+
+th,
+td {
+  padding: 0.8rem 0;
+  font-size: 1.1rem;
 }

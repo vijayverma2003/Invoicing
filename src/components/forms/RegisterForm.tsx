@@ -24,7 +24,7 @@ function RegisterForm() {
     },
   ];
   return (
-    <section className="page">
+    <section className="form-page">
       <div className="login">
         <h2 className="text-gradient login-heading">Register</h2>
         <Form button={{ text: "Register" }} state={data} inputs={inputs} />

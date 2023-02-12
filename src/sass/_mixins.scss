@@ -20,3 +20,8 @@
   color: transparent;
   animation: move-gradient 4s ease-in-out infinite alternate;
 }
+
+@mixin grid($gap: 0) {
+  display: grid;
+  gap: $gap;
+}

@@ -150,9 +150,90 @@ html {
   font-size: 1.2rem;
 }
 
+.dashboard {
+  display: grid;
+  grid-template: repeat(1, 1fr)/1fr 260px;
+  gap: 4rem;
+  padding: 1.4rem 2rem;
+}
+.dashboard-heading {
+  margin: 1.4rem 0;
+}
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding: 0.8rem 0;
+}
+
+.dashboard-box {
+  background-color: rgba(255, 255, 255, 0.09);
+  border-radius: 8px;
+}
+.dashboard-box-description {
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+  gap: 1.4rem;
+  border-top: 1px solid #909090;
+  width: 100%;
+  text-align: center;
+}
+
+.dashboard-data {
+  display: grid;
+  grid-template: repeat(1, 1fr)/repeat(3, 1fr);
+  gap: 1.4rem;
+}
+.dashboard-data .dashboard-box {
+  padding: 1.4rem;
+}
+
+.dashboard-data-heading,
+.dashboard-data-description {
+  margin-bottom: 1.4rem;
+}
+
+.dashboard-sales-chart,
+.dashboard-overdues {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 2.4rem;
+  padding: 1rem;
+}
+
+.dashboard-sales-chart-image {
+  width: 100%;
+  height: 300px;
+  object-fit: contain;
+  padding: 4rem;
+}
+
+.dashboard-side {
+  padding: 2.4rem;
+  margin-bottom: 2rem;
+}
+.dashboard-side-heading {
+  margin-bottom: 1.4rem;
+}
+.dashboard-side-analytics {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 2rem;
+}
+
 .light {
   color: black;
+  color: black;
   background: white;
+}
+.light .text-lighter {
+  color: #606060;
 }
 .light .input-container {
   background-color: #f2f2f2;
@@ -167,10 +248,19 @@ html {
 .light a {
   color: black;
 }
+.light .dashboard-box {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+.light .fill {
+  fill: #303030;
+}
+.light .stroke {
+  stroke: #303030;
+}
 
 body {
   font-family: "Lato", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-color: #1c1c1c;
+  background-color: #101010;
   color: #fff;
 }
 
@@ -188,6 +278,11 @@ h3 {
 
 h4 {
   font-size: 1.4rem;
+}
+
+h5 {
+  font-size: 1.2rem;
+  line-height: 1.4;
 }
 
 p {
@@ -222,7 +317,6 @@ p {
 }
 
 a {
-  font-size: 1.6rem;
   text-decoration: none;
   color: #fff;
 }
@@ -237,7 +331,7 @@ button,
   padding: 0.8rem 1.2rem;
   border-radius: 3px;
   border: none;
-  background-color: #1c1c1c;
+  background-color: #101010;
   color: #fff;
   font-family: "Lato";
   font-weight: bold;
@@ -251,7 +345,11 @@ button,
   background: linear-gradient(to right, #a148af, #982ebd, #3256d4, #2c7cc6, #952cc6);
 }
 
-.page {
+.btn-icon {
+  padding: 0;
+}
+
+.form-page {
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -317,6 +415,60 @@ input {
 
 .form-button {
   margin: 5rem 0;
+}
+
+.page {
+  border-left: 1px dotted #dadada;
+  margin-left: 180px;
+  min-height: 100vh;
+}
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding: 0.8rem 2rem;
+  border-bottom: 1px solid #dadada;
+}
+.page-header-icons button:nth-child(n) {
+  margin-left: 1.8rem;
+}
+.page-content {
+  padding: 0.8rem 2rem;
+}
+
+table {
+  width: 100%;
+}
+
+.page-table {
+  width: 75%;
+}
+.page-table td,
+.page-table th {
+  font-size: 1.25rem;
+}
+
+.td-left {
+  text-align: left;
+}
+
+.td-center {
+  text-align: center;
+}
+
+th {
+  color: #909090;
+}
+
+td {
+  text-align: center;
+}
+
+th,
+td {
+  padding: 0.8rem 0;
+  font-size: 1.1rem;
 }
 
 /*# sourceMappingURL=styles.css.map */

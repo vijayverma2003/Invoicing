@@ -1,6 +1,11 @@
 .light {
   color: darken($light-primary, 100%);
+  color: darken($light-primary, 100%);
   background: lighten($dark-primary, 100%);
+
+  .text-lighter {
+    color: #606060;
+  }
 
   .input-container {
     background-color: lighten($dark-secondary, 76%);
@@ -17,5 +22,17 @@
 
   a {
     color: black;
+  }
+
+  .dashboard-box {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+
+  .fill {
+    fill: #303030;
+  }
+
+  .stroke {
+    stroke: #303030;
   }
 }
