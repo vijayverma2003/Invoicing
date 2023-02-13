@@ -1,34 +1,33 @@
-import { InputInterface } from "../../models/form";
-import emailSVG from "../../svg/email.svg";
-import Form from "../common/Form";
-import passwordSVG from "../../svg/password.svg";
 import { Link } from "react-router-dom";
+import { loginAndRegisterFormModel as lf } from "../../models/models";
+import Button from "../common/Button";
+import Input from "../common/Input";
+import useForm from "../../hooks/useForm";
 
 function RegisterForm() {
-  const data = { email: "", password: "" };
+  const { state, handleChange } = useForm(lf.initialState);
+  const [data] = state;
 
-  const inputs: InputInterface[] = [
-    {
-      name: "email",
-      placeholder: "Email Address",
-      svg: emailSVG,
-      type: "email",
-      value: "",
-    },
-    {
-      name: "password",
-      placeholder: "Password",
-      svg: passwordSVG,
-      type: "password",
-      value: "",
-    },
-  ];
   return (
     <section className="form-page">
-      <div className="login">
-        <h2 className="text-gradient login-heading">Register</h2>
-        <Form button={{ text: "Register" }} state={data} inputs={inputs} />
-        <p className="login-description">
+      <div className="form-container">
+        <form className="form-primary">
+          <h2 className="text-gradient form-heading">Register</h2>
+          <Input
+            {...lf.model.email}
+            value={data.email}
+            onChange={handleChange}
+          />
+          <Input
+            {...lf.model.password}
+            value={data.password}
+            onChange={handleChange}
+          />
+          <Button className="btn-submit" href="/dashboard">
+            Register
+          </Button>
+        </form>
+        <p className="form-description">
           Already have an account?{" "}
           <Link to="/login" className="link-primary">
             Login

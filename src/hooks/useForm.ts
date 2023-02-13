@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { InputInterface } from "../models/form";
-
-interface Model {
-  [key: string]: InputInterface;
-}
+import React, { useState } from "react";
 
 interface Data {
   [key: string]: any;
 }
 
-function useForm(initialState: Data, model: Model) {
+function useForm(initialState: Data) {
   const [data, setData] = useState<Data>(initialState);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +13,18 @@ function useForm(initialState: Data, model: Model) {
     setData(d);
   };
 
-  return { state: [data, setData], handleChange };
+  const handleTabularChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    arr: string,
+    index: number
+  ) => {
+    const d = { ...data };
+    d[arr][index][e.target.name] = e.target.value;
+
+    setData(d);
+  };
+
+  return { state: [data, setData], handleChange, handleTabularChange };
 }
 
 export default useForm;

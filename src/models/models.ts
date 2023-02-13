@@ -1,8 +1,22 @@
 import emailSVG from "../svg/email.svg";
 import passwordSVG from "../svg/password.svg";
 
-export const loginForm = {
-  initialState: { email: "", password: "" },
+export interface Input {
+  name: string;
+  placeholder: string;
+  svg?: string;
+  type: string;
+  value: string;
+  tabular?: string;
+}
+
+interface FormModel {
+  initialState: { [key: string]: string | number | null | any[] };
+  model: { [key: string]: Input };
+}
+
+export const loginAndRegisterFormModel: FormModel = {
+  initialState: { email: "", password: "", products: [{ email: "" }] },
 
   model: {
     email: {
@@ -11,6 +25,7 @@ export const loginForm = {
       svg: emailSVG,
       type: "email",
       value: "",
+      tabular: "products",
     },
     password: {
       name: "password",

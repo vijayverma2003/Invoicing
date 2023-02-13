@@ -1,5 +1,3 @@
-import emailSVG from "../../svg/email.svg";
-
 interface inputProps {
   svg?: string;
   placeholder: string;

@@ -1,8 +1,8 @@
+import { Link } from "react-router-dom";
 import Button from "../common/Button";
+import cardSVG from "../../svg/card.svg";
 import invoiceSVG from "../../svg/invoice.svg";
 import productSVG from "../../svg/product.svg";
-import cardSVG from "../../svg/card.svg";
-import { Link } from "react-router-dom";
 
 function HomePage(): JSX.Element {
   return (

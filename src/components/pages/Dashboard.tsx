@@ -6,7 +6,7 @@ function Dashboard() {
   };
 
   return (
-    <section className="page">
+    <section id="main-page" className="page">
       <header className="page-header">
         <h4>V Business</h4>
         <div className="page-header-icons">

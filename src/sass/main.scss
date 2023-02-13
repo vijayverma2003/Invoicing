@@ -97,25 +97,41 @@ button,
   padding: 0;
 }
 
-// Input
+// Form
 
 .form-page {
   height: 100vh;
   @include flex-center();
 }
 
-.login {
+.form-container {
+  @include flex-center(column);
+  border: 2px solid $dark-secondary;
+  padding: 1rem 3.2rem;
+  border-radius: 8px;
+}
+
+.form-primary {
+  @include flex-center(column);
+  margin-bottom: 5rem;
+
+  .btn-submit {
+    margin-top: 4rem;
+  }
+}
+
+.form {
   padding: 0 2.8rem;
   @include flex-center(column);
   box-shadow: $primary-shadow;
   border-radius: 12px;
 }
 
-.login-heading {
+.form-heading {
   margin: 5rem 0;
 }
 
-.login-description {
+.form-description {
   font-size: 1rem;
   margin-bottom: 2.4rem;
   letter-spacing: 1px;
@@ -124,6 +140,8 @@ button,
     font-size: 1rem;
   }
 }
+
+// Inputs
 
 .input-container {
   @include flex-center();

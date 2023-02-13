@@ -2,7 +2,7 @@ import { AddSVG, FilterSVG, SearchSVG } from "../common/SVG";
 
 function Products() {
   return (
-    <section className="page products-page">
+    <section id="main-page" className="page products-page">
       <header className="page-header">
         <h4>Products</h4>
         <div className="page-header-icons">
