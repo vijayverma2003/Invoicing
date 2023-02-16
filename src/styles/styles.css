@@ -414,7 +414,8 @@ button,
   background-color: #303030;
   padding: 0.8rem 1rem;
   border-radius: 5px;
-  width: 300px;
+  max-width: 300px;
+  width: 100%;
   margin: 1.6rem 0;
 }
 
@@ -442,9 +443,12 @@ input {
   margin: 5rem 0;
 }
 
+#main-page {
+  margin-left: 180px;
+}
+
 .page {
   border-left: 1px dotted #dadada;
-  margin-left: 180px;
   min-height: 100vh;
 }
 .page-header {
@@ -460,15 +464,18 @@ input {
 }
 .page-content {
   padding: 0.8rem 2rem;
+  width: 100%;
+}
+.page-grid {
+  display: grid;
+  grid-template: repeat(1, 1fr)/1fr 260px;
+  gap: 4rem;
 }
 
 table {
   width: 100%;
 }
 
-.page-table {
-  width: 75%;
-}
 .page-table td,
 .page-table th {
   font-size: 1.25rem;
@@ -494,6 +501,59 @@ th,
 td {
   padding: 0.8rem 0;
   font-size: 1.1rem;
+}
+
+nav {
+  width: 180px;
+  position: fixed;
+  height: 100vh;
+}
+
+.nav-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.4rem 0.6rem;
+  width: 100%;
+}
+.nav-header-description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav-logo {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.nav-user {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.nav-items {
+  width: 100%;
+  list-style: none;
+}
+
+.nav-item {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.nav-item a {
+  display: block;
+  padding: 2rem;
+}
+.nav-item:hover {
+  background-color: #303030;
+}
+.nav-item:hover a {
+  color: #fff;
 }
 
 /*# sourceMappingURL=styles.css.map */

@@ -1,10 +1,10 @@
 import { AddSVG } from "../common/SVG";
 
-function Products() {
+function Customers(): JSX.Element {
   return (
     <section id="main-page" className="page products-page">
       <header className="page-header">
-        <h4>Products</h4>
+        <h4>Customers</h4>
         <div className="page-header-icons">
           <button className="btn-icon">
             <AddSVG />
@@ -17,21 +17,19 @@ function Products() {
             <thead>
               <tr>
                 <th className="td-left">Name</th>
-                <th>Cost</th>
-                <th>Tax</th>
-                <th>HSN</th>
+                <th className="td-left">Email</th>
                 <th>Sales</th>
-                <th>Stock</th>
+                <th>City</th>
+                <th>State</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td className="td-left">Black T Shirt</td>
-                <td>₹999/pcs</td>
-                <td>12%</td>
-                <td>5903</td>
-                <td>₹9,990</td>
-                <td>15</td>
+                <td className="td-left">vijayvermakvp@gmail.com</td>
+                <td>₹8,930</td>
+                <td>Ratia</td>
+                <td>HR, 🇮🇳</td>
               </tr>
             </tbody>
           </table>
@@ -47,4 +45,4 @@ function Products() {
   );
 }
 
-export default Products;
+export default Customers;
