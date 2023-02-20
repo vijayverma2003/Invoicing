@@ -37,6 +37,13 @@
   }
 
   .form-container {
-    border: 2px solid $light-secondary;
+    box-shadow: $primary-shadow;
+  }
+
+  .nav-item {
+    .active {
+      background-color: $dark-secondary;
+      color: $light-primary;
+    }
   }
 }

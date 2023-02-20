@@ -11,30 +11,22 @@ function Invoices(): JSX.Element {
           </button>
         </div>
       </header>
-      <div className="page-content">
+      <div className="page-content page-grid">
         <div>
-          <table className="page-table">
-            <thead>
-              <tr>
-                <th className="td-left">INV</th>
-                <th>Customer</th>
-                <th>Date</th>
-                <th>Due Date</th>
-                <th>Total</th>
-                <th>Pending Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="td-left">001</td>
-                <td>Vijay</td>
-                <td className="text-lighter">20/02/2023</td>
-                <td className="text-lighter">28/02/2023</td>
-                <td>₹30,000</td>
-                <td>₹10,000</td>
-              </tr>
-            </tbody>
-          </table>
+          <div className="list-page-item">
+            <div>
+              <h4 className="list-page-item-heading">Vijay</h4>
+              <p className="text-lighter list-page-item-description">
+                #INV-123
+              </p>
+            </div>
+            <div>
+              <h4 className="list-page-item-heading text-right">$40,000</h4>
+              <p className="text-lighter list-page-item-description text-right">
+                Recieved
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

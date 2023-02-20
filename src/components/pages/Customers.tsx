@@ -1,6 +1,11 @@
 import { AddSVG } from "../common/SVG";
 
 function Customers(): JSX.Element {
+  const handleToggleSide = () => {
+    const sideBar = document.querySelector(".page-side");
+    sideBar?.classList.toggle("page-side-open");
+  };
+
   return (
     <section id="main-page" className="page products-page">
       <header className="page-header">
@@ -13,27 +18,24 @@ function Customers(): JSX.Element {
       </header>
       <div className="page-content page-grid">
         <div>
-          <table className="page-table">
-            <thead>
-              <tr>
-                <th className="td-left">Name</th>
-                <th className="td-left">Email</th>
-                <th>Sales</th>
-                <th>City</th>
-                <th>State</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="td-left">Black T Shirt</td>
-                <td className="td-left">vijayvermakvp@gmail.com</td>
-                <td>₹8,930</td>
-                <td>Ratia</td>
-                <td>HR, 🇮🇳</td>
-              </tr>
-            </tbody>
-          </table>
+          <div className="list-page-item">
+            <div>
+              <h4 className="list-page-item-heading">Luke Parker</h4>
+              <p className="text-lighter list-page-item-description">
+                lukefeelixparker@gmail.com
+              </p>
+            </div>
+            <div>
+              <h4 className="list-page-item-heading text-right">$4000</h4>
+              <p className="text-lighter list-page-item-description text-right">
+                Ratia, HR, 🇮🇳
+              </p>
+            </div>
+          </div>
         </div>
+        <button onClick={handleToggleSide} className="page-side-toggle">
+          Search
+        </button>
         <div className="page-side">
           <h4 className="text-lighter">Search</h4>
           <div className="input-container">
