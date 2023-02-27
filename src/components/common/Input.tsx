@@ -12,6 +12,7 @@ function Input({ svg, placeholder, name, type, value, ...args }: inputProps) {
     <div className="input-container">
       {svg && <img className="input-img" src={svg} alt="" />}
       <input
+        autoComplete="off"
         type={type}
         name={name}
         placeholder={placeholder}

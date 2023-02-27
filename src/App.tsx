@@ -12,17 +12,17 @@ import "./styles/styles.css";
 function App() {
   return (
     <>
-      <Routes>
+      {/* <Routes>
         <Route element={<RegisterForm />} path="/register" />
         <Route element={<LoginForm />} path="/login" />
         <Route element={<HomePage />} path="/" />
-      </Routes>
+      </Routes> */}
       <Navbar />
       <Routes>
         <Route element={<Invoices />} path="/invoices" />
         <Route element={<Customers />} path="/customers" />
         <Route element={<Products />} path="/products" />
-        <Route element={<Dashboard />} path="/dashboard" />
+        <Route element={<Dashboard />} path="/" />
       </Routes>
     </>
   );

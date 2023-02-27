@@ -62,7 +62,7 @@ html {
   top: 30rem;
   left: 14.4rem;
   width: 360px;
-  box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 4px 20px 5px rgb(0, 0, 0);
 }
 
 #home-invoice-2 {
@@ -110,7 +110,7 @@ html {
 .home-features .home-feature-card {
   padding: 3.2rem 2rem;
   border-radius: 8px;
-  box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 4px 20px 5px rgb(0, 0, 0);
 }
 .home-features .home-feature-card img {
   width: 30px;
@@ -287,7 +287,7 @@ html {
   stroke: #303030;
 }
 .light .form-container {
-  box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 4px 20px 5px rgb(0, 0, 0);
 }
 .light .nav-item .active {
   background-color: #303030;
@@ -407,6 +407,11 @@ button,
   padding: 0;
 }
 
+.btn-primary {
+  background-color: #fff;
+  color: #101010;
+}
+
 .form-page {
   height: 100vh;
   display: flex;
@@ -433,7 +438,8 @@ button,
   margin-bottom: 5rem;
   width: 320px;
 }
-.form-primary .btn-submit {
+
+.btn-submit {
   margin-top: 4rem;
 }
 
@@ -443,7 +449,7 @@ button,
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 4px 20px 5px rgb(0, 0, 0);
   border-radius: 12px;
 }
 
@@ -565,7 +571,7 @@ input {
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 4rem 2.4rem;
-    box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 4px 4px 20px 5px rgb(0, 0, 0);
     border-radius: 12px;
     width: calc(320px + 4.8rem);
   }
@@ -671,6 +677,55 @@ nav {
 }
 .list-page-item-active {
   background-color: red;
+}
+
+.grid {
+  display: grid;
+}
+
+.grid-1x2 {
+  grid-template: repeat(1, 1fr)/repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.grid-1x3 {
+  grid-template: repeat(1, 1fr)/repeat(3, 1fr);
+  gap: 1rem;
+}
+
+dialog {
+  border-radius: 8px;
+  z-index: 9;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-color: #dadada;
+}
+
+dialog::backdrop {
+  background-color: red;
+}
+
+.dialog-close {
+  position: absolute;
+  right: 1.4rem;
+  top: 1.4rem;
+  z-index: 10;
+}
+
+.form-dialog {
+  width: 420px;
+  padding: 2.8rem 3.2rem;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.form-dialog-heading {
+  color: #101010;
+  margin: 2.4rem;
 }
 
 /*# sourceMappingURL=styles.css.map */

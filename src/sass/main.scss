@@ -124,6 +124,11 @@ button,
   padding: 0;
 }
 
+.btn-primary {
+  background-color: $light-primary;
+  color: $dark-primary;
+}
+
 // Form
 
 .form-page {
@@ -142,10 +147,10 @@ button,
   @include flex-center(column);
   margin-bottom: 5rem;
   width: 320px;
+}
 
-  .btn-submit {
-    margin-top: 4rem;
-  }
+.btn-submit {
+  margin-top: 4rem;
 }
 
 .form {
@@ -403,5 +408,57 @@ nav {
 
   &-active {
     background-color: red;
+  }
+}
+
+// Grids
+
+.grid {
+  display: grid;
+}
+
+.grid-1x2 {
+  grid-template: repeat(1, 1fr) / repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.grid-1x3 {
+  grid-template: repeat(1, 1fr) / repeat(3, 1fr);
+  gap: 1rem;
+}
+
+// Dialogs
+
+dialog {
+  border-radius: 8px;
+  z-index: 9;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-color: $light-secondary;
+}
+
+dialog::backdrop {
+  background-color: red;
+}
+
+.dialog-close {
+  position: absolute;
+  right: 1.4rem;
+  top: 1.4rem;
+  z-index: 10;
+}
+
+.form-dialog {
+  width: 420px;
+  padding: 2.8rem 3.2rem;
+  border-radius: 12px;
+
+  @include flex-center(column);
+
+  &-heading {
+    color: $dark-primary;
+    margin: 2.4rem;
   }
 }

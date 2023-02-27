@@ -15,7 +15,7 @@ function Navbar() {
       </div>
       <ul className="nav-items">
         <li className="nav-item">
-          <NavLink to="/dashboard">Dashboard</NavLink>
+          <NavLink to="/">Dashboard</NavLink>
         </li>
         <li className="nav-item">
           <NavLink to="/products">Products</NavLink>
