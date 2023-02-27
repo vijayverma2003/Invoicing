@@ -10,7 +10,6 @@ function TransportForm(): JSX.Element {
 
   const handleClose = () => {
     document.querySelector("dialog")?.close();
-    console.log(document.querySelector("dialog")?.open);
   };
 
   return (

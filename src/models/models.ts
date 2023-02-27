@@ -10,12 +10,17 @@ export interface Input {
   tabular?: string;
 }
 
-interface FormModel {
+interface FormObjectModel {
   initialState: { [key: string]: string | number | null | any[] };
   model: { [key: string]: Input };
 }
 
-export const loginAndRegisterFormModel: FormModel = {
+interface FormArrayModel {
+  initialState: { [key: string]: string | number | null | any[] };
+  model: Input[];
+}
+
+export const loginAndRegisterFormModel: FormObjectModel = {
   initialState: { email: "", password: "", products: [{ email: "" }] },
 
   model: {
@@ -36,43 +41,43 @@ export const loginAndRegisterFormModel: FormModel = {
   },
 };
 
-export const productFormModel: FormModel = {
+export const productFormModel: FormArrayModel = {
   initialState: { name: "", hsn: "", cost: "", unit: "", tax: "" },
-  model: {
-    name: {
+  model: [
+    {
       name: "name",
       placeholder: "Name",
       type: "text",
       value: "",
     },
-    hsn: {
+    {
       name: "hsn",
       placeholder: "HSN/SAC",
       type: "number",
       value: "",
     },
-    cost: {
+    {
       name: "cost",
       placeholder: "Cost",
       type: "number",
       value: "",
     },
-    unit: {
+    {
       name: "unit",
       placeholder: "Unit",
       type: "text",
       value: "",
     },
-    tax: {
+    {
       name: "tax",
       placeholder: "Tax",
       type: "number",
       value: "",
     },
-  },
+  ],
 };
 
-export const customerFormModel: FormModel = {
+export const customerFormModel: FormObjectModel = {
   initialState: {
     name: "",
     email: "",
@@ -122,7 +127,7 @@ export const customerFormModel: FormModel = {
   },
 };
 
-export const transportFormModel: FormModel = {
+export const transportFormModel: FormObjectModel = {
   initialState: {
     name: "",
     transporter_id: "",

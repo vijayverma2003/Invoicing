@@ -8,7 +8,7 @@ function Dashboard() {
   return (
     <section id="main-page" className="page">
       <header className="page-header">
-        <h4>V Business</h4>
+        <h4>Dashboard</h4>
         <div className="page-header-icons">
           <button onClick={handleScreenMode} className="btn-icon">
             <ScreenModeSVG />

@@ -289,6 +289,16 @@ html {
 .light .form-container {
   box-shadow: 4px 4px 20px 5px rgb(0, 0, 0);
 }
+.light dialog {
+  background-color: white;
+}
+.light .form-dialog-heading {
+  color: #101010;
+  margin: 2.4rem;
+}
+.light nav {
+  background-color: white;
+}
 .light .nav-item .active {
   background-color: #303030;
   color: #fff;
@@ -612,19 +622,29 @@ nav {
   width: 180px;
   position: fixed;
   height: 100vh;
+  background-color: #101010;
+  top: 0;
+  transition: transform 0.4s ease-out;
+  z-index: 99;
 }
 
 .nav-header {
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   gap: 1rem;
   padding: 1.4rem 0.6rem;
   width: 100%;
+  border-bottom: 1px solid #dadada;
 }
 .nav-header-description {
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.nav-mobile {
+  display: none;
 }
 
 .nav-logo {
@@ -660,7 +680,31 @@ nav {
 
 @media screen and (max-width: 1080px) {
   nav {
-    display: none;
+    transform: translateX(-100%);
+  }
+  .nav-expanded {
+    transform: translateX(0%);
+  }
+  .nav-mobile {
+    display: block;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 0.8rem 2rem;
+    background-color: #101010;
+  }
+  .nav-mobile h4 {
+    color: #fff;
+  }
+  .nav-mobile button {
+    background-color: transparent;
+  }
+}
+@media screen and (max-width: 768px) {
+  .nav-mobile {
+    padding: 0.8rem 1rem;
   }
 }
 .list-page-item {
@@ -701,6 +745,7 @@ dialog {
   left: 50%;
   transform: translate(-50%, -50%);
   border-color: #dadada;
+  background-color: #101010;
 }
 
 dialog::backdrop {
@@ -726,6 +771,21 @@ dialog::backdrop {
 .form-dialog-heading {
   color: #101010;
   margin: 2.4rem;
+}
+
+@media screen and (max-width: 420px) {
+  dialog {
+    width: 100%;
+  }
+  .form-dialog {
+    width: 100%;
+    padding: 2.8rem 1rem;
+    border-radius: 0;
+  }
+  .form-dialog-heading {
+    color: #fff;
+    margin: 2.4rem;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */

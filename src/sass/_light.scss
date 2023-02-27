@@ -40,6 +40,21 @@
     box-shadow: $primary-shadow;
   }
 
+  dialog {
+    background-color: lighten($dark-primary, 100%);
+  }
+
+  .form-dialog {
+    &-heading {
+      color: $dark-primary;
+      margin: 2.4rem;
+    }
+  }
+
+  nav {
+    background-color: lighten($dark-primary, 100%);
+  }
+
   .nav-item {
     .active {
       background-color: $dark-secondary;
