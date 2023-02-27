@@ -7,6 +7,7 @@ import Customers from "./components/pages/Customers";
 import Dashboard from "./components/pages/Dashboard";
 import Invoices from "./components/pages/Invoices";
 import Products from "./components/pages/Products";
+import Transports from "./components/pages/Transports";
 import "./styles/styles.css";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       </Routes> */}
       <Navbar />
       <Routes>
+        <Route element={<Transports />} path="/transports" />
         <Route element={<Invoices />} path="/invoices" />
         <Route element={<Customers />} path="/customers" />
         <Route element={<Products />} path="/products" />

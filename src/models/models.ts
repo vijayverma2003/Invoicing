@@ -121,3 +121,32 @@ export const customerFormModel: FormModel = {
     },
   },
 };
+
+export const transportFormModel: FormModel = {
+  initialState: {
+    name: "",
+    transporter_id: "",
+    mode: "",
+  },
+
+  model: {
+    transporter_id: {
+      name: "transporter_id",
+      placeholder: "ID",
+      type: "text",
+      value: "",
+    },
+    name: {
+      name: "name",
+      placeholder: "Name",
+      type: "text",
+      value: "",
+    },
+    mode: {
+      name: "mode",
+      placeholder: "Mode",
+      type: "text",
+      value: "",
+    },
+  },
+};
