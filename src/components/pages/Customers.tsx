@@ -9,7 +9,7 @@ function Customers(): JSX.Element {
 
   const handleOpenCustomerFormDialog = () => {
     const dialog = document.querySelector("dialog");
-    if (dialog) dialog.open = true;
+    if (dialog) dialog.showModal();
   };
 
   return (

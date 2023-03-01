@@ -4,7 +4,7 @@ import ProductForm from "../forms/ProductForm";
 function Products() {
   const handleOpenProductFormDialog = () => {
     const dialog = document.querySelector("dialog");
-    if (dialog) dialog.open = true;
+    if (dialog) dialog.showModal();
   };
 
   return (

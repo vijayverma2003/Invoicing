@@ -5,7 +5,7 @@ import TransportForm from "../forms/TransportForm";
 function Transports() {
   const handleOpenTransportFormDialog = () => {
     const dialog = document.querySelector("dialog");
-    if (dialog) dialog.open = true;
+    if (dialog) dialog.showModal();
   };
 
   return (

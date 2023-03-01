@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { AddSVG } from "../common/SVG";
 
 function Invoices(): JSX.Element {
@@ -6,9 +7,9 @@ function Invoices(): JSX.Element {
       <header className="page-header">
         <h4>Invoices</h4>
         <div className="page-header-icons">
-          <button className="btn-icon">
+          <Link to="/invoices/new" className="btn-icon">
             <AddSVG />
-          </button>
+          </Link>
         </div>
       </header>
       <div className="page-content page-grid">

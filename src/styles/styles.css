@@ -476,6 +476,16 @@ button,
   font-size: 1rem;
 }
 
+.invoice-product-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+.invoice-product-wrapper h3 {
+  margin: 0;
+}
+
 .input-container {
   display: flex;
   justify-content: center;
@@ -487,7 +497,22 @@ button,
   border-radius: 5px;
   max-width: 320px;
   width: 100%;
-  margin: 1.6rem 0;
+  margin: 0.6rem 0 1.6rem;
+  position: relative;
+  z-index: 1;
+}
+
+label {
+  position: absolute;
+  top: 50%;
+  transform: translate(1rem, -1rem);
+  left: 0;
+  font-size: 1.6rem;
+  font-weight: bold;
+  transition: top left 0.8s ease-out;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 2;
 }
 
 input {
@@ -508,6 +533,7 @@ input {
 
 ::placeholder {
   font-weight: bold;
+  display: none;
 }
 
 .form-button {
@@ -729,27 +755,42 @@ nav {
 
 .grid-1x2 {
   grid-template: repeat(1, 1fr)/repeat(2, 1fr);
-  gap: 1rem;
+  gap: 0.4rem;
 }
 
 .grid-1x3 {
   grid-template: repeat(1, 1fr)/repeat(3, 1fr);
-  gap: 1rem;
+  gap: 0.4rem;
 }
 
+.grid-1x4 {
+  grid-template: repeat(1, 1fr)/repeat(4, 1fr);
+  gap: 0.4rem;
+}
+
+@media screen and (max-width: 680px) {
+  .grid-1x4 {
+    grid-template: repeat(2, 1fr)/repeat(2, 1fr);
+    gap: 0.4rem;
+  }
+}
+@media screen and (max-width: 380px) {
+  .grid-1x4 {
+    grid-template: repeat(4, 1fr)/repeat(1, 1fr);
+    gap: 0.4rem;
+  }
+}
 dialog {
   border-radius: 8px;
   z-index: 9;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin: auto;
   border-color: #dadada;
   background-color: #101010;
+  position: relative;
 }
 
 dialog::backdrop {
-  background-color: red;
+  backdrop-filter: blur(2px);
 }
 
 .dialog-close {
@@ -786,6 +827,9 @@ dialog::backdrop {
     color: #fff;
     margin: 2.4rem;
   }
+}
+.mb2 {
+  margin-bottom: 2rem;
 }
 
 /*# sourceMappingURL=styles.css.map */

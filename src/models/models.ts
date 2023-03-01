@@ -1,5 +1,6 @@
 import emailSVG from "../svg/email.svg";
 import passwordSVG from "../svg/password.svg";
+import moment from "moment";
 
 export interface Input {
   name: string;
@@ -8,6 +9,7 @@ export interface Input {
   type: string;
   value: string;
   tabular?: string;
+  label?: boolean;
 }
 
 interface FormObjectModel {
@@ -152,6 +154,90 @@ export const transportFormModel: FormObjectModel = {
       placeholder: "Mode",
       type: "text",
       value: "",
+    },
+  },
+};
+
+export const invoiceFormModel: FormObjectModel = {
+  initialState: {
+    number: "",
+    date: moment().format("YYYY-MM-DD"),
+    due_date: moment().add(10, "days").format("YYYY-MM-DD"),
+    customer: "",
+    transport: "",
+    products: [{ name: "", cost: "", discount: "", qty: "" }],
+  },
+
+  model: {
+    number: {
+      name: "number",
+      placeholder: "Invoice number",
+      type: "text",
+      value: "",
+      label: true,
+    },
+    date: {
+      name: "date",
+      placeholder: "Date",
+      type: "date",
+      value: "",
+      label: true,
+    },
+    due_date: {
+      name: "due_date",
+      placeholder: "Due Date",
+      type: "date",
+      value: "",
+      label: true,
+    },
+    customer: {
+      name: "customer",
+      placeholder: "Customer",
+      type: "text",
+      value: "",
+    },
+    transport: {
+      name: "transport",
+      placeholder: "Transporter",
+      type: "text",
+      value: "",
+      label: true,
+    },
+
+    name: {
+      name: "name",
+      placeholder: "Name",
+      type: "text",
+      value: "",
+      tabular: "products",
+    },
+    cost: {
+      name: "cost",
+      placeholder: "Cost",
+      type: "number",
+      value: "",
+      tabular: "products",
+    },
+    qty: {
+      name: "qty",
+      placeholder: "Qty",
+      type: "number",
+      value: "",
+      tabular: "products",
+    },
+    discount: {
+      name: "discount",
+      placeholder: "Discount",
+      type: "number",
+      value: "",
+      tabular: "products",
+    },
+    packing_charges: {
+      name: "packing_charges",
+      placeholder: "Pkg. Charges",
+      type: "number",
+      value: "",
+      tabular: "products",
     },
   },
 };

@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import InvoiceForm from "./components/forms/InvoiceForm";
 import LoginForm from "./components/forms/LoginForm";
 import RegisterForm from "./components/forms/RegisterForm";
 import HomePage from "./components/home/HomePage";
@@ -20,6 +21,7 @@ function App() {
       </Routes> */}
       <Navbar />
       <Routes>
+        <Route element={<InvoiceForm />} path="/invoices/new" />
         <Route element={<Transports />} path="/transports" />
         <Route element={<Invoices />} path="/invoices" />
         <Route element={<Customers />} path="/customers" />
