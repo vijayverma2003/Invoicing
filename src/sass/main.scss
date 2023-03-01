@@ -181,7 +181,7 @@ button,
   gap: 1rem;
 
   h3 {
-    margin: 0;
+    margin: 0.6rem 0 1.6rem;
   }
 }
 
@@ -514,7 +514,7 @@ dialog {
   border-radius: 8px;
   z-index: 9;
   margin: auto;
-  border-color: $light-secondary;
+  border: none;
   background-color: $dark-primary;
   position: relative;
 }
@@ -538,7 +538,7 @@ dialog::backdrop {
   @include flex-center(column);
 
   &-heading {
-    color: $dark-primary;
+    color: $light-primary;
     margin: 2.4rem;
   }
 }

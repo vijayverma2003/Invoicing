@@ -20,6 +20,11 @@
     background-color: lighten($dark-primary, 100%);
   }
 
+  .btn-primary {
+    background-color: darken($dark-primary, 100%);
+    color: lighten($light-primary, 100%);
+  }
+
   a {
     color: black;
   }
@@ -59,6 +64,12 @@
     .active {
       background-color: $dark-secondary;
       color: $light-primary;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .page-side-open {
+      box-shadow: $light-shadow;
     }
   }
 }

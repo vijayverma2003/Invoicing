@@ -274,6 +274,10 @@ html {
   color: black;
   background-color: white;
 }
+.light .btn-primary {
+  background-color: black;
+  color: white;
+}
 .light a {
   color: black;
 }
@@ -302,6 +306,11 @@ html {
 .light .nav-item .active {
   background-color: #303030;
   color: #fff;
+}
+@media screen and (max-width: 768px) {
+  .light .page-side-open {
+    box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.1);
+  }
 }
 
 body {
@@ -483,7 +492,7 @@ button,
   gap: 1rem;
 }
 .invoice-product-wrapper h3 {
-  margin: 0;
+  margin: 0.6rem 0 1.6rem;
 }
 
 .input-container {
@@ -784,7 +793,7 @@ dialog {
   border-radius: 8px;
   z-index: 9;
   margin: auto;
-  border-color: #dadada;
+  border: none;
   background-color: #101010;
   position: relative;
 }
@@ -810,7 +819,7 @@ dialog::backdrop {
   flex-direction: column;
 }
 .form-dialog-heading {
-  color: #101010;
+  color: #fff;
   margin: 2.4rem;
 }
 

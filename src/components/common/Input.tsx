@@ -26,7 +26,7 @@ function Input({
     if (inputRef.current?.value) {
       inputRef.current.focus();
     }
-  }, []);
+  });
 
   const handleFocus = () => {
     gsap.to(labelRef.current, {
