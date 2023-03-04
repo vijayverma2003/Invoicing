@@ -36,6 +36,9 @@ html {
   left: 0;
   width: 100%;
 }
+.home-header-button {
+  font-size: 1.6rem;
+}
 .home-header-button:nth-child(n) {
   margin-left: 2.8rem;
 }
@@ -261,6 +264,10 @@ html {
   color: black;
   background: white;
 }
+.light .home-invoice-image,
+.light .home-feature-card {
+  box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.1);
+}
 .light .text-lighter {
   color: #606060;
 }
@@ -291,7 +298,7 @@ html {
   stroke: #303030;
 }
 .light .form-container {
-  box-shadow: 4px 4px 20px 5px rgb(0, 0, 0);
+  box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.1);
 }
 .light dialog {
   background-color: white;
@@ -477,12 +484,12 @@ button,
 }
 
 .form-description {
-  font-size: 1rem;
+  font-size: 1.2rem;
   margin-bottom: 2.4rem;
   letter-spacing: 1px;
 }
 .form-description a {
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 .invoice-product-wrapper {
@@ -493,6 +500,10 @@ button,
 }
 .invoice-product-wrapper h3 {
   margin: 0.6rem 0 1.6rem;
+}
+
+.input-container-wrapper {
+  width: 100%;
 }
 
 .input-container {
@@ -571,17 +582,6 @@ input {
   padding: 1.4rem 2rem;
   width: 100%;
 }
-.page-grid {
-  display: grid;
-  grid-template: repeat(1, 1fr)/1fr 260px;
-  gap: 4rem;
-}
-.page-side {
-  display: block;
-}
-.page-side-toggle {
-  display: none;
-}
 
 @media screen and (max-width: 1080px) {
   #main-page {
@@ -598,27 +598,6 @@ input {
   }
   .page-grid {
     display: block;
-  }
-  .page-side {
-    display: none;
-  }
-  .page-side-toggle {
-    display: inline-block;
-    position: absolute;
-    bottom: 2rem;
-    right: 1rem;
-  }
-  .page-side-open {
-    display: block;
-    position: absolute;
-    z-index: 5;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 4rem 2.4rem;
-    box-shadow: 4px 4px 20px 5px rgb(0, 0, 0);
-    border-radius: 12px;
-    width: calc(320px + 4.8rem);
   }
 }
 table {

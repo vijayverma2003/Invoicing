@@ -29,13 +29,7 @@ function Invoices(): JSX.Element {
             </div>
           </div>
         </div>
-        <div className="page-side">
-          <h4 className="text-lighter">Search</h4>
-          <div className="input-container">
-            <input type="search" />
-          </div>
-        </div>
-      </div>
+    </div>
     </section>
   );
 }

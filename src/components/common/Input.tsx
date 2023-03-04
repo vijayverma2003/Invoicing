@@ -26,7 +26,7 @@ function Input({
     if (inputRef.current?.value) {
       inputRef.current.focus();
     }
-  });
+  }, [inputRef.current?.value]);
 
   const handleFocus = () => {
     gsap.to(labelRef.current, {
@@ -52,14 +52,17 @@ function Input({
     // {label && <label htmlFor={name}>{placeholder}</label>}
     <div className="input-container">
       {svg && <img className="input-img" src={svg} alt="" />}
-      <label ref={labelRef} htmlFor={name}>
-        {placeholder}
-      </label>
+      {!svg && (
+        <label ref={labelRef} htmlFor={name}>
+          {placeholder}
+        </label>
+      )}
       <input
         ref={inputRef}
         onFocus={handleFocus}
         onBlur={handleFocusOut}
         autoComplete="off"
+        placeholder={svg ? placeholder : ""}
         type={type}
         name={name}
         value={value}

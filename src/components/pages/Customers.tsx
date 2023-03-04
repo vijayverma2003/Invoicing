@@ -2,11 +2,6 @@ import { AddSVG } from "../common/SVG";
 import CustomerForm from "../forms/CustomerForm";
 
 function Customers(): JSX.Element {
-  const handleToggleSide = () => {
-    const sideBar = document.querySelector(".page-side");
-    sideBar?.classList.toggle("page-side-open");
-  };
-
   const handleOpenCustomerFormDialog = () => {
     const dialog = document.querySelector("dialog");
     if (dialog) dialog.showModal();
@@ -28,9 +23,9 @@ function Customers(): JSX.Element {
           <div>
             <div className="list-page-item">
               <div>
-                <h4 className="list-page-item-heading">Luke Parker</h4>
+                <h4 className="list-page-item-heading">Vijay</h4>
                 <p className="text-lighter list-page-item-description">
-                  lukefeelixparker@gmail.com
+                  vijayvermakvp@gmail.com
                 </p>
               </div>
               <div>
@@ -39,15 +34,6 @@ function Customers(): JSX.Element {
                   Ratia, HR, 🇮🇳
                 </p>
               </div>
-            </div>
-          </div>
-          <button onClick={handleToggleSide} className="page-side-toggle">
-            Search
-          </button>
-          <div className="page-side">
-            <h4 className="text-lighter">Search</h4>
-            <div className="input-container">
-              <input type="search" />
             </div>
           </div>
         </div>

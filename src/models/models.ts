@@ -43,6 +43,81 @@ export const loginAndRegisterFormModel: FormObjectModel = {
   },
 };
 
+export const firmFormModel: FormObjectModel = {
+  initialState: { name: "" },
+
+  model: {
+    name: {
+      name: "name",
+      placeholder: "Name",
+      type: "text",
+      value: "",
+    },
+  },
+};
+
+export const firmAddressFormModel: FormObjectModel = {
+  initialState: { street: "", city: "", state: "", country: "" },
+
+  model: {
+    street: {
+      name: "street",
+      placeholder: "Street Address",
+      type: "text",
+      value: "",
+    },
+    city: {
+      name: "city",
+      placeholder: "City",
+      type: "text",
+      value: "",
+    },
+    state: {
+      name: "state",
+      placeholder: "State",
+      type: "text",
+      value: "",
+    },
+    country: {
+      name: "country",
+      placeholder: "Country",
+      type: "text",
+      value: "",
+    },
+  },
+};
+
+export const bankFormModel: FormObjectModel = {
+  initialState: { name: "", ifsc: "", acc: "", branch: "" },
+
+  model: {
+    name: {
+      name: "name",
+      placeholder: "Bank Name",
+      type: "text",
+      value: "",
+    },
+    ifsc: {
+      name: "ifsc",
+      placeholder: "IFSC Code",
+      type: "text",
+      value: "",
+    },
+    acc: {
+      name: "acc",
+      placeholder: "A/C number",
+      type: "text",
+      value: "",
+    },
+    branch: {
+      name: "branch",
+      placeholder: "Branch City",
+      type: "text",
+      value: "",
+    },
+  },
+};
+
 export const productFormModel: FormArrayModel = {
   initialState: { name: "", hsn: "", cost: "", unit: "", tax: "" },
   model: [

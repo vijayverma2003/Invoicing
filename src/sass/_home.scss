@@ -12,6 +12,10 @@
   left: 0;
   width: 100%;
 
+  &-button {
+    font-size: 1.6rem;
+  }
+
   &-button:nth-child(n) {
     margin-left: 2.8rem;
   }

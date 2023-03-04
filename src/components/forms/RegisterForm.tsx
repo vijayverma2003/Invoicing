@@ -23,7 +23,7 @@ function RegisterForm() {
             value={data.password}
             onChange={handleChange}
           />
-          <Button className="btn-submit" href="/dashboard">
+          <Button className="btn-submit" href="/firm">
             Register
           </Button>
         </form>

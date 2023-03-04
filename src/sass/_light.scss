@@ -3,6 +3,11 @@
   color: darken($light-primary, 100%);
   background: lighten($dark-primary, 100%);
 
+  .home-invoice-image,
+  .home-feature-card {
+    box-shadow: $light-shadow;
+  }
+
   .text-lighter {
     color: #606060;
   }
@@ -42,7 +47,7 @@
   }
 
   .form-container {
-    box-shadow: $primary-shadow;
+    box-shadow: $light-shadow;
   }
 
   dialog {

@@ -4,9 +4,16 @@ interface buttonProps {
   children: string;
   className?: string;
   href?: string;
+  [key: string]: any;
 }
 
-function Button({ children, className, href }: buttonProps): JSX.Element {
+function Button({
+  children,
+  className,
+  href,
+  type = "button",
+  ...props
+}: buttonProps): JSX.Element {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -15,7 +22,9 @@ function Button({ children, className, href }: buttonProps): JSX.Element {
 
   return (
     <div className={`btn-container ${className}`}>
-      <button onClick={handleClick}>{children}</button>
+      <button {...props} type={type} onClick={handleClick}>
+        {children}
+      </button>
     </div>
   );
 }

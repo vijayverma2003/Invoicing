@@ -165,12 +165,12 @@ button,
 }
 
 .form-description {
-  font-size: 1rem;
+  font-size: 1.2rem;
   margin-bottom: 2.4rem;
   letter-spacing: 1px;
 
   a {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 }
 
@@ -186,6 +186,10 @@ button,
 }
 
 // Inputs
+
+.input-container-wrapper {
+  width: 100%;
+}
 
 .input-container {
   @include flex-center();
@@ -260,20 +264,6 @@ input {
     padding: 1.4rem 2rem;
     width: 100%;
   }
-
-  &-grid {
-    display: grid;
-    grid-template: repeat(1, 1fr) / 1fr 260px;
-    gap: 4rem;
-  }
-
-  &-side {
-    display: block;
-
-    &-toggle {
-      display: none;
-    }
-  }
 }
 
 @media screen and (max-width: 1080px) {
@@ -295,30 +285,6 @@ input {
 
     &-grid {
       display: block;
-    }
-
-    &-side {
-      display: none;
-
-      &-toggle {
-        display: inline-block;
-        position: absolute;
-        bottom: 2rem;
-        right: 1rem;
-      }
-    }
-
-    &-side-open {
-      display: block;
-      position: absolute;
-      z-index: 5;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 4rem 2.4rem;
-      box-shadow: $primary-shadow;
-      border-radius: 12px;
-      width: calc(320px + 2.4rem * 2);
     }
   }
 }
