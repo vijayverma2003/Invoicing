@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { AddSVG } from "../common/SVG";
 import ProductForm from "../forms/ProductForm";
 import { useEffect } from "react";
-import { Product, getProducts, productsRequested } from "../../store/products";
+import { getProducts, productsRequested } from "../../store/products/slice";
+import { Product } from "../../models/products";
 
 function Products() {
   const dispatch = useDispatch();

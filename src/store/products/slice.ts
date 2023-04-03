@@ -1,13 +1,5 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
-
-export interface Product {
-  id: number;
-  name: string;
-  price: number;
-  tax: number;
-  unit: string;
-  hsn: string;
-}
+import { Product } from "../../models/products";
 
 interface InitialState {
   loading: boolean;

@@ -1,8 +1,7 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-
 import createSagaMiddleware from "@redux-saga/core";
-import watchFetchProducts from "./sagas/products";
 import entities from "./entities";
+import watchAll from "./sagas";
 
 const sagaMiddleWare = createSagaMiddleware();
 
@@ -13,6 +12,6 @@ const store = configureStore({
 
 console.log(store);
 
-sagaMiddleWare.run(watchFetchProducts);
+sagaMiddleWare.run(watchAll);
 
 export default store;

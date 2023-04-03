@@ -1,15 +1,14 @@
+import { AxiosResponse } from "axios";
+import { Product } from "../../models/products";
 import { put, takeEvery, takeLatest, call } from "redux-saga/effects";
 import http from "../../services/http";
 import {
   productsRequested,
   productsRecieved,
   productsRequestFailed,
-  Product,
-} from "../products";
-import { AxiosResponse } from "axios";
+} from "./slice";
 
 function* fetchProducts() {
-  console.log("Hello from fetchProducts saga");
   try {
     const { data }: AxiosResponse<Product[]> = yield call(
       http.get,
@@ -22,6 +21,5 @@ function* fetchProducts() {
 }
 
 export default function* watchFetchProducts() {
-  console.log("Hello");
   yield takeEvery(productsRequested, fetchProducts);
 }
