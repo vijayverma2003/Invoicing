@@ -1,9 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 
-interface Product {
+export interface Product {
   id: number;
   name: string;
   price: number;
+  tax: number;
+  unit: string;
+  hsn: string;
 }
 
 interface InitialState {
@@ -46,4 +49,22 @@ const slice = createSlice({
   },
 });
 
+export const {
+  productsRequested,
+  productsRecieved,
+  productDeleted,
+  productUpdated,
+  productAdded,
+  productsRequestFailed,
+} = slice.actions;
+
 export default slice.reducer;
+
+interface RootState {
+  products: InitialState;
+}
+
+export const getProducts = createSelector(
+  (state: RootState) => state.products,
+  (products) => products.list
+);
