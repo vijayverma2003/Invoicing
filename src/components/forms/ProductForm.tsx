@@ -1,11 +1,8 @@
 import { CloseSVG } from "../common/SVG";
-// import { useForm, FormProvider } from "react-hook-form";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "../common/Input";
 import useForm from "../../hooks/useForm";
 import { productForm } from "../../models/products";
-import { error } from "console";
 
 const schema = z.object({
   name: z
@@ -32,8 +29,7 @@ const requiredSchema = schema.required({
 
 function ProductForm(): JSX.Element {
   const { data, setData, handleChange, errors, setErrors } = useForm(
-    productForm.initialState,
-    requiredSchema
+    productForm.initialState
   );
 
   const handleClose = () => {
@@ -46,18 +42,12 @@ function ProductForm(): JSX.Element {
     const result = requiredSchema.safeParse(data);
     if (!result.success) {
       const updatedErrors = { ...errors };
-      console.log(result.error.issues);
-      for (let issue of result.error.issues) {
-        console.log(issue);
-        updatedErrors[issue.path[0]] = issue.message;
-      }
 
-      console.log(updatedErrors);
+      for (let issue of result.error.issues)
+        updatedErrors[issue.path[0]] = issue.message;
 
       setErrors(updatedErrors);
     }
-
-    console.log(errors);
   };
 
   return (

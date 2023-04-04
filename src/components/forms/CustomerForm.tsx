@@ -1,8 +1,8 @@
-import { FormProvider, useForm } from "react-hook-form";
 import Input from "../common/Input";
 import { CloseSVG } from "../common/SVG";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import useForm from "../../hooks/useForm";
+import { customerForm } from "../../models/customers";
 
 const schema = z.object({
   name: z
@@ -35,27 +35,28 @@ const requiredSchema = schema.required({
   state: true,
 });
 
-type FormData = z.infer<typeof schema>;
-
 function CustomerForm(): JSX.Element {
   const handleClose = () => {
     document.querySelector("dialog")?.close();
   };
 
-  const methods = useForm<FormData>({ resolver: zodResolver(requiredSchema) });
+  const { data, errors, setErrors, handleChange } = useForm(
+    customerForm.initialState
+  );
 
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = methods;
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
-  const name = register("name");
-  const email = register("email");
-  const phone = register("phone");
-  const street = register("street");
-  const city = register("city");
-  const state = register("state");
+    const result = requiredSchema.safeParse(data);
+    if (!result.success) {
+      const updatedErrors = { ...errors };
+
+      for (let issue of result.error.issues)
+        updatedErrors[issue.path[0]] = issue.message;
+
+      setErrors(updatedErrors);
+    }
+  };
 
   return (
     <dialog>
@@ -63,76 +64,20 @@ function CustomerForm(): JSX.Element {
         <CloseSVG />
       </button>
 
-      <FormProvider {...methods}>
-        <form
-          onSubmit={handleSubmit((data) => console.log(data))}
-          action=""
-          className="form-dialog"
-        >
-          <h3 className="form-dialog-heading">Customer</h3>
-          <Input
-            name={name.name}
-            onChange={name.onChange}
-            onBlur={name.onBlur}
-            inputRef={name.ref}
-            placeholder="Name"
-            type="text"
-            error={errors.name}
-          />
+      <form onSubmit={handleSubmit} className="form-dialog">
+        <h3 className="form-dialog-heading">Customer</h3>
 
+        {customerForm.inputs.map((input) => (
           <Input
-            name={email.name}
-            onChange={email.onChange}
-            onBlur={email.onBlur}
-            inputRef={email.ref}
-            placeholder="Email"
-            type="email"
-            error={errors.email}
+            key={input.name}
+            {...input}
+            onChange={handleChange}
+            error={errors[input.name]}
           />
+        ))}
 
-          <Input
-            name={phone.name}
-            onChange={phone.onChange}
-            onBlur={phone.onBlur}
-            inputRef={phone.ref}
-            placeholder="Phone"
-            type="text"
-            error={errors.phone}
-          />
-
-          <Input
-            name={street.name}
-            onChange={street.onChange}
-            onBlur={street.onBlur}
-            inputRef={street.ref}
-            placeholder="Street"
-            type="text"
-            error={errors.street}
-          />
-
-          <Input
-            name={city.name}
-            onChange={city.onChange}
-            onBlur={city.onBlur}
-            inputRef={city.ref}
-            placeholder="City"
-            type="text"
-            error={errors.city}
-          />
-
-          <Input
-            name={state.name}
-            onChange={state.onChange}
-            onBlur={state.onBlur}
-            inputRef={state.ref}
-            placeholder="State"
-            type="text"
-            error={errors.state}
-          />
-
-          <button className="btn btn-submit btn-primary">Create</button>
-        </form>
-      </FormProvider>
+        <button className="btn btn-submit btn-primary">Create</button>
+      </form>
     </dialog>
   );
 }

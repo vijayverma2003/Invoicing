@@ -5,7 +5,7 @@ interface InitialState {
 interface Input {
   name: string;
   placeholder: string;
-  type: "text" | "email" | "number" | "date" | "phone";
+  type: "text" | "email" | "number" | "date" | "tel";
 }
 
 export default interface Form {
