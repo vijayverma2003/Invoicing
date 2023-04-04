@@ -19,13 +19,13 @@ function TransportForm(): JSX.Element {
       </button>
       <form action="" className="form-dialog">
         <h3 className="form-dialog-heading">Transport</h3>
-        <Input {...name} value={data.name} onChange={handleChange} />
+        {/* <Input {...name} value={data.name} onChange={handleChange} />
         <Input
           {...transporter_id}
           value={data.transporter_id}
           onChange={handleChange}
         />
-        <Input {...mode} value={data.mode} onChange={handleChange} />
+        <Input {...mode} value={data.mode} onChange={handleChange} /> */}
         <button className="btn btn-submit btn-primary">Create</button>
       </form>
     </dialog>

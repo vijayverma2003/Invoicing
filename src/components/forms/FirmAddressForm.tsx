@@ -21,10 +21,10 @@ function FirmAddressForm() {
       <div className="form-container">
         <form className="form-primary">
           <h2 className="text-gradient form-heading">Firm Address</h2>
-          <Input {...street} value={data.street} onChange={handleChange} />
+          {/* <Input {...street} value={data.street} onChange={handleChange} />
           <Input {...city} value={data.city} onChange={handleChange} />
           <Input {...addressState} value={data.state} onChange={handleChange} />
-          <Input {...country} value={data.country} onChange={handleChange} />
+          <Input {...country} value={data.country} onChange={handleChange} /> */}
           <Button className="btn-submit" href="/firm/bank">
             Add
           </Button>

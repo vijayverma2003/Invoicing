@@ -13,7 +13,7 @@ function RegisterForm() {
       <div className="form-container">
         <form className="form-primary">
           <h2 className="text-gradient form-heading">Register</h2>
-          <Input
+          {/* <Input
             {...lf.model.email}
             value={data.email}
             onChange={handleChange}
@@ -22,7 +22,7 @@ function RegisterForm() {
             {...lf.model.password}
             value={data.password}
             onChange={handleChange}
-          />
+          /> */}
           <Button className="btn-submit" href="/firm">
             Register
           </Button>

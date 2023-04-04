@@ -27,7 +27,7 @@ function InvoiceForm() {
       </div>
       <div className="page-content">
         <div className="grid grid-1x4 mb2">
-          <Input onChange={handleChange} {...number} value={data["number"]} />
+          {/* <Input onChange={handleChange} {...number} value={data["number"]} />
           <Input onChange={handleChange} {...date} value={data["date"]} />
           <Input
             onChange={handleChange}
@@ -38,15 +38,15 @@ function InvoiceForm() {
             onChange={handleChange}
             {...transport}
             value={data["transport"]}
-          />
+          /> */}
         </div>
         <div>
           {/* <h4 className="mb2">Customer</h4> */}
-          <Input
+          {/* <Input
             onChange={handleChange}
             {...customer}
             value={data["customer"]}
-          />
+          /> */}
           <h5>
             <i>59, New Town, Ratia, 🇮🇳</i>
           </h5>

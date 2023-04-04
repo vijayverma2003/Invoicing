@@ -16,7 +16,7 @@ function FirmForm() {
       <div className="form-container">
         <form className="form-primary">
           <h2 className="text-gradient form-heading">Add your firm</h2>
-          <Input {...name} value={data.name} onChange={handleChange} />
+          {/* <Input {...name} value={data.name} onChange={handleChange} /> */}
           <Button className="btn-submit" href="/firm/address">
             Create
           </Button>

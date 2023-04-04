@@ -1,26 +1,28 @@
 import gsap from "gsap";
 import { useEffect, useRef } from "react";
+import { FieldError } from "react-hook-form";
 
 interface inputProps {
   svg?: string;
   placeholder: string;
   name: string;
   type: string;
-  value: number | string;
+  error: FieldError | undefined;
   [property: string]: any;
 }
 
 function Input({
+  inputRef,
   svg,
   placeholder,
   name,
   type,
-  value,
   label,
+  error,
   ...args
 }: inputProps) {
-  const inputRef = useRef<HTMLInputElement>(null);
   const labelRef = useRef<HTMLLabelElement>(null);
+  const input = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (inputRef.current?.value) {
@@ -37,38 +39,32 @@ function Input({
       ease: "Power3.easeOut",
     });
   };
-  const handleFocusOut = () => {
-    if (!inputRef.current?.value)
-      gsap.to(labelRef.current, {
-        top: "50%",
-        left: "0",
-        fontSize: "1.6rem",
-        duration: 0.2,
-        ease: "Power3.easeOut",
-      });
-  };
 
   return (
-    // {label && <label htmlFor={name}>{placeholder}</label>}
-    <div className="input-container">
-      {svg && <img className="input-img" src={svg} alt="" />}
-      {!svg && (
-        <label ref={labelRef} htmlFor={name}>
-          {placeholder}
-        </label>
+    <>
+      <div className="input-container">
+        {svg && <img className="input-img" src={svg} alt="" />}
+        {!svg && (
+          <label ref={labelRef} htmlFor={name}>
+            {placeholder}
+          </label>
+        )}
+        <input
+          {...args}
+          ref={inputRef}
+          onFocus={handleFocus}
+          autoComplete="off"
+          placeholder={svg ? placeholder : ""}
+          type={type}
+          name={name}
+        />
+      </div>
+      {error && (
+        <span className="input-error">
+          <i>{error.message}</i>
+        </span>
       )}
-      <input
-        ref={inputRef}
-        onFocus={handleFocus}
-        onBlur={handleFocusOut}
-        autoComplete="off"
-        placeholder={svg ? placeholder : ""}
-        type={type}
-        name={name}
-        value={value}
-        {...args}
-      />
-    </div>
+    </>
   );
 }
 

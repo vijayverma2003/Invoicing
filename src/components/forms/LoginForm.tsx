@@ -20,8 +20,8 @@ function LoginForm() {
           className="form-primary"
         >
           <h2 className="text-gradient form-heading">Login</h2>
-          <Input {...email} value={data.email} onChange={handleChange} />
-          <Input {...password} value={data.password} onChange={handleChange} />
+          {/* <Input {...email} value={data.email} onChange={handleChange} />
+          <Input {...password} value={data.password} onChange={handleChange} /> */}
           <div className="btn-container btn-submit">
             <button>Login</button>
           </div>

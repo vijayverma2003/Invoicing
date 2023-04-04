@@ -27,12 +27,12 @@ function CustomerForm(): JSX.Element {
       </button>
       <form action="" className="form-dialog">
         <h3 className="form-dialog-heading">Customer</h3>
-        <Input {...name} value={data.name} onChange={handleChange} />
+        {/* <Input {...name} value={data.name} onChange={handleChange} />
         <Input {...email} value={data.email} onChange={handleChange} />
         <Input {...phone} value={data.phone} onChange={handleChange} />
         <Input {...street} value={data.street} onChange={handleChange} />
         <Input {...city} value={data.city} onChange={handleChange} />
-        <Input {...stateAddress} value={data.state} onChange={handleChange} />
+        <Input {...stateAddress} value={data.state} onChange={handleChange} /> */}
         <button className="btn btn-submit btn-primary">Create</button>
       </form>
     </dialog>
