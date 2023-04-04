@@ -10,8 +10,6 @@ const store = configureStore({
   middleware: [...getDefaultMiddleware(), sagaMiddleWare],
 });
 
-console.log(store);
-
 sagaMiddleWare.run(watchAll);
 
 export default store;

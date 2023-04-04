@@ -13,11 +13,14 @@ const schema = z.object({
   tax: z
     .number({ invalid_type_error: "Tax is required" })
     .max(100, "Tax can't be greater than 100%"),
-  unit: z.string().max(3, "Unit must be less than 3 characters"),
+  unit: z
+    .string()
+    .min(1, "Unit is required")
+    .max(3, "Unit must be less than 3 characters"),
   hsn: z.string().max(10, "HSN must be less than 10 characters"),
 });
 
-const required = schema.required({
+const requiredSchema = schema.required({
   name: true,
   price: true,
   tax: true,
@@ -33,7 +36,7 @@ function ProductForm(): JSX.Element {
     formState: { errors },
     reset,
   } = useForm<FormData>({
-    resolver: zodResolver(required),
+    resolver: zodResolver(requiredSchema),
   });
 
   const name = register("name");
