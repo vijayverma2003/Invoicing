@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import Input from "../common/Input";
 import { CloseSVG } from "../common/SVG";
 import { z } from "zod";
@@ -42,11 +42,13 @@ function CustomerForm(): JSX.Element {
     document.querySelector("dialog")?.close();
   };
 
+  const methods = useForm<FormData>({ resolver: zodResolver(requiredSchema) });
+
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<FormData>({ resolver: zodResolver(requiredSchema) });
+  } = methods;
 
   const name = register("name");
   const email = register("email");
@@ -60,74 +62,77 @@ function CustomerForm(): JSX.Element {
       <button onClick={handleClose} className="btn-icon dialog-close">
         <CloseSVG />
       </button>
-      <form
-        onSubmit={handleSubmit((data) => console.log(data))}
-        action=""
-        className="form-dialog"
-      >
-        <h3 className="form-dialog-heading">Customer</h3>
-        <Input
-          name={name.name}
-          onChange={name.onChange}
-          onBlur={name.onBlur}
-          inputRef={name.ref}
-          placeholder="Name"
-          type="text"
-          error={errors.name}
-        />
 
-        <Input
-          name={email.name}
-          onChange={email.onChange}
-          onBlur={email.onBlur}
-          inputRef={email.ref}
-          placeholder="Email"
-          type="email"
-          error={errors.email}
-        />
+      <FormProvider {...methods}>
+        <form
+          onSubmit={handleSubmit((data) => console.log(data))}
+          action=""
+          className="form-dialog"
+        >
+          <h3 className="form-dialog-heading">Customer</h3>
+          <Input
+            name={name.name}
+            onChange={name.onChange}
+            onBlur={name.onBlur}
+            inputRef={name.ref}
+            placeholder="Name"
+            type="text"
+            error={errors.name}
+          />
 
-        <Input
-          name={phone.name}
-          onChange={phone.onChange}
-          onBlur={phone.onBlur}
-          inputRef={phone.ref}
-          placeholder="Phone"
-          type="text"
-          error={errors.phone}
-        />
+          <Input
+            name={email.name}
+            onChange={email.onChange}
+            onBlur={email.onBlur}
+            inputRef={email.ref}
+            placeholder="Email"
+            type="email"
+            error={errors.email}
+          />
 
-        <Input
-          name={street.name}
-          onChange={street.onChange}
-          onBlur={street.onBlur}
-          inputRef={street.ref}
-          placeholder="Street"
-          type="text"
-          error={errors.street}
-        />
+          <Input
+            name={phone.name}
+            onChange={phone.onChange}
+            onBlur={phone.onBlur}
+            inputRef={phone.ref}
+            placeholder="Phone"
+            type="text"
+            error={errors.phone}
+          />
 
-        <Input
-          name={city.name}
-          onChange={city.onChange}
-          onBlur={city.onBlur}
-          inputRef={city.ref}
-          placeholder="City"
-          type="text"
-          error={errors.city}
-        />
+          <Input
+            name={street.name}
+            onChange={street.onChange}
+            onBlur={street.onBlur}
+            inputRef={street.ref}
+            placeholder="Street"
+            type="text"
+            error={errors.street}
+          />
 
-        <Input
-          name={state.name}
-          onChange={state.onChange}
-          onBlur={state.onBlur}
-          inputRef={state.ref}
-          placeholder="State"
-          type="text"
-          error={errors.state}
-        />
+          <Input
+            name={city.name}
+            onChange={city.onChange}
+            onBlur={city.onBlur}
+            inputRef={city.ref}
+            placeholder="City"
+            type="text"
+            error={errors.city}
+          />
 
-        <button className="btn btn-submit btn-primary">Create</button>
-      </form>
+          <Input
+            name={state.name}
+            onChange={state.onChange}
+            onBlur={state.onBlur}
+            inputRef={state.ref}
+            placeholder="State"
+            type="text"
+            error={errors.state}
+          />
+
+          <button className="btn btn-submit btn-primary">Create</button>
+        </form>
+      </FormProvider>
     </dialog>
   );
 }

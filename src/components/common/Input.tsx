@@ -1,34 +1,29 @@
 import gsap from "gsap";
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { FieldError } from "react-hook-form";
 
-interface inputProps {
+interface InputProps {
   svg?: string;
   placeholder: string;
   name: string;
   type: string;
-  error: FieldError | undefined;
+  error: string | undefined | FieldError;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   [property: string]: any;
 }
 
-function Input({
-  inputRef,
+const Input = ({
   svg,
   placeholder,
   name,
   type,
   label,
   error,
+  onChange,
   ...args
-}: inputProps) {
+}: InputProps) => {
   const labelRef = useRef<HTMLLabelElement>(null);
-  const input = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (inputRef.current?.value) {
-      inputRef.current.focus();
-    }
-  }, [inputRef.current?.value]);
+  const input = useRef<HTMLInputElement | null>(null);
 
   const handleFocus = () => {
     gsap.to(labelRef.current, {
@@ -40,6 +35,21 @@ function Input({
     });
   };
 
+  const handleFocusOut = (e: React.FocusEvent<HTMLInputElement, Element>) => {
+    if (!e.target.value)
+      gsap.to(labelRef.current, {
+        top: "50%",
+        left: "0",
+        fontSize: "1.6rem",
+        duration: 0.2,
+        ease: "Power3.easeOut",
+      });
+  };
+
+  useEffect(() => {
+    if (input.current?.value) input.current?.focus();
+  }, [input.current?.value]);
+
   return (
     <>
       <div className="input-container">
@@ -50,22 +60,25 @@ function Input({
           </label>
         )}
         <input
+          autoFocus
           {...args}
-          ref={inputRef}
+          ref={input}
+          onChange={onChange}
           onFocus={handleFocus}
+          onBlur={(e) => handleFocusOut(e)}
           autoComplete="off"
           placeholder={svg ? placeholder : ""}
           type={type}
           name={name}
+          id={name}
         />
       </div>
       {error && (
         <span className="input-error">
-          <i>{error.message}</i>
+          <i>{error.toString()}</i>
         </span>
       )}
     </>
   );
-}
-
+};
 export default Input;

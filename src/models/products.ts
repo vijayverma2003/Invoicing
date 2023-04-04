@@ -1,3 +1,5 @@
+import Form from "./form";
+
 export interface Product {
   id: number;
   name: string;
@@ -6,3 +8,14 @@ export interface Product {
   unit: string;
   hsn: string;
 }
+
+export const productForm: Form = {
+  initialState: { name: "", price: "", tax: "", unit: "", hsn: "" },
+  inputs: [
+    { name: "name", placeholder: "Name", type: "text" },
+    { name: "price", placeholder: "Price", type: "number" },
+    { name: "tax", placeholder: "Tax", type: "number" },
+    { name: "unit", placeholder: "Unit", type: "text" },
+    { name: "hsn", placeholder: "HSN", type: "text" },
+  ],
+};

@@ -1,15 +1,26 @@
 import React, { useState } from "react";
+import { z } from "zod";
 
 interface Data {
   [key: string]: any;
 }
+interface Errors {
+  [key: string]: string | undefined;
+}
 
-function useForm(initialState: Data) {
+function useForm(initialState: Data, schema: z.Schema) {
   const [data, setData] = useState<Data>(initialState);
+  const [errors, setErrors] = useState<Errors>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const d = { ...data };
     d[e.target.name] = e.target.value;
+
+    const result = schema.safeParse(data);
+    if (!result.success) {
+      console.log(result.error.issues);
+    }
+
     setData(d);
   };
 
@@ -20,11 +31,17 @@ function useForm(initialState: Data) {
   ) => {
     const d = { ...data };
     d[arr][index][e.target.name] = e.target.value;
-
     setData(d);
   };
 
-  return { state: [data, setData], handleChange, handleTabularChange };
+  return {
+    data,
+    setData,
+    errors,
+    setErrors,
+    handleChange,
+    handleTabularChange,
+  };
 }
 
 export default useForm;

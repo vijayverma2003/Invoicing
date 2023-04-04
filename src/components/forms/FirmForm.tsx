@@ -6,10 +6,10 @@ import Button from "../common/Button";
 import Input from "../common/Input";
 
 function FirmForm() {
-  const { name } = firmFormModel.model;
+  // const { name } = firmFormModel.model;
 
-  const { state, handleChange } = useForm(firmFormModel.initialState);
-  const [data] = state;
+  // const { state, handleChange } = useForm(firmFormModel.initialState);
+  // const [data] = state;
 
   return (
     <section className="form-page">

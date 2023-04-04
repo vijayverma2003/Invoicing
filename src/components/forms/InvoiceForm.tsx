@@ -7,17 +7,17 @@ import InvoiceProducts from "./InvoiceProducts";
 function InvoiceForm() {
   const [numberOfProducts, setNumberOfProducts] = useState(1);
 
-  const { state, handleChange, handleTabularChange } = useForm(
-    invoiceFormModel.initialState
-  );
-  const [data, setData] = state;
-  const { number, date, due_date, customer, transport } =
-    invoiceFormModel.model;
+  // const { state, handleChange, handleTabularChange } = useForm(
+  //   invoiceFormModel.initialState
+  // );
+  // const [data, setData] = state;
+  // const { number, date, due_date, customer, transport } =
+  //   invoiceFormModel.model;
 
   const handleAddMoreProduct = () => {
-    let d = { ...data };
-    d.products.push({ name: "", cost: "", qty: "", discount: "" });
-    setNumberOfProducts((n) => ++n);
+    // let d = { ...data };
+    // d.products.push({ name: "", cost: "", qty: "", discount: "" });
+    // setNumberOfProducts((n) => ++n);
   };
 
   return (
@@ -52,7 +52,7 @@ function InvoiceForm() {
           </h5>
         </div>
         <h3 className="form-heading">Products</h3>
-        {Array(numberOfProducts)
+        {/* {Array(numberOfProducts)
           .fill(1)
           .map((i, index) => (
             <div key={index} className="invoice-product-wrapper">
@@ -63,7 +63,7 @@ function InvoiceForm() {
                 index={index}
               />
             </div>
-          ))}
+          ))} */}
       </div>
       <button onClick={handleAddMoreProduct}>Add more</button>
     </section>

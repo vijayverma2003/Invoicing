@@ -5,8 +5,8 @@ import useForm from "../../hooks/useForm";
 
 function TransportForm(): JSX.Element {
   const { name, transporter_id, mode } = transportFormModel.model;
-  const { state, handleChange } = useForm(transportFormModel.initialState);
-  const [data] = state;
+  // const { state, handleChange } = useForm(transportFormModel.initialState);
+  // const [data] = state;
 
   const handleClose = () => {
     document.querySelector("dialog")?.close();

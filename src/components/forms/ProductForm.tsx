@@ -1,8 +1,11 @@
 import { CloseSVG } from "../common/SVG";
-import { useForm } from "react-hook-form";
+// import { useForm, FormProvider } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "../common/Input";
+import useForm from "../../hooks/useForm";
+import { productForm } from "../../models/products";
+import { error } from "console";
 
 const schema = z.object({
   name: z
@@ -27,26 +30,34 @@ const requiredSchema = schema.required({
   unit: true,
 });
 
-type FormData = z.infer<typeof schema>;
-
 function ProductForm(): JSX.Element {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<FormData>({
-    resolver: zodResolver(requiredSchema),
-  });
-
-  const name = register("name");
-  const price = register("price", { valueAsNumber: true });
-  const tax = register("tax", { valueAsNumber: true });
-  const hsn = register("hsn");
-  const unit = register("unit");
+  const { data, setData, handleChange, errors, setErrors } = useForm(
+    productForm.initialState,
+    requiredSchema
+  );
 
   const handleClose = () => {
     document.querySelector("dialog")?.close();
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const result = requiredSchema.safeParse(data);
+    if (!result.success) {
+      const updatedErrors = { ...errors };
+      console.log(result.error.issues);
+      for (let issue of result.error.issues) {
+        console.log(issue);
+        updatedErrors[issue.path[0]] = issue.message;
+      }
+
+      console.log(updatedErrors);
+
+      setErrors(updatedErrors);
+    }
+
+    console.log(errors);
   };
 
   return (
@@ -54,65 +65,18 @@ function ProductForm(): JSX.Element {
       <button onClick={handleClose} className="btn-icon dialog-close">
         <CloseSVG />
       </button>
-      <form
-        onSubmit={handleSubmit((data) => {
-          console.log(data);
-          reset();
-        })}
-        action=""
-        className="form-dialog"
-      >
+
+      <form onSubmit={handleSubmit} className="form-dialog">
         <h3 className="form-dialog-heading">Product</h3>
 
-        <Input
-          name={name.name}
-          onChange={name.onChange}
-          onBlur={name.onBlur}
-          inputRef={name.ref}
-          placeholder="Name"
-          type="text"
-          error={errors.name}
-        />
-
-        <Input
-          name={price.name}
-          onChange={price.onChange}
-          onBlur={price.onBlur}
-          inputRef={price.ref}
-          placeholder="Price"
-          type="number"
-          error={errors.price}
-        />
-
-        <Input
-          name={tax.name}
-          onChange={tax.onChange}
-          onBlur={tax.onBlur}
-          inputRef={tax.ref}
-          placeholder="Tax"
-          type="number"
-          error={errors.tax}
-        />
-
-        <Input
-          name={unit.name}
-          onChange={unit.onChange}
-          onBlur={unit.onBlur}
-          inputRef={unit.ref}
-          placeholder="Unit"
-          type="text"
-          error={errors.unit}
-        />
-
-        <Input
-          name={hsn.name}
-          onChange={hsn.onChange}
-          onBlur={hsn.onBlur}
-          inputRef={hsn.ref}
-          placeholder="HSN/SAC"
-          type="text"
-          error={errors.hsn}
-        />
+        {productForm.inputs.map((input) => (
+          <Input
+            key={input.name}
+            {...input}
+            onChange={handleChange}
+            error={errors[input.name]}
+          />
+        ))}
 
         <button className="btn btn-submit btn-primary">Create</button>
       </form>

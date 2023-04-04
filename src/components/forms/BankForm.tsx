@@ -7,8 +7,8 @@ import Input from "../common/Input";
 function BankForm() {
   const { name, ifsc, acc, branch } = bankFormModel.model;
 
-  const { state, handleChange } = useForm(bankFormModel.initialState);
-  const [data] = state;
+  // const { state, handleChange } = useForm(bankFormModel.initialState);
+  // const [data] = state;
 
   return (
     <section className="form-page">

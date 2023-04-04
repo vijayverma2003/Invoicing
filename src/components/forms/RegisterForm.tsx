@@ -5,8 +5,8 @@ import Input from "../common/Input";
 import useForm from "../../hooks/useForm";
 
 function RegisterForm() {
-  const { state, handleChange } = useForm(lf.initialState);
-  const [data] = state;
+  // const { state, handleChange } = useForm(lf.initialState);
+  // const [data] = state;
 
   return (
     <section className="form-page">

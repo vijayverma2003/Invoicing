@@ -5,8 +5,8 @@ import useForm from "../../hooks/useForm";
 
 function LoginForm() {
   const { email, password } = lf.model;
-  const { state, handleChange } = useForm(lf.initialState);
-  const [data] = state;
+  // const { state, handleChange } = useForm(lf.initialState);
+  // const [data] = state;
 
   return (
     <section className="form-page">
