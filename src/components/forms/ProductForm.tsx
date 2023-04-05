@@ -3,6 +3,9 @@ import { z } from "zod";
 import Input from "../common/Input";
 import useForm from "../../hooks/useForm";
 import { productForm } from "../../models/products";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../../store/products/slice";
+import { AppDispatch } from "../../store/configureStore";
 
 const schema = z.object({
   name: z
@@ -28,6 +31,8 @@ const requiredSchema = schema.required({
 });
 
 function ProductForm(): JSX.Element {
+  const dispatch = useDispatch<AppDispatch>();
+
   const { data, setData, handleChange, errors, setErrors } = useForm(
     productForm.initialState
   );
@@ -47,7 +52,13 @@ function ProductForm(): JSX.Element {
         updatedErrors[issue.path[0]] = issue.message;
 
       setErrors(updatedErrors);
+    } else {
+      console.log("handleSubmit");
+      dispatch(addProduct(data));
+      setData(productForm.initialState);
     }
+
+    handleClose();
   };
 
   return (

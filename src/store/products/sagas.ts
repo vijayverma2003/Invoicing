@@ -1,25 +1,24 @@
 import { AxiosResponse } from "axios";
-import { Product } from "../../models/products";
-import { put, takeEvery, takeLatest, call } from "redux-saga/effects";
+import { put, takeLatest, call } from "redux-saga/effects";
 import http from "../../services/http";
-import {
-  productsRequested,
-  productsRecieved,
-  productsRequestFailed,
-} from "./slice";
+import { API, apiCallBegan, apiCallFailed } from "../api";
 
-function* fetchProducts() {
+function* handleApiRequests(action: API) {
+  const { url, method, data, onSuccess } = action.payload;
+
   try {
-    const { data }: AxiosResponse<Product[]> = yield call(
-      http.get,
-      "/products/"
-    );
-    yield put(productsRecieved(data));
+    const response: AxiosResponse<any> = yield call(http.request, {
+      url,
+      method,
+      data,
+    });
+
+    yield put({ type: onSuccess, payload: response.data });
   } catch (error) {
-    yield put(productsRequestFailed(error));
+    yield put(apiCallFailed(error));
   }
 }
 
-export default function* watchFetchProducts() {
-  yield takeEvery(productsRequested, fetchProducts);
+export function* watchApiRequests() {
+  yield takeLatest(apiCallBegan, handleApiRequests);
 }

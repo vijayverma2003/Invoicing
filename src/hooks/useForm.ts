@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { z } from "zod";
 
 interface Data {
   [key: string]: any;
@@ -14,7 +13,10 @@ function useForm(initialState: Data) {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const d = { ...data };
-    d[e.target.name] = e.target.value;
+    const { name, value, type } = e.target;
+
+    d[name] = value;
+    if (type === "number") d[name] = parseInt(d[name]);
 
     setData(d);
   };

@@ -2,11 +2,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { AddSVG } from "../common/SVG";
 import ProductForm from "../forms/ProductForm";
 import { useEffect } from "react";
-import { getProducts, productsRequested } from "../../store/products/slice";
+import { getProducts, loadProducts } from "../../store/products/slice";
 import { Product } from "../../models/products";
+import { AppDispatch } from "../../store/configureStore";
 
 function Products() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const products: Product[] = useSelector(getProducts);
 
   const handleOpenProductFormDialog = () => {
@@ -15,8 +16,8 @@ function Products() {
   };
 
   useEffect(() => {
-    dispatch(productsRequested(null));
-  }, []);
+    dispatch(loadProducts());
+  }, [dispatch]);
 
   return (
     <>

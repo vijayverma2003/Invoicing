@@ -1,5 +1,11 @@
-import { createSelector, createSlice } from "@reduxjs/toolkit";
+import {
+  AnyAction,
+  Dispatch,
+  createSelector,
+  createSlice,
+} from "@reduxjs/toolkit";
 import { Product } from "../../models/products";
+import { apiCallBegan } from "../api";
 
 interface InitialState {
   loading: boolean;
@@ -55,6 +61,28 @@ export default slice.reducer;
 interface RootState {
   products: InitialState;
 }
+
+export const loadProducts = () => (dispatch: Dispatch<AnyAction>) => {
+  return dispatch(
+    apiCallBegan({
+      method: "get",
+      url: "/products/",
+      onSuccess: productsRecieved.type,
+    })
+  );
+};
+
+export const addProduct =
+  (data: { [key: string]: any }) => (dispatch: Dispatch<AnyAction>) => {
+    return dispatch(
+      apiCallBegan({
+        data,
+        method: "post",
+        url: "/products/",
+        onSuccess: productAdded.type,
+      })
+    );
+  };
 
 export const getProducts = createSelector(
   (state: RootState) => state.products,
