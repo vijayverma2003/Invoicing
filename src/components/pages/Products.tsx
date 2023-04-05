@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AddSVG } from "../common/SVG";
 import ProductForm from "../forms/ProductForm";
 import { useEffect } from "react";
-import { getProducts, loadProducts } from "../../store/products/slice";
+import { getProducts, loadProducts } from "../../store/entities/products";
 import { Product } from "../../models/products";
 import { AppDispatch } from "../../store/configureStore";
 

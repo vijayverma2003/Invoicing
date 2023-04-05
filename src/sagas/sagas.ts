@@ -1,6 +1,5 @@
 import { all } from "redux-saga/effects";
-// import { watchAddProduct, watchFetchProducts } from "./products/sagas";
-import { watchApiRequests } from "./products/sagas";
+import { watchApiRequests } from "./api";
 
 function* watchAll() {
   yield all([watchApiRequests()]);

@@ -1,3 +1,4 @@
+import { ZodSchema } from "zod";
 import React, { useState } from "react";
 
 interface Data {
@@ -31,13 +32,36 @@ function useForm(initialState: Data) {
     setData(d);
   };
 
+  const handleSubmit = (
+    e: React.FormEvent,
+    schema: ZodSchema,
+    onSubmit: () => void
+  ) => {
+    e.preventDefault();
+
+    const result = schema.safeParse(data);
+    if (!result.success) {
+      const updatedErrors = { ...errors };
+
+      for (let issue of result.error.issues)
+        updatedErrors[issue.path[0]] = issue.message;
+
+      setErrors(updatedErrors);
+
+      return;
+    }
+
+    onSubmit();
+  };
+
   return {
     data,
-    setData,
     errors,
-    setErrors,
     handleChange,
+    handleSubmit,
     handleTabularChange,
+    setData,
+    setErrors,
   };
 }
 

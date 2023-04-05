@@ -1,4 +1,4 @@
 import { combineReducers } from "redux";
-import productsReducer from "./products/slice";
+import productsReducer from "./entities/products";
 
 export default combineReducers({ products: productsReducer });

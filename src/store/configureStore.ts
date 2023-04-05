@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "@redux-saga/core";
 import entities from "./entities";
-import watchAll from "./sagas";
+import watchAll from "../sagas/sagas";
 
 const sagaMiddleWare = createSagaMiddleware();
 

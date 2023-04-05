@@ -1,11 +1,12 @@
+import { addProduct } from "../../store/entities/products";
+import { AppDispatch } from "../../store/configureStore";
 import { CloseSVG } from "../common/SVG";
+import { productForm } from "../../models/products";
+import { useDispatch } from "react-redux";
+import { useRef } from "react";
 import { z } from "zod";
 import Input from "../common/Input";
 import useForm from "../../hooks/useForm";
-import { productForm } from "../../models/products";
-import { useDispatch } from "react-redux";
-import { addProduct } from "../../store/products/slice";
-import { AppDispatch } from "../../store/configureStore";
 
 const schema = z.object({
   name: z
@@ -32,42 +33,31 @@ const requiredSchema = schema.required({
 
 function ProductForm(): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
+  const dialog = useRef<HTMLDialogElement>(null);
 
-  const { data, setData, handleChange, errors, setErrors } = useForm(
+  const { data, setData, handleChange, errors, handleSubmit } = useForm(
     productForm.initialState
   );
 
-  const handleClose = () => {
-    document.querySelector("dialog")?.close();
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const result = requiredSchema.safeParse(data);
-    if (!result.success) {
-      const updatedErrors = { ...errors };
-
-      for (let issue of result.error.issues)
-        updatedErrors[issue.path[0]] = issue.message;
-
-      setErrors(updatedErrors);
-    } else {
-      console.log("handleSubmit");
-      dispatch(addProduct(data));
-      setData(productForm.initialState);
-    }
-
-    handleClose();
+  const handleAddProduct = () => {
+    dispatch(addProduct(data));
+    setData(productForm.initialState);
+    dialog.current?.close();
   };
 
   return (
-    <dialog>
-      <button onClick={handleClose} className="btn-icon dialog-close">
+    <dialog ref={dialog}>
+      <button
+        onClick={() => dialog.current?.close()}
+        className="btn-icon dialog-close"
+      >
         <CloseSVG />
       </button>
 
-      <form onSubmit={handleSubmit} className="form-dialog">
+      <form
+        onSubmit={(e) => handleSubmit(e, requiredSchema, handleAddProduct)}
+        className="form-dialog"
+      >
         <h3 className="form-dialog-heading">Product</h3>
 
         {productForm.inputs.map((input) => (
