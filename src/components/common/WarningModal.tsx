@@ -1,5 +1,4 @@
-import React, { useRef } from "react";
-import { CloseSVG } from "./SVG";
+import { useRef } from "react";
 
 interface Props {
   description: string;

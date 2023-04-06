@@ -59,7 +59,7 @@ function ProductForm({ product }: Props): JSX.Element {
   }, [product]);
 
   return (
-    <dialog ref={dialog}>
+    <dialog id="dialog-product-form" ref={dialog}>
       <button
         onClick={() => dialog.current?.close()}
         className="btn-icon dialog-close"

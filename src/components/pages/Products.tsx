@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
 import { AddSVG } from "../common/SVG";
-import ProductForm from "../forms/ProductForm";
-import { useEffect } from "react";
-import { getProducts, loadProducts } from "../../store/entities/products";
-import { Product } from "../../models/products";
 import { AppDispatch } from "../../store/configureStore";
+import { getProducts, loadProducts } from "../../store/entities/products";
 import { Link } from "react-router-dom";
+import { Product } from "../../models/products";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import ProductForm from "../forms/ProductForm";
 
 function Products() {
   const dispatch = useDispatch<AppDispatch>();
@@ -32,10 +32,15 @@ function Products() {
             </button>
           </div>
         </header>
+
         <div className="page-content page-grid">
           <div>
             {products.map((product) => (
-              <Link to={`/products/${product.id}`} key={product.id}>
+              <Link
+                id={product.id.toString()}
+                to={`/products/${product.id}`}
+                key={product.id}
+              >
                 <div className="list-page-item">
                   <div>
                     <h4 className="list-page-item-heading">{product.name}</h4>

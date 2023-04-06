@@ -1,13 +1,13 @@
+import { apiCallBegan } from "../api";
+import { Product } from "../../models/products";
+import { RootState } from "../configureStore";
+import moment from "moment";
 import {
   AnyAction,
   Dispatch,
   createSelector,
   createSlice,
 } from "@reduxjs/toolkit";
-import { Product } from "../../models/products";
-import { apiCallBegan } from "../api";
-import moment from "moment";
-import { RootState } from "../configureStore";
 
 interface InitialState {
   loading: boolean;
@@ -19,7 +19,7 @@ const slice = createSlice({
   initialState: { loading: false, list: [], lastFetch: null } as InitialState,
   name: "products",
   reducers: {
-    productsRequested: (products, action) => {
+    productsRequested: (products) => {
       products.loading = true;
     },
 
@@ -29,7 +29,7 @@ const slice = createSlice({
       products.lastFetch = Date.now();
     },
 
-    productsRequestFailed: (products, action) => {
+    productsRequestFailed: (products) => {
       products.loading = false;
     },
 

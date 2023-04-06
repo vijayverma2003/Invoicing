@@ -106,7 +106,7 @@ button,
   border-radius: 3px;
   border: none;
   background-color: $dark-primary;
-  color: $light-primary;
+  color: $light-primary !important;
   font-family: $primary-font;
   font-weight: bold;
   cursor: pointer;

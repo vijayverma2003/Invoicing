@@ -1,16 +1,16 @@
 import { AiOutlineEdit } from "react-icons/ai";
 import { AppDispatch } from "../../store/configureStore";
-import {
-  deleteProduct,
-  getProduct,
-  loadProducts,
-} from "../../store/entities/products";
 import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ProductForm from "../forms/ProductForm";
 import WarningModal from "../common/WarningModal";
+import {
+  deleteProduct,
+  getProduct,
+  loadProducts,
+} from "../../store/entities/products";
 
 function ProductDescription() {
   const { id } = useParams();
@@ -22,7 +22,9 @@ function ProductDescription() {
   }, [dispatch]);
 
   const handleOpenProductFormDialog = () => {
-    const dialog = document.querySelector("dialog");
+    const dialog = document.querySelector<HTMLDialogElement>(
+      "#dialog-product-form"
+    );
     if (dialog) dialog.showModal();
   };
 
@@ -39,14 +41,17 @@ function ProductDescription() {
   return (
     <>
       <ProductForm product={product} />
+
       <WarningModal
         onClick={handleDelete}
         description="Are you sure that you want to permanently delete this product?"
       />
-      {product && (
-        <section id="main-page" className="page">
-          <header className="page-header">
-            <h4>{product.name}</h4>
+
+      <section id="main-page" className="page">
+        <header className="page-header">
+          <h4>{product?.name ?? "Not found"}</h4>
+
+          {product && (
             <div className="page-header-icons">
               <button
                 onClick={handleOpenProductFormDialog}
@@ -58,21 +63,30 @@ function ProductDescription() {
                 <MdDeleteOutline size={20} color="red" />
               </button>
             </div>
-          </header>
-          <div className="page-content">
+          )}
+        </header>
+
+        <div className="page-content">
+          {product ? (
+            <>
+              <p className="page-content-description">
+                <strong>Price -</strong> {product.price} /{" "}
+                {product.unit.toLowerCase()}
+              </p>
+              <p className="page-content-description">
+                <strong>Tax -</strong> {product.tax}
+              </p>
+              <p className="page-content-description">
+                <strong>HSN -</strong> {product.hsn ?? "Doesn't exists"}
+              </p>
+            </>
+          ) : (
             <p className="page-content-description">
-              <strong>Price -</strong> {product.price} /{" "}
-              {product.unit.toLowerCase()}
+              The product with given ID was not found!
             </p>
-            <p className="page-content-description">
-              <strong>Tax -</strong> {product.tax}
-            </p>
-            <p className="page-content-description">
-              <strong>HSN -</strong> {product.hsn ?? "Doesn't exists"}
-            </p>
-          </div>
-        </section>
-      )}
+          )}
+        </div>
+      </section>
     </>
   );
 }

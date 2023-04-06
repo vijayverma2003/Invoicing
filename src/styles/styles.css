@@ -419,7 +419,7 @@ button,
   border-radius: 3px;
   border: none;
   background-color: #101010;
-  color: #fff;
+  color: #fff !important;
   font-family: "Lato";
   font-weight: bold;
   cursor: pointer;
