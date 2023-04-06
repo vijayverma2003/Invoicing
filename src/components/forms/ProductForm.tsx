@@ -44,11 +44,8 @@ function ProductForm({ product }: Props): JSX.Element {
   );
 
   const handleAddProduct = () => {
-    const id = data.id;
-    // delete data.id;
-
     if (!product) dispatch(addProduct(data));
-    else dispatch(updateProduct(id, data));
+    else dispatch(updateProduct(data.id, data));
 
     setData(productForm.initialState);
     dialog.current?.close();
