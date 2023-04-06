@@ -13,10 +13,16 @@ interface InitialState {
   loading: boolean;
   list: Product[];
   lastFetch: number | null;
+  error?: { [key: string]: string[] };
 }
 
 const slice = createSlice({
-  initialState: { loading: false, list: [], lastFetch: null } as InitialState,
+  initialState: {
+    loading: false,
+    list: [],
+    lastFetch: null,
+    error: {},
+  } as InitialState,
   name: "products",
   reducers: {
     productsRequested: (products) => {
@@ -29,8 +35,13 @@ const slice = createSlice({
       products.lastFetch = Date.now();
     },
 
-    productsRequestFailed: (products) => {
+    productsRequestFailed: (products, action) => {
+      products.error = action.payload;
       products.loading = false;
+    },
+
+    productsError: (products, { payload }) => {
+      products.error = payload;
     },
 
     productAdded: (products, action) => {
@@ -69,7 +80,9 @@ export const loadProducts =
       apiCallBegan({
         method: "get",
         url: "/products/",
+        onStart: productsRequested.type,
         onSuccess: productsRecieved.type,
+        onError: productsRequestFailed.type,
       })
     );
   };
@@ -82,6 +95,7 @@ export const addProduct =
         method: "post",
         url: "/products/",
         onSuccess: productAdded.type,
+        onError: productsRequestFailed.type,
       })
     );
   };
@@ -121,3 +135,8 @@ export const getProduct = (id: number | undefined) =>
     (products) =>
       products.list[products.list.findIndex((product) => product.id === id)]
   );
+
+export const getFailedRequestError = createSelector(
+  (state: RootState) => state.products,
+  (products) => products.error
+);

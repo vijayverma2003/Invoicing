@@ -7,7 +7,9 @@ export interface API {
     data?: any;
     method: string;
     url: string;
+    onStart?: string;
     onSuccess?: string;
+    onError?: string;
   };
 }
 

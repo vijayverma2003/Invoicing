@@ -57,7 +57,7 @@ function ProductDescription() {
                 onClick={handleOpenProductFormDialog}
                 className="btn-icon"
               >
-                <AiOutlineEdit size={20} />
+                <AiOutlineEdit color="black" size={20} />
               </button>
               <button onClick={handleShowWarning} className="btn-icon">
                 <MdDeleteOutline size={20} color="red" />

@@ -1,12 +1,16 @@
-import { addProduct, updateProduct } from "../../store/entities/products";
 import { AppDispatch } from "../../store/configureStore";
 import { CloseSVG } from "../common/SVG";
 import { Product, productForm } from "../../models/products";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef } from "react";
 import { z } from "zod";
 import Input from "../common/Input";
 import useForm from "../../hooks/useForm";
+import {
+  addProduct,
+  getFailedRequestError,
+  updateProduct,
+} from "../../store/entities/products";
 
 const schema = z.object({
   name: z
@@ -38,14 +42,16 @@ interface Props {
 function ProductForm({ product }: Props): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
   const dialog = useRef<HTMLDialogElement>(null);
+  const error = useSelector(getFailedRequestError);
 
-  const { data, setData, handleChange, errors, handleSubmit } = useForm(
-    productForm.initialState
-  );
+  const { data, setData, handleChange, errors, handleSubmit, setErrors } =
+    useForm(productForm.initialState);
 
   const handleAddProduct = () => {
     if (!product) dispatch(addProduct(data));
     else dispatch(updateProduct(data.id, data));
+
+    if (error) return;
 
     setData(productForm.initialState);
     dialog.current?.close();
@@ -75,7 +81,10 @@ function ProductForm({ product }: Props): JSX.Element {
             key={input.name}
             {...input}
             onChange={handleChange}
-            error={errors[input.name]}
+            error={
+              errors[input.name] ||
+              (error && error[input.name] && error[input.name][0])
+            }
             value={data[input.name] ?? ""}
           />
         ))}
