@@ -270,6 +270,11 @@ input {
   &-content {
     padding: 1.4rem 2rem;
     width: 100%;
+
+    &-description {
+      font-size: 1.4rem;
+      margin-bottom: 1.8rem;
+    }
   }
 }
 

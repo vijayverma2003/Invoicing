@@ -1,9 +1,9 @@
-import { addProduct } from "../../store/entities/products";
+import { addProduct, updateProduct } from "../../store/entities/products";
 import { AppDispatch } from "../../store/configureStore";
 import { CloseSVG } from "../common/SVG";
-import { productForm } from "../../models/products";
+import { Product, productForm } from "../../models/products";
 import { useDispatch } from "react-redux";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { z } from "zod";
 import Input from "../common/Input";
 import useForm from "../../hooks/useForm";
@@ -31,7 +31,11 @@ const requiredSchema = schema.required({
   unit: true,
 });
 
-function ProductForm(): JSX.Element {
+interface Props {
+  product?: Product;
+}
+
+function ProductForm({ product }: Props): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
   const dialog = useRef<HTMLDialogElement>(null);
 
@@ -40,10 +44,19 @@ function ProductForm(): JSX.Element {
   );
 
   const handleAddProduct = () => {
-    dispatch(addProduct(data));
+    const id = data.id;
+    // delete data.id;
+
+    if (!product) dispatch(addProduct(data));
+    else dispatch(updateProduct(id, data));
+
     setData(productForm.initialState);
     dialog.current?.close();
   };
+
+  useEffect(() => {
+    if (product) setData(product);
+  }, [product]);
 
   return (
     <dialog ref={dialog}>
@@ -66,6 +79,7 @@ function ProductForm(): JSX.Element {
             {...input}
             onChange={handleChange}
             error={errors[input.name]}
+            value={data[input.name] ?? ""}
           />
         ))}
 

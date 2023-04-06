@@ -7,7 +7,7 @@ export interface API {
     data?: any;
     method: string;
     url: string;
-    onSuccess: string;
+    onSuccess?: string;
   };
 }
 

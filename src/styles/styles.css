@@ -589,6 +589,10 @@ input {
   padding: 1.4rem 2rem;
   width: 100%;
 }
+.page-content-description {
+  font-size: 1.4rem;
+  margin-bottom: 1.8rem;
+}
 
 @media screen and (max-width: 1080px) {
   #main-page {

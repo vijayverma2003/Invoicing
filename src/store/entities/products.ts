@@ -6,6 +6,8 @@ import {
 } from "@reduxjs/toolkit";
 import { Product } from "../../models/products";
 import { apiCallBegan } from "../api";
+import moment from "moment";
+import { RootState } from "../configureStore";
 
 interface InitialState {
   loading: boolean;
@@ -58,19 +60,19 @@ export const {
 
 export default slice.reducer;
 
-interface RootState {
-  products: InitialState;
-}
+export const loadProducts =
+  () => (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
+    const lastFetch = getState().products.lastFetch;
+    if (moment().diff(moment(lastFetch), "minutes") < 20) return;
 
-export const loadProducts = () => (dispatch: Dispatch<AnyAction>) => {
-  return dispatch(
-    apiCallBegan({
-      method: "get",
-      url: "/products/",
-      onSuccess: productsRecieved.type,
-    })
-  );
-};
+    return dispatch(
+      apiCallBegan({
+        method: "get",
+        url: "/products/",
+        onSuccess: productsRecieved.type,
+      })
+    );
+  };
 
 export const addProduct =
   (data: { [key: string]: any }) => (dispatch: Dispatch<AnyAction>) => {
@@ -84,7 +86,27 @@ export const addProduct =
     );
   };
 
+export const updateProduct =
+  (id: string | number, data: { [key: string]: any }) =>
+  (dispatch: Dispatch<AnyAction>) => {
+    return dispatch(
+      apiCallBegan({
+        data,
+        method: "put",
+        url: `/products/${id}/`,
+        onSuccess: productUpdated.type,
+      })
+    );
+  };
+
 export const getProducts = createSelector(
   (state: RootState) => state.products,
   (products) => products.list
 );
+
+export const getProduct = (id: number | undefined) =>
+  createSelector(
+    (state: RootState) => state.products,
+    (products) =>
+      products.list[products.list.findIndex((product) => product.id === id)]
+  );

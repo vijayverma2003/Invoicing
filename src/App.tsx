@@ -16,6 +16,7 @@ import "./styles/styles.css";
 
 import store from "./store/configureStore";
 import { Provider } from "react-redux";
+import ProductDescription from "./components/pages/ProductDescription";
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
       {localStorage.getItem("user") && <Navbar />}
       <Provider store={store}>
         <Routes>
+          <Route element={<ProductDescription />} path={"/products/:id"} />
+
           <Route element={<InvoiceForm />} path="/invoices/new" />
           <Route element={<Transports />} path="/transports" />
           <Route element={<Invoices />} path="/invoices" />

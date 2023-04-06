@@ -3,12 +3,12 @@ import React, { useEffect, useRef } from "react";
 import { FieldError } from "react-hook-form";
 
 interface InputProps {
-  svg?: string;
-  placeholder: string;
-  name: string;
-  type: string;
   error: string | undefined | FieldError;
+  name: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder: string;
+  svg?: string;
+  type: string;
   [property: string]: any;
 }
 
@@ -47,8 +47,15 @@ const Input = ({
   };
 
   useEffect(() => {
-    if (input.current?.value) input.current?.focus();
-  }, [input.current?.value]);
+    if (input.current?.value)
+      gsap.to(labelRef.current, {
+        top: "-12%",
+        left: "-2.5%",
+        fontSize: "1rem",
+        duration: 0.2,
+        ease: "Power3.easeOut",
+      });
+  });
 
   return (
     <>
@@ -60,7 +67,6 @@ const Input = ({
           </label>
         )}
         <input
-          autoFocus
           {...args}
           ref={input}
           onChange={onChange}
