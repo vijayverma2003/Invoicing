@@ -285,6 +285,10 @@ html {
   background-color: black;
   color: white;
 }
+.light .btn-danger {
+  background-color: rgb(158, 30, 30);
+  color: #fff;
+}
 .light a {
   color: black;
 }
@@ -436,6 +440,11 @@ button,
 .btn-primary {
   background-color: #fff;
   color: #101010;
+}
+
+.btn-danger {
+  background-color: rgb(158, 30, 30);
+  color: #fff;
 }
 
 .form-page {
@@ -811,6 +820,31 @@ dialog::backdrop {
 .form-dialog-heading {
   color: #fff;
   margin: 2.4rem;
+}
+
+.dialog-warning {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 2.4rem 1rem;
+  max-width: 320px;
+  gap: 4rem;
+}
+.dialog-warning-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding: 0 2rem;
+}
+
+.dialog-description {
+  width: 100%;
+  text-align: center;
+  font-size: 1.4rem;
+  display: block;
 }
 
 @media screen and (max-width: 420px) {

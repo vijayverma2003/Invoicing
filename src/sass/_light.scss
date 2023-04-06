@@ -30,6 +30,11 @@
     color: lighten($light-primary, 100%);
   }
 
+  .btn-danger {
+    background-color: $color-danger;
+    color: $light-primary;
+  }
+
   a {
     color: black;
   }

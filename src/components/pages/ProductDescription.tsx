@@ -1,10 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { AppDispatch } from "../../store/configureStore";
-import { useEffect } from "react";
-import { getProduct, loadProducts } from "../../store/entities/products";
 import { AiOutlineEdit } from "react-icons/ai";
+import { AppDispatch } from "../../store/configureStore";
+import {
+  deleteProduct,
+  getProduct,
+  loadProducts,
+} from "../../store/entities/products";
+import { MdDeleteOutline } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import ProductForm from "../forms/ProductForm";
+import WarningModal from "../common/WarningModal";
 
 function ProductDescription() {
   const { id } = useParams();
@@ -20,9 +26,23 @@ function ProductDescription() {
     if (dialog) dialog.showModal();
   };
 
+  const handleShowWarning = () => {
+    const dialog = document.querySelector<HTMLDialogElement>("#dialog-warning");
+    if (dialog) dialog.showModal();
+  };
+
+  const handleDelete = () => {
+    if (id) dispatch(deleteProduct(id));
+    window.location.replace("/products");
+  };
+
   return (
     <>
       <ProductForm product={product} />
+      <WarningModal
+        onClick={handleDelete}
+        description="Are you sure that you want to permanently delete this product?"
+      />
       {product && (
         <section id="main-page" className="page">
           <header className="page-header">
@@ -33,6 +53,9 @@ function ProductDescription() {
                 className="btn-icon"
               >
                 <AiOutlineEdit size={20} />
+              </button>
+              <button onClick={handleShowWarning} className="btn-icon">
+                <MdDeleteOutline size={20} color="red" />
               </button>
             </div>
           </header>

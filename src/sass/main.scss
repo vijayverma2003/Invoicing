@@ -129,6 +129,11 @@ button,
   color: $dark-primary;
 }
 
+.btn-danger {
+  background-color: $color-danger;
+  color: $light-primary;
+}
+
 // Form
 
 .form-page {
@@ -519,6 +524,26 @@ dialog::backdrop {
     color: $light-primary;
     margin: 2.4rem;
   }
+}
+
+.dialog-warning {
+  @include flex-center(column);
+  padding: 2.4rem 1rem;
+  max-width: 320px;
+  gap: 4rem;
+
+  &-buttons {
+    width: 100%;
+    @include flex-space(row);
+    padding: 0 2rem;
+  }
+}
+
+.dialog-description {
+  width: 100%;
+  text-align: center;
+  font-size: 1.4rem;
+  display: block;
 }
 
 @media screen and (max-width: 420px) {

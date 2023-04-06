@@ -99,6 +99,17 @@ export const updateProduct =
     );
   };
 
+export const deleteProduct =
+  (id: string) => (dispatch: Dispatch<AnyAction>) => {
+    return dispatch(
+      apiCallBegan({
+        method: "delete",
+        url: `/products/${id}/`,
+        onSuccess: productDeleted.type,
+      })
+    );
+  };
+
 export const getProducts = createSelector(
   (state: RootState) => state.products,
   (products) => products.list
