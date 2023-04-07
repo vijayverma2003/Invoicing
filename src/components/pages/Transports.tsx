@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
 import { AddSVG } from "../common/SVG";
-import TransportForm from "../forms/TransportForm";
-import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/configureStore";
 import { getTransports, loadTransports } from "../../store/entities/transports";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import TransportForm from "../forms/TransportForm";
 
 function Transports() {
   const dispatch = useDispatch<AppDispatch>();
@@ -36,20 +37,25 @@ function Transports() {
         <div className="page-content">
           <div>
             {transports.map((transport) => (
-              <div key={transport.id} className="list-page-item">
-                <div>
-                  <h4 className="list-page-item-heading">Rajesh Kumar</h4>
-                  <p className="text-lighter list-page-item-description"></p>
+              <Link
+                id={transport.id.toString()}
+                key={transport.id}
+                to={`/transports/${transport.id}`}
+              >
+                <div className="list-page-item">
+                  <div>
+                    <h4 className="list-page-item-heading">{transport.name}</h4>
+                    <p className="text-lighter list-page-item-description">
+                      {transport.mode}
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="list-page-item-heading text-right">
+                      {transport.transporter_id}
+                    </h4>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="list-page-item-heading text-right">
-                    #81H81J01000
-                  </h4>
-                  <p className="text-lighter list-page-item-description text-right">
-                    Road
-                  </p>
-                </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

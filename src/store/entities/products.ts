@@ -17,13 +17,15 @@ interface InitialState {
 }
 
 const slice = createSlice({
+  name: "products",
+
   initialState: {
     loading: false,
     list: [],
     lastFetch: null,
     error: {},
   } as InitialState,
-  name: "products",
+
   reducers: {
     productsRequested: (products) => {
       products.loading = true;
@@ -38,10 +40,6 @@ const slice = createSlice({
     productsRequestFailed: (products, action) => {
       products.error = action.payload;
       products.loading = false;
-    },
-
-    productsError: (products, { payload }) => {
-      products.error = payload;
     },
 
     productAdded: (products, action) => {

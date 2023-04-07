@@ -42,7 +42,7 @@ interface Props {
 function ProductForm({ product }: Props): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
   const dialog = useRef<HTMLDialogElement>(null);
-  const error = useSelector(getFailedRequestError);
+  const failedAPIRequestError = useSelector(getFailedRequestError);
 
   const { data, setData, handleChange, errors, handleSubmit, setErrors } =
     useForm(productForm.initialState);
@@ -51,7 +51,7 @@ function ProductForm({ product }: Props): JSX.Element {
     if (!product) dispatch(addProduct(data));
     else dispatch(updateProduct(data.id, data));
 
-    if (error) return;
+    if (failedAPIRequestError) return;
 
     setData(productForm.initialState);
     dialog.current?.close();
@@ -83,7 +83,9 @@ function ProductForm({ product }: Props): JSX.Element {
             onChange={handleChange}
             error={
               errors[input.name] ||
-              (error && error[input.name] && error[input.name][0])
+              (failedAPIRequestError &&
+                failedAPIRequestError[input.name] &&
+                failedAPIRequestError[input.name][0])
             }
             value={data[input.name] ?? ""}
           />
