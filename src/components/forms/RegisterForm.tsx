@@ -3,6 +3,8 @@ import Input from "../common/Input";
 import useForm from "../../hooks/useForm";
 import { registerForm } from "../../models/user";
 import { z } from "zod";
+import { createJWT, login, register } from "../../services/auth";
+import { AxiosError } from "axios";
 
 const schema = z.object({
   username: z
@@ -20,11 +22,33 @@ const schema = z.object({
 });
 
 function RegisterForm() {
-  const { data, setData, errors, handleChange, handleSubmit } = useForm(
-    registerForm.initialState
-  );
+  const { data, setData, errors, setErrors, handleChange, handleSubmit } =
+    useForm(registerForm.initialState);
 
-  const onSubmit = () => {};
+  const onSubmit = async () => {
+    try {
+      await register(data);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        const errs = { ...errors };
+
+        if (error.response) {
+          const { data } = error.response;
+          for (let error in data) errs[error] = data[error][0];
+        }
+
+        setErrors(errs);
+      }
+    }
+
+    try {
+      await login(data);
+    } catch (error) {
+      window.location.href = "/login";
+    }
+
+    
+  };
 
   return (
     <section className="form-page">

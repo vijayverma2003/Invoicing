@@ -73,7 +73,7 @@ export default slice.reducer;
 
 export const loadTransports =
   () => (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
-    const lastFetch = getState().transports.lastFetch;
+    const lastFetch = getState().entities.transports.lastFetch;
 
     if (moment().diff(moment(lastFetch), "minutes") < 20) return;
 
@@ -130,18 +130,18 @@ export const deleteTransport =
 // Selectors
 
 export const getTransports = createSelector(
-  (state: RootState) => state.transports,
+  (state: RootState) => state.entities.transports,
   (transports) => transports.list
 );
 
 export const getTransport = (id: number) =>
   createSelector(
-    (state: RootState) => state.transports,
+    (state: RootState) => state.entities.transports,
     (transports) =>
       transports.list[transports.list.findIndex((t) => t.id === id)]
   );
 
 export const getFailedRequestError = createSelector(
-  (state: RootState) => state.transports,
+  (state: RootState) => state.entities.transports,
   (transports) => transports.error
 );

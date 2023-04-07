@@ -71,7 +71,7 @@ export default slice.reducer;
 
 export const loadProducts =
   () => (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
-    const lastFetch = getState().products.lastFetch;
+    const lastFetch = getState().entities.products.lastFetch;
     if (moment().diff(moment(lastFetch), "minutes") < 20) return;
 
     return dispatch(
@@ -123,18 +123,18 @@ export const deleteProduct =
   };
 
 export const getProducts = createSelector(
-  (state: RootState) => state.products,
+  (state: RootState) => state.entities.products,
   (products) => products.list
 );
 
 export const getProduct = (id: number | undefined) =>
   createSelector(
-    (state: RootState) => state.products,
+    (state: RootState) => state.entities.products,
     (products) =>
       products.list[products.list.findIndex((product) => product.id === id)]
   );
 
 export const getFailedRequestError = createSelector(
-  (state: RootState) => state.products,
+  (state: RootState) => state.entities.products,
   (products) => products.error
 );

@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import productsReducer from "./entities/products";
-import transportsReducer from "./entities/transports";
+import productsReducer from "./products";
+import transportsReducer from "./transports";
 
 export default combineReducers({
   products: productsReducer,
