@@ -1,5 +1,5 @@
 import { AxiosError, AxiosResponse } from "axios";
-import { put, takeLatest, call } from "redux-saga/effects";
+import { put, call, takeEvery } from "redux-saga/effects";
 import http from "../services/http";
 import { API, apiCallBegan, apiCallFailed } from "../store/api";
 
@@ -25,5 +25,5 @@ function* handleApiRequests(action: API) {
 }
 
 export function* watchApiRequests() {
-  yield takeLatest(apiCallBegan, handleApiRequests);
+  yield takeEvery(apiCallBegan, handleApiRequests);
 }

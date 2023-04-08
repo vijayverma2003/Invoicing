@@ -43,6 +43,7 @@ function ProductForm({ product }: Props): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
   const dialog = useRef<HTMLDialogElement>(null);
   const failedAPIRequestError = useSelector(getFailedRequestError);
+  console.log(product);
 
   const { data, setData, handleChange, errors, handleSubmit } =
     useForm<Product>(productForm.initialState);
@@ -81,6 +82,7 @@ function ProductForm({ product }: Props): JSX.Element {
             key={input.name}
             {...input}
             onChange={handleChange}
+            value={data[input.name] ?? ""}
             error={
               errors[input.name] ||
               (failedAPIRequestError &&

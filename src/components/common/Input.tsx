@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 import { FieldError } from "react-hook-form";
 
 interface InputProps {
-  error: string | undefined | FieldError;
+  error: string | FieldError | undefined | null;
   name: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;

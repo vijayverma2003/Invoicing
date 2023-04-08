@@ -8,20 +8,18 @@ interface Errors {
   [key: string]: string | undefined;
 }
 
-function useForm<T>(initialState: T) {
-  const [data, setData] = useState<T>(initialState);
+function useForm<T>(initialState: T | Data) {
+  const [data, setData] = useState<T | Data>(initialState);
   const [errors, setErrors] = useState<Errors>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const d: Data = { ...data } as Data;
+    const d = { ...data } as Data;
     const { name, value, type } = e.target;
 
-    if (d[name]) {
-      d[name] = value as string;
-    }
+    d[name] = value as string;
     if (type === "number") d[name] = parseInt(d[name]);
 
-    setData(d as T);
+    setData(d);
   };
 
   const handleTabularChange = (

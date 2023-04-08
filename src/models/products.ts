@@ -1,4 +1,4 @@
-import Form from "./form";
+import Form, { Input } from "./form";
 
 export interface Product {
   id?: number;

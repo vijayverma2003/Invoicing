@@ -13,7 +13,7 @@ interface InitialState {
   loading: boolean;
   list: Product[];
   lastFetch: number | null;
-  error?: { [key: string]: string[] };
+  error?: { [key: string]: string[] } | null;
 }
 
 // Slice
@@ -25,7 +25,7 @@ const slice = createSlice({
     loading: false,
     list: [],
     lastFetch: null,
-    error: {},
+    error: null,
   } as InitialState,
 
   reducers: {
@@ -37,6 +37,7 @@ const slice = createSlice({
       products.list = action.payload;
       products.loading = false;
       products.lastFetch = Date.now();
+      products.error = null;
     },
 
     productsRequestFailed: (products, action) => {
@@ -46,11 +47,13 @@ const slice = createSlice({
 
     productAdded: (products, action) => {
       products.list.push(action.payload);
+      products.error = null;
     },
 
     productUpdated: (products, action) => {
       const index = products.list.findIndex((p) => p.id === action.payload.id);
       products.list[index] = action.payload;
+      products.error = null;
     },
 
     productDeleted: (products, action) => {
@@ -133,11 +136,11 @@ export const getProducts = createSelector(
   (products) => products.list
 );
 
-export const getProduct = (id: number | undefined) =>
+export const getProduct = (id: string | undefined) =>
   createSelector(
     (state: RootState) => state.entities.products,
     (products) =>
-      products.list[products.list.findIndex((product) => product.id === id)]
+      products.list[products.list.findIndex((product) => product.id == id)]
   );
 
 export const getFailedRequestError = createSelector(

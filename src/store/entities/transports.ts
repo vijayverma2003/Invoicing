@@ -9,7 +9,7 @@ interface InitialState {
   loading: boolean;
   list: Transport[];
   lastFetch: number | null;
-  error?: { [key: string]: string[] };
+  error?: { [key: string]: string[] } | null;
 }
 
 // Slice
@@ -38,10 +38,12 @@ const slice = createSlice({
       transports.list = action.payload;
       transports.loading = false;
       transports.lastFetch = Date.now();
+      transports.error = null;
     },
 
     transportAdded: (transports, action) => {
       transports.list.push(action.payload);
+      transports.error = null;
     },
 
     transportUpdated: (transports, action) => {
@@ -50,6 +52,7 @@ const slice = createSlice({
       );
 
       transports.list[index] = action.payload;
+      transports.error = null;
     },
 
     transportDeleted: (transports, action) => {

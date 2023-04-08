@@ -15,7 +15,7 @@ import {
 function ProductDescription() {
   const { id } = useParams();
   const dispatch = useDispatch<AppDispatch>();
-  const product = useSelector(getProduct(Number(id)));
+  const product = useSelector(getProduct(id));
 
   useEffect(() => {
     dispatch(loadProducts());

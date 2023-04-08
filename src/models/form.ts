@@ -2,13 +2,13 @@ interface InitialState {
   [key: string]: string;
 }
 
-interface Input {
-  name: string;
+export interface Input<T> {
+  name: keyof T;
   placeholder: string;
   type: "text" | "email" | "number" | "date" | "tel" | "password";
 }
 
 export default interface Form<T> {
   initialState: T;
-  inputs: Input[];
+  inputs: Input<T>[];
 }

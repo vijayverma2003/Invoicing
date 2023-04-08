@@ -3,15 +3,19 @@ import { setJWT } from "./http";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 
+interface Data {
+  [key: string]: any;
+}
+
 const http = axios.create({
   baseURL: process.env.REACT_APP_AUTH_URL,
 });
 
-export async function register(data: User) {
+export async function register(data: User | Data) {
   return http.post("/users/", data);
 }
 
-export async function login(data: LoginFields) {
+export async function login(data: LoginFields | Data) {
   const { data: jwt } = await http.post("/jwt/create/", data);
   localStorage.setItem("access-token", jwt.access);
   localStorage.setItem("refresh-token", jwt.refresh);
