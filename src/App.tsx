@@ -19,9 +19,11 @@ import { Provider } from "react-redux";
 import ProductDescription from "./components/pages/ProductDescription";
 
 function App() {
+  const user = localStorage.getItem("access-token");
+
   return (
     <>
-      {localStorage.getItem("user") && <Navbar />}
+      {user && <Navbar />}
       <Provider store={store}>
         <Routes>
           <Route element={<ProductDescription />} path={"/products/:id"} />
@@ -36,12 +38,7 @@ function App() {
           <Route element={<FirmForm />} path="/firm" />
           <Route element={<RegisterForm />} path="/register" />
           <Route element={<LoginForm />} path="/login" />
-          <Route
-            element={
-              localStorage.getItem("user") ? <Dashboard /> : <HomePage />
-            }
-            path="/"
-          />
+          <Route element={user ? <Dashboard /> : <HomePage />} path="/" />
         </Routes>
       </Provider>
     </>

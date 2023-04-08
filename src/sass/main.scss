@@ -118,6 +118,10 @@ button,
   padding: 0.3rem;
   border-radius: 5px;
   background: $primary-gradient;
+
+  button {
+    color: $dark-primary !important;
+  }
 }
 
 .btn-icon {

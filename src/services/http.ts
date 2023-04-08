@@ -1,7 +1,9 @@
 import axios from "axios";
 
-const http = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
-});
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
-export default http;
+export function setJWT(jwt: string | null) {
+  if (jwt) axios.defaults.headers.common["Authorization"] = `JWT ${jwt}`;
+}
+
+export default axios;

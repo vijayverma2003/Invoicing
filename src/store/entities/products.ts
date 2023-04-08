@@ -16,6 +16,8 @@ interface InitialState {
   error?: { [key: string]: string[] };
 }
 
+// Slice
+
 const slice = createSlice({
   name: "products",
 
@@ -69,6 +71,8 @@ export const {
 
 export default slice.reducer;
 
+// Action Creators
+
 export const loadProducts =
   () => (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
     const lastFetch = getState().entities.products.lastFetch;
@@ -121,6 +125,8 @@ export const deleteProduct =
       })
     );
   };
+
+// Selectors
 
 export const getProducts = createSelector(
   (state: RootState) => state.entities.products,

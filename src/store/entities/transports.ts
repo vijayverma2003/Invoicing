@@ -12,6 +12,8 @@ interface InitialState {
   error?: { [key: string]: string[] };
 }
 
+// Slice
+
 const slice = createSlice({
   name: "transports",
 
@@ -70,6 +72,8 @@ export const {
 } = slice.actions;
 
 export default slice.reducer;
+
+// Action Creators
 
 export const loadTransports =
   () => (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {

@@ -432,6 +432,9 @@ button,
   border-radius: 5px;
   background: linear-gradient(to right, #a148af, #982ebd, #3256d4, #2c7cc6, #952cc6);
 }
+.btn-container button {
+  color: #101010 !important;
+}
 
 .btn-icon {
   padding: 0;

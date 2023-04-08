@@ -1,10 +1,10 @@
+import { AxiosError } from "axios";
 import { Link } from "react-router-dom";
-import Input from "../common/Input";
-import useForm from "../../hooks/useForm";
+import { login, register } from "../../services/auth";
 import { registerForm } from "../../models/user";
 import { z } from "zod";
-import { createJWT, login, register } from "../../services/auth";
-import { AxiosError } from "axios";
+import Input from "../common/Input";
+import useForm from "../../hooks/useForm";
 
 const schema = z.object({
   username: z
@@ -22,22 +22,20 @@ const schema = z.object({
 });
 
 function RegisterForm() {
-  const { data, setData, errors, setErrors, handleChange, handleSubmit } =
-    useForm(registerForm.initialState);
+  const { data, errors, setErrors, handleChange, handleSubmit } = useForm(
+    registerForm.initialState
+  );
 
   const onSubmit = async () => {
     try {
       await register(data);
     } catch (error) {
       if (error instanceof AxiosError) {
-        const errs = { ...errors };
+        const copiedErrors = { ...errors };
 
-        if (error.response) {
-          const { data } = error.response;
-          for (let error in data) errs[error] = data[error][0];
-        }
-
-        setErrors(errs);
+        if (error.response)
+          for (let err in error.response.data) copiedErrors[err] = data[err][0];
+        setErrors(copiedErrors);
       }
     }
 
@@ -47,7 +45,7 @@ function RegisterForm() {
       window.location.href = "/login";
     }
 
-    
+    window.location.href = "/firm";
   };
 
   return (

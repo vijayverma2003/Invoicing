@@ -1,20 +1,26 @@
 import axios from "axios";
-import { User } from "../models/user";
+import { setJWT } from "./http";
 
 const http = axios.create({
   baseURL: process.env.REACT_APP_AUTH_URL,
 });
 
-export const register = (data: { [key: string]: any }) => {
+interface Data {
+  [key: string]: string;
+}
+
+export async function register(data: Data) {
   return http.post("/users/", data);
-};
+}
 
-export const createJWT = (data: { [key: string]: any }) => {
-  return http.post("/jwt/create/", data);
-};
-
-export const login = async (data: { [key: string]: string }) => {
+export async function login(data: Data) {
   const { data: jwt } = await http.post("/jwt/create/", data);
   localStorage.setItem("access-token", jwt.access);
   localStorage.setItem("refresh-token", jwt.refresh);
-};
+}
+
+export function getJWT() {
+  return localStorage.getItem("access-token");
+}
+
+setJWT(getJWT());
