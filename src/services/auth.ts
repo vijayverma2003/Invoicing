@@ -1,5 +1,6 @@
 import axios from "axios";
 import { setJWT } from "./http";
+import jwtDecode from "jwt-decode";
 
 const http = axios.create({
   baseURL: process.env.REACT_APP_AUTH_URL,
@@ -21,6 +22,12 @@ export async function login(data: Data) {
 
 export function getJWT() {
   return localStorage.getItem("access-token");
+}
+
+export function getUserID() {
+  const jwt = getJWT();
+  if (jwt) return jwtDecode(jwt);
+  return null;
 }
 
 setJWT(getJWT());

@@ -23,7 +23,7 @@ function Products() {
   return (
     <>
       <ProductForm />
-      <section id="main-page" className="page products-page">
+      <section className="page products-page">
         <header className="page-header">
           <h4>Products</h4>
           <div className="page-header-icons">

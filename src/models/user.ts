@@ -14,3 +14,11 @@ export const registerForm: Form = {
     { name: "password", placeholder: "Password", type: "password" },
   ],
 };
+
+export const loginForm: Form = {
+  initialState: { username: "", password: "" },
+  inputs: [
+    { name: "username", placeholder: "Username", type: "text" },
+    { name: "password", placeholder: "Password", type: "password" },
+  ],
+};

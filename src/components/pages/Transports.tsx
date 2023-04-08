@@ -22,7 +22,7 @@ function Transports() {
   return (
     <>
       <TransportForm />
-      <section id="main-page" className="page transports-page">
+      <section className="page transports-page">
         <header className="page-header">
           <h4>Transports</h4>
           <div className="page-header-icons">

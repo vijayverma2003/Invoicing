@@ -6,7 +6,7 @@ function Dashboard() {
   };
 
   return (
-    <section id="main-page" className="page">
+    <section className="page">
       <header className="page-header">
         <h4>Dashboard</h4>
         <div className="page-header-icons">

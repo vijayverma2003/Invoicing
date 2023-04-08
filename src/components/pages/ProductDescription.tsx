@@ -47,7 +47,7 @@ function ProductDescription() {
         description="Are you sure that you want to permanently delete this product?"
       />
 
-      <section id="main-page" className="page">
+      <section className="page">
         <header className="page-header">
           <h4>{product?.name ?? "Not found"}</h4>
 

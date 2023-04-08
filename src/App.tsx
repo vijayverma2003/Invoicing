@@ -17,29 +17,31 @@ import "./styles/styles.css";
 import store from "./store/configureStore";
 import { Provider } from "react-redux";
 import ProductDescription from "./components/pages/ProductDescription";
+import { getUserID } from "./services/auth";
 
 function App() {
-  const user = localStorage.getItem("access-token");
+  const user = getUserID();
 
   return (
     <>
       {user && <Navbar />}
       <Provider store={store}>
-        <Routes>
-          <Route element={<ProductDescription />} path={"/products/:id"} />
-
-          <Route element={<InvoiceForm />} path="/invoices/new" />
-          <Route element={<Transports />} path="/transports" />
-          <Route element={<Invoices />} path="/invoices" />
-          <Route element={<Customers />} path="/customers" />
-          <Route element={<Products />} path="/products" />
-          <Route element={<BankForm />} path="/firm/bank" />
-          <Route element={<FirmAddressForm />} path="/firm/address" />
-          <Route element={<FirmForm />} path="/firm" />
-          <Route element={<RegisterForm />} path="/register" />
-          <Route element={<LoginForm />} path="/login" />
-          <Route element={user ? <Dashboard /> : <HomePage />} path="/" />
-        </Routes>
+        <main id={user ? "content" : ""}>
+          <Routes>
+            <Route element={<ProductDescription />} path={"/products/:id"} />
+            <Route element={<InvoiceForm />} path="/invoices/new" />
+            <Route element={<Transports />} path="/transports" />
+            <Route element={<Invoices />} path="/invoices" />
+            <Route element={<Customers />} path="/customers" />
+            <Route element={<Products />} path="/products" />
+            <Route element={<BankForm />} path="/firm/bank" />
+            <Route element={<FirmAddressForm />} path="/firm/address" />
+            <Route element={<FirmForm />} path="/firm" />
+            <Route element={<RegisterForm />} path="/register" />
+            <Route element={<LoginForm />} path="/login" />
+            <Route element={user ? <Dashboard /> : <HomePage />} path="/" />
+          </Routes>
+        </main>
       </Provider>
     </>
   );

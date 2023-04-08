@@ -21,7 +21,7 @@ function InvoiceForm() {
   };
 
   return (
-    <section id="main-page" className="page">
+    <section className="page">
       <div className="page-header">
         <h4 className="page-heading">New Invoice</h4>
       </div>

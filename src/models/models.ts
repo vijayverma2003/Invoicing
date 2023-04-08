@@ -22,27 +22,6 @@ interface FormArrayModel {
   model: Input[];
 }
 
-export const loginAndRegisterFormModel: FormObjectModel = {
-  initialState: { email: "", password: "", products: [{ email: "" }] },
-
-  model: {
-    email: {
-      name: "email",
-      placeholder: "Email Address",
-      svg: emailSVG,
-      type: "email",
-      value: "",
-    },
-    password: {
-      name: "password",
-      placeholder: "Password",
-      svg: passwordSVG,
-      type: "password",
-      value: "",
-    },
-  },
-};
-
 export const firmFormModel: FormObjectModel = {
   initialState: { name: "" },
 

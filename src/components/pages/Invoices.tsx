@@ -3,7 +3,7 @@ import { AddSVG } from "../common/SVG";
 
 function Invoices(): JSX.Element {
   return (
-    <section id="main-page" className="page products-page">
+    <section className="page products-page">
       <header className="page-header">
         <h4>Invoices</h4>
         <div className="page-header-icons">
@@ -29,7 +29,7 @@ function Invoices(): JSX.Element {
             </div>
           </div>
         </div>
-    </div>
+      </div>
     </section>
   );
 }
