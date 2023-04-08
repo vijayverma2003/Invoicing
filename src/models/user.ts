@@ -6,7 +6,12 @@ export interface User {
   password: string;
 }
 
-export const registerForm: Form = {
+export interface LoginFields {
+  username: string;
+  password: string;
+}
+
+export const registerForm: Form<User> = {
   initialState: { username: "", email: "", password: "" },
   inputs: [
     { name: "username", placeholder: "Username", type: "text" },
@@ -15,7 +20,7 @@ export const registerForm: Form = {
   ],
 };
 
-export const loginForm: Form = {
+export const loginForm: Form<LoginFields> = {
   initialState: { username: "", password: "" },
   inputs: [
     { name: "username", placeholder: "Username", type: "text" },

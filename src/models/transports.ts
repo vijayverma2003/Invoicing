@@ -1,13 +1,13 @@
 import Form from "./form";
 
 export interface Transport {
-  id: number;
+  id?: number;
   name: string;
-  transporter_id: string;
+  transporter_id?: string;
   mode: string;
 }
 
-export const transportForm: Form = {
+export const transportForm: Form<Transport> = {
   initialState: { name: "", transporter_id: "", mode: "" },
   inputs: [
     { name: "name", type: "text", placeholder: "Name" },

@@ -45,11 +45,11 @@ function ProductForm({ product }: Props): JSX.Element {
   const failedAPIRequestError = useSelector(getFailedRequestError);
 
   const { data, setData, handleChange, errors, handleSubmit, setErrors } =
-    useForm(productForm.initialState);
+    useForm<Product>(productForm.initialState);
 
   const handleAddProduct = () => {
     if (!product) dispatch(addProduct(data));
-    else dispatch(updateProduct(data.id, data));
+    else dispatch(updateProduct(data.id!.toString(), data));
 
     if (failedAPIRequestError) return;
 
@@ -87,7 +87,6 @@ function ProductForm({ product }: Props): JSX.Element {
                 failedAPIRequestError[input.name] &&
                 failedAPIRequestError[input.name][0])
             }
-            value={data[input.name] ?? ""}
           />
         ))}
 

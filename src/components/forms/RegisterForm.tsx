@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import { Link } from "react-router-dom";
 import { login, register } from "../../services/auth";
-import { registerForm } from "../../models/user";
+import { User, registerForm } from "../../models/user";
 import { z } from "zod";
 import Input from "../common/Input";
 import useForm from "../../hooks/useForm";
@@ -22,7 +22,7 @@ const schema = z.object({
 });
 
 function RegisterForm() {
-  const { data, errors, setErrors, handleChange, handleSubmit } = useForm(
+  const { data, errors, setErrors, handleChange, handleSubmit } = useForm<User>(
     registerForm.initialState
   );
 
@@ -34,7 +34,8 @@ function RegisterForm() {
         const copiedErrors = { ...errors };
 
         if (error.response)
-          for (let err in error.response.data) copiedErrors[err] = data[err][0];
+          for (let err in error.response.data)
+            copiedErrors[err] = error.response.data[err][0];
         setErrors(copiedErrors);
       }
     }

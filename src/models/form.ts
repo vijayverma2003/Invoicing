@@ -8,7 +8,7 @@ interface Input {
   type: "text" | "email" | "number" | "date" | "tel" | "password";
 }
 
-export default interface Form {
-  initialState: InitialState;
+export default interface Form<T> {
+  initialState: T;
   inputs: Input[];
 }

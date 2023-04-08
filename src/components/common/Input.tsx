@@ -30,6 +30,7 @@ const Input = ({
       top: "-12%",
       left: "-2.5%",
       fontSize: "1rem",
+      opacity: 1,
       duration: 0.2,
       ease: "Power3.easeOut",
     });
@@ -42,6 +43,7 @@ const Input = ({
         left: "0",
         fontSize: "1.6rem",
         duration: 0.2,
+        opacity: 0.4,
         ease: "Power3.easeOut",
       });
   };
@@ -51,8 +53,9 @@ const Input = ({
       gsap.to(labelRef.current, {
         top: "-12%",
         left: "-2.5%",
+        opacity: 1,
         fontSize: "1rem",
-        duration: 0.2,
+        duration: 0.4,
         ease: "Power3.easeOut",
       });
   });

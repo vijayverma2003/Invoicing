@@ -43,7 +43,7 @@ function TransportForm({ transport }: Props): JSX.Element {
   };
 
   const onSubmit = () => {
-    if (transport) dispatch(updateTransport(data.id, data));
+    if (transport) dispatch(updateTransport(data.id!.toString(), data));
     else dispatch(addTransport(data));
 
     if (failedAPIRequestError) return;
@@ -68,7 +68,6 @@ function TransportForm({ transport }: Props): JSX.Element {
           <Input
             key={input.name}
             {...input}
-            value={data[input.name]}
             onChange={handleChange}
             error={
               errors[input.name] ||

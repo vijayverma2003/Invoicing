@@ -1,15 +1,15 @@
 import Form from "./form";
 
 export interface Product {
-  id: number;
+  id?: number;
   name: string;
-  price: number;
-  tax: number;
+  price: number | "";
+  tax: number | "";
   unit: string;
-  hsn: string;
+  hsn?: string;
 }
 
-export const productForm: Form = {
+export const productForm: Form<Product> = {
   initialState: { name: "", price: "", tax: "", unit: "", hsn: "" },
   inputs: [
     { name: "name", placeholder: "Name", type: "text" },

@@ -9,7 +9,7 @@ export interface Customer {
   state: string;
 }
 
-export const customerForm: Form = {
+export const customerForm: Form<Customer> = {
   initialState: {
     name: "",
     email: "",

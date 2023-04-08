@@ -6,7 +6,6 @@ import {
   addFirm,
   getFailedRequestError,
   getFirm,
-  loadFirm,
   updateFirm,
 } from "../../store/user-info/firm";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,7 +32,7 @@ function FirmForm() {
   }, [firm]);
 
   const onSubmit = () => {
-    if (firm) dispatch(updateFirm(data.id, data));
+    if (firm) dispatch(updateFirm(data.id!.toString(), data));
     else dispatch(addFirm(data));
 
     if (failedAPIRequestError) return;
@@ -47,7 +46,7 @@ function FirmForm() {
           onSubmit={(e) => handleSubmit(e, schema, onSubmit)}
           className="form-primary"
         >
-          <h2 className="form-heading">Your Firm</h2>
+          <h3 className="form-heading">Your Firm</h3>
 
           {firmForm.inputs.map((input) => (
             <Input

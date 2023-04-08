@@ -2,7 +2,7 @@ import Input from "../common/Input";
 import { CloseSVG } from "../common/SVG";
 import { z } from "zod";
 import useForm from "../../hooks/useForm";
-import { customerForm } from "../../models/customers";
+import { Customer, customerForm } from "../../models/customers";
 
 const schema = z.object({
   name: z
@@ -40,7 +40,7 @@ function CustomerForm(): JSX.Element {
     document.querySelector("dialog")?.close();
   };
 
-  const { data, errors, setErrors, handleChange } = useForm(
+  const { data, errors, setErrors, handleChange } = useForm<Customer>(
     customerForm.initialState
   );
 

@@ -103,7 +103,7 @@ export const addProduct =
   };
 
 export const updateProduct =
-  (id: string | number, data: { [key: string]: any }) =>
+  (id: string, data: { [key: string]: any }) =>
   (dispatch: Dispatch<AnyAction>) => {
     return dispatch(
       apiCallBegan({
