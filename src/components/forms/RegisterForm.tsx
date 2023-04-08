@@ -18,7 +18,7 @@ const schema = z.object({
   password: z
     .string()
     .max(55, "Username must be less than 150 characters")
-    .min(8, "Password must be atleast 8 characters long"),
+    .min(6, "Password must be atleast 8 characters long"),
 });
 
 function RegisterForm() {

@@ -1,25 +1,71 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import useForm from "../../hooks/useForm";
-import { firmFormModel } from "../../models/models";
-import Button from "../common/Button";
+import { firmForm } from "../../models/firm";
+import { z } from "zod";
 import Input from "../common/Input";
+import useForm from "../../hooks/useForm";
+import {
+  addFirm,
+  getFailedRequestError,
+  getFirm,
+  loadFirm,
+  updateFirm,
+} from "../../store/user-info/firm";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../../store/configureStore";
+import { useEffect } from "react";
+
+const schema = z.object({
+  name: z
+    .string()
+    .min(3, "Name must be atleast 3 characters")
+    .max(255, "Name must be less than 255 characters"),
+});
 
 function FirmForm() {
-  // const { name } = firmFormModel.model;
+  const dispatch = useDispatch<AppDispatch>();
+  const failedAPIRequestError = useSelector(getFailedRequestError);
+  const firm = useSelector(getFirm);
+  const { data, handleChange, errors, handleSubmit, setData } = useForm(
+    firm ?? firmForm.initialState
+  );
 
-  // const { state, handleChange } = useForm(firmFormModel.initialState);
-  // const [data] = state;
+  useEffect(() => {
+    if (firm) setData(firm);
+  }, [firm]);
+
+  const onSubmit = () => {
+    if (firm) dispatch(updateFirm(data.id, data));
+    else dispatch(addFirm(data));
+
+    if (failedAPIRequestError) return;
+    window.location.href = "/firm/address";
+  };
 
   return (
     <section className="form-page">
       <div className="form-container">
-        <form className="form-primary">
-          <h2 className="text-gradient form-heading">Add your firm</h2>
-          {/* <Input {...name} value={data.name} onChange={handleChange} /> */}
-          <Button className="btn-submit" href="/firm/address">
-            Create
-          </Button>
+        <form
+          onSubmit={(e) => handleSubmit(e, schema, onSubmit)}
+          className="form-primary"
+        >
+          <h2 className="form-heading">Your Firm</h2>
+
+          {firmForm.inputs.map((input) => (
+            <Input
+              key={input.name}
+              {...input}
+              value={data.name}
+              onChange={handleChange}
+              error={
+                errors[input.name] ||
+                (failedAPIRequestError &&
+                  failedAPIRequestError[input.name] &&
+                  failedAPIRequestError[input.name][0]) ||
+                (failedAPIRequestError && failedAPIRequestError["error"])
+              }
+            />
+          ))}
+
+          <button className="btn-primary btn-submit">Create</button>
         </form>
       </div>
     </section>

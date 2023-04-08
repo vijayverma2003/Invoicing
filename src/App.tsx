@@ -1,27 +1,34 @@
-import { Route, Routes } from "react-router-dom";
-import BankForm from "./components/forms/BankForm";
-import FirmAddressForm from "./components/forms/FirmAddressForm";
-import FirmForm from "./components/forms/FirmForm";
-import InvoiceForm from "./components/forms/InvoiceForm";
-import LoginForm from "./components/forms/LoginForm";
-import RegisterForm from "./components/forms/RegisterForm";
-import HomePage from "./components/home/HomePage";
-import Navbar from "./components/Navbar";
-import Customers from "./components/pages/Customers";
-import Dashboard from "./components/pages/Dashboard";
-import Invoices from "./components/pages/Invoices";
-import Products from "./components/pages/Products";
-import Transports from "./components/pages/Transports";
 import "./styles/styles.css";
 
-import store from "./store/configureStore";
-import { Provider } from "react-redux";
-import ProductDescription from "./components/pages/ProductDescription";
+import { Provider, useDispatch } from "react-redux";
+import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+
 import { getUserID } from "./services/auth";
-import ProtectedRoute from "./components/common/ProtectedRoute";
+import { loadFirm } from "./store/user-info/firm";
+import store, { AppDispatch } from "./store/configureStore";
+
+import BankForm from "./components/forms/BankForm";
+import Customers from "./components/pages/Customers";
+import Dashboard from "./components/pages/Dashboard";
+import FirmAddressForm from "./components/forms/FirmAddressForm";
+import FirmForm from "./components/forms/FirmForm";
+import HomePage from "./components/home/HomePage";
+import InvoiceForm from "./components/forms/InvoiceForm";
+import Invoices from "./components/pages/Invoices";
+import LoginForm from "./components/forms/LoginForm";
+import Navbar from "./components/Navbar";
+import ProductDescription from "./components/pages/ProductDescription";
+import Products from "./components/pages/Products";
+import RegisterForm from "./components/forms/RegisterForm";
+import Transports from "./components/pages/Transports";
 
 function App() {
   const user = getUserID();
+
+  useEffect(() => {
+    if (user) store.dispatch(loadFirm());
+  }, []);
 
   return (
     <>
