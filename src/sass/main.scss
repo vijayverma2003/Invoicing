@@ -259,9 +259,6 @@ input {
 }
 
 // Dashboard
-#content {
-  margin-left: 180px;
-}
 
 .page {
   min-height: 100vh;
@@ -347,6 +344,10 @@ td {
 
 // Navbar
 
+#content {
+  margin-left: 180px;
+}
+
 nav {
   border-right: 1px solid $light-secondary;
   width: 180px;
@@ -412,6 +413,10 @@ nav {
 }
 
 @media screen and (max-width: 1080px) {
+  #content {
+    margin-left: 0;
+  }
+
   nav {
     transform: translateX(-100%);
   }

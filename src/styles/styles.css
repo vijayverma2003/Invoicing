@@ -579,10 +579,6 @@ input {
   color: rgb(158, 30, 30);
 }
 
-#content {
-  margin-left: 180px;
-}
-
 .page {
   min-height: 100vh;
 }
@@ -654,6 +650,10 @@ td {
   font-size: 1.1rem;
 }
 
+#content {
+  margin-left: 180px;
+}
+
 nav {
   border-right: 1px solid #dadada;
   width: 180px;
@@ -716,6 +716,9 @@ nav {
 }
 
 @media screen and (max-width: 1080px) {
+  #content {
+    margin-left: 0;
+  }
   nav {
     transform: translateX(-100%);
   }
