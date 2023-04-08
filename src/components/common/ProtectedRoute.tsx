@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import { getUserID } from "../../services/auth";
 import { Navigate } from "react-router-dom";
 

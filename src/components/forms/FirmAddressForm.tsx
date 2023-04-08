@@ -3,7 +3,7 @@ import Input from "../common/Input";
 import { FirmAddress, firmAddressForm } from "../../models/firm-address";
 
 function FirmAddressForm() {
-  const { data, errors, handleSubmit, handleChange } = useForm<FirmAddress>(
+  const { errors, handleChange } = useForm<FirmAddress>(
     firmAddressForm.initialState
   );
 

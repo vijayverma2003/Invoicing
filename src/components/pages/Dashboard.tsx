@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { FilterSVG, ScreenModeSVG, SettingsSVG, UserSVG } from "../common/SVG";
 
 function Dashboard() {
@@ -171,9 +172,9 @@ function Dashboard() {
               <h5>
                 Do you have any recommendations? We would love to hear that,
                 Share your recommendations{" "}
-                <a className="link-primary" href="#">
+                <Link className="link-primary" to="#">
                   here
-                </a>
+                </Link>
                 .
               </h5>
             </div>
@@ -184,9 +185,9 @@ function Dashboard() {
             <div className="dashboard-side-analytics">
               <h5>
                 Got stuck or don’t know how to use this app. Click{" "}
-                <a className="link-primary" href="#">
+                <Link className="link-primary" to="#">
                   here
-                </a>{" "}
+                </Link>{" "}
                 to check how to create your first invoice.
               </h5>
             </div>

@@ -37,7 +37,7 @@ function Products() {
           <div>
             {products.map((product) => (
               <Link
-                id={product.id.toString()}
+                id={product.id!.toString()}
                 to={`/products/${product.id}`}
                 key={product.id}
               >

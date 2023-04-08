@@ -45,7 +45,7 @@ function LoginForm() {
           onSubmit={(e) => handleSubmit(e, schema, onSubmit)}
           className="form-primary"
         >
-          <h2 className="form-heading">Login</h2>
+          <h3 className="form-heading">Login</h3>
 
           {loginForm.inputs.map((input) => (
             <Input

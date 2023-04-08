@@ -56,7 +56,7 @@ function RegisterForm() {
           onSubmit={(e) => handleSubmit(e, schema, onSubmit)}
           className="form-primary"
         >
-          <h2 className="form-heading">Register</h2>
+          <h3 className="form-heading">Register</h3>
 
           {registerForm.inputs.map((input) => (
             <Input

@@ -108,20 +108,20 @@ function HomePage(): JSX.Element {
 
       <footer className="home-footer">
         <div>
-          <a className="home-footer-link link-primary" href="#">
+          <Link className="home-footer-link link-primary" to="#">
             Terms & Conditions
-          </a>
-          <a className="home-footer-link link-primary" href="#">
+          </Link>
+          <Link className="home-footer-link link-primary" to="#">
             Privacy Policy
-          </a>
+          </Link>
         </div>
         <div>
-          <a className="home-footer-link text-right text-lighter" href="#">
+          <Link className="home-footer-link text-right text-lighter" to="#">
             vbusinessapp@gmail.com
-          </a>
-          <a className="home-footer-link text-right text-lighter" href="#">
+          </Link>
+          <Link className="home-footer-link text-right text-lighter" to="#">
             &copy; Copyright by V Business
-          </a>
+          </Link>
         </div>
       </footer>
     </main>

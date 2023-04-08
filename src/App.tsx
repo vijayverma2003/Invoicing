@@ -1,12 +1,12 @@
 import "./styles/styles.css";
 
-import { Provider, useDispatch } from "react-redux";
+import { Provider } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
 
 import { getUserID } from "./services/auth";
 import { loadFirm } from "./store/user-info/firm";
-import store, { AppDispatch } from "./store/configureStore";
+import store from "./store/configureStore";
 
 import BankForm from "./components/forms/BankForm";
 import Customers from "./components/pages/Customers";
@@ -28,7 +28,7 @@ function App() {
 
   useEffect(() => {
     if (user) store.dispatch(loadFirm());
-  }, []);
+  }, [user]);
 
   return (
     <>

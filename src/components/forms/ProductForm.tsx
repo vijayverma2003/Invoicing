@@ -44,7 +44,7 @@ function ProductForm({ product }: Props): JSX.Element {
   const dialog = useRef<HTMLDialogElement>(null);
   const failedAPIRequestError = useSelector(getFailedRequestError);
 
-  const { data, setData, handleChange, errors, handleSubmit, setErrors } =
+  const { data, setData, handleChange, errors, handleSubmit } =
     useForm<Product>(productForm.initialState);
 
   const handleAddProduct = () => {
@@ -59,7 +59,7 @@ function ProductForm({ product }: Props): JSX.Element {
 
   useEffect(() => {
     if (product) setData(product);
-  }, [product]);
+  }, [product, setData]);
 
   return (
     <dialog id="dialog-product-form" ref={dialog}>

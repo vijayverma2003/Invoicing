@@ -29,7 +29,7 @@ function FirmForm() {
 
   useEffect(() => {
     if (firm) setData(firm);
-  }, [firm]);
+  }, [firm, setData]);
 
   const onSubmit = () => {
     if (firm) dispatch(updateFirm(data.id!.toString(), data));

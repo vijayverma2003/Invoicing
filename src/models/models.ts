@@ -1,5 +1,3 @@
-import emailSVG from "../svg/email.svg";
-import passwordSVG from "../svg/password.svg";
 import moment from "moment";
 
 export interface Input {

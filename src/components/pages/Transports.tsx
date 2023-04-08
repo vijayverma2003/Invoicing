@@ -38,7 +38,7 @@ function Transports() {
           <div>
             {transports.map((transport) => (
               <Link
-                id={transport.id.toString()}
+                id={transport.id!.toString()}
                 key={transport.id}
                 to={`/transports/${transport.id}`}
               >

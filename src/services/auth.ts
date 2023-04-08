@@ -7,10 +7,6 @@ const http = axios.create({
   baseURL: process.env.REACT_APP_AUTH_URL,
 });
 
-interface Data {
-  [key: string]: string;
-}
-
 export async function register(data: User) {
   return http.post("/users/", data);
 }
