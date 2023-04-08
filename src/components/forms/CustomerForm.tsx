@@ -1,8 +1,8 @@
-import Input from "../common/Input";
-import { CloseSVG } from "../common/SVG";
-import { z } from "zod";
-import useForm from "../../hooks/useForm";
 import { Customer, customerForm } from "../../models/customers";
+import { MdOutlineClose } from "react-icons/md";
+import { z } from "zod";
+import Input from "../common/Input";
+import useForm from "../../hooks/useForm";
 
 const schema = z.object({
   name: z
@@ -61,7 +61,7 @@ function CustomerForm(): JSX.Element {
   return (
     <dialog>
       <button onClick={handleClose} className="btn-icon dialog-close">
-        <CloseSVG />
+        <MdOutlineClose size={20} color="black" />
       </button>
 
       <form onSubmit={handleSubmit} className="form-dialog">

@@ -1,6 +1,6 @@
-import { AddSVG } from "../common/SVG";
 import { AppDispatch } from "../../store/configureStore";
 import { getProducts, loadProducts } from "../../store/entities/products";
+import { IoMdAddCircleOutline } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { Product } from "../../models/products";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,7 +28,7 @@ function Products() {
           <h4>Products</h4>
           <div className="page-header-icons">
             <button onClick={handleOpenProductFormDialog} className="btn-icon">
-              <AddSVG />
+              <IoMdAddCircleOutline size={20} color="black" />
             </button>
           </div>
         </header>

@@ -1,5 +1,8 @@
+import { FaRegUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { FilterSVG, ScreenModeSVG, SettingsSVG, UserSVG } from "../common/SVG";
+import { MdFilterAlt } from "react-icons/md";
+import { RiSettingsLine } from "react-icons/ri";
+import { VscColorMode } from "react-icons/vsc";
 
 function Dashboard() {
   const handleScreenMode = () => {
@@ -12,13 +15,13 @@ function Dashboard() {
         <h4>Dashboard</h4>
         <div className="page-header-icons">
           <button onClick={handleScreenMode} className="btn-icon">
-            <ScreenModeSVG />
+            <VscColorMode color="black" size={20} />
           </button>
           <button className="btn-icon">
-            <UserSVG />
+            <RiSettingsLine color="black" size={20} />
           </button>
           <button className="btn-icon">
-            <SettingsSVG />
+            <FaRegUserCircle color="black" size={19.5} />
           </button>
         </div>
       </header>
@@ -43,7 +46,7 @@ function Dashboard() {
           <div className="dashboard-header">
             <h3 className="dashboard-heading">Sales Analytics</h3>
             <button className="btn-icon">
-              <FilterSVG />
+              <MdFilterAlt size={20} color="black" />
             </button>
           </div>
           <div className="dashboard-box dashboard-sales-chart">

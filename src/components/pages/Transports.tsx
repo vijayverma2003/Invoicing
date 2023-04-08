@@ -1,6 +1,6 @@
-import { AddSVG } from "../common/SVG";
 import { AppDispatch } from "../../store/configureStore";
 import { getTransports, loadTransports } from "../../store/entities/transports";
+import { IoMdAddCircleOutline } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -30,7 +30,7 @@ function Transports() {
               onClick={handleOpenTransportFormDialog}
               className="btn-icon"
             >
-              <AddSVG />
+              <IoMdAddCircleOutline size={20} color="black" />
             </button>
           </div>
         </header>

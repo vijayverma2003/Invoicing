@@ -1,5 +1,5 @@
 import { AppDispatch } from "../../store/configureStore";
-import { CloseSVG } from "../common/SVG";
+import { MdOutlineClose } from "react-icons/md";
 import { Product, productForm } from "../../models/products";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef } from "react";
@@ -67,7 +67,7 @@ function ProductForm({ product }: Props): JSX.Element {
         onClick={() => dialog.current?.close()}
         className="btn-icon dialog-close"
       >
-        <CloseSVG />
+        <MdOutlineClose size={20} color="black" />
       </button>
 
       <form

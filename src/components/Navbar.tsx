@@ -1,6 +1,6 @@
-import { useRef } from "react";
 import { NavLink } from "react-router-dom";
-import { MenuBarSVG } from "./common/SVG";
+import { RiMenu3Fill } from "react-icons/ri";
+import { useRef } from "react";
 
 function Navbar() {
   const nav = useRef<HTMLElement>(null);
@@ -14,7 +14,7 @@ function Navbar() {
       <div className="nav-mobile">
         <h4>V Business</h4>
         <button onClick={handleNavToggle} className="btn-icon">
-          <MenuBarSVG />
+          <RiMenu3Fill size={20} color="white" />
         </button>
       </div>
       <nav ref={nav}>

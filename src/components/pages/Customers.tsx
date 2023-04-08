@@ -1,4 +1,4 @@
-import { AddSVG } from "../common/SVG";
+import { IoMdAddCircleOutline } from "react-icons/io";
 import CustomerForm from "../forms/CustomerForm";
 
 function Customers(): JSX.Element {
@@ -15,7 +15,7 @@ function Customers(): JSX.Element {
           <h4>Customers</h4>
           <div className="page-header-icons">
             <button onClick={handleOpenCustomerFormDialog} className="btn-icon">
-              <AddSVG />
+              <IoMdAddCircleOutline size={20} color="black" />
             </button>
           </div>
         </header>

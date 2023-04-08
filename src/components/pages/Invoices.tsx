@@ -1,5 +1,5 @@
+import { IoMdAddCircleOutline } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { AddSVG } from "../common/SVG";
 
 function Invoices(): JSX.Element {
   return (
@@ -8,7 +8,7 @@ function Invoices(): JSX.Element {
         <h4>Invoices</h4>
         <div className="page-header-icons">
           <Link to="/invoices/new" className="btn-icon">
-            <AddSVG />
+            <IoMdAddCircleOutline size={20} color="black" />
           </Link>
         </div>
       </header>

@@ -1,5 +1,5 @@
 import { AppDispatch } from "../../store/configureStore";
-import { CloseSVG } from "../common/SVG";
+import { MdOutlineClose } from "react-icons/md";
 import { Transport, transportForm } from "../../models/transports";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef } from "react";
@@ -55,7 +55,7 @@ function TransportForm({ transport }: Props): JSX.Element {
   return (
     <dialog ref={dialog}>
       <button onClick={handleClose} className="btn-icon dialog-close">
-        <CloseSVG />
+        <MdOutlineClose size={20} color="black" />
       </button>
       <form
         onSubmit={(e) => handleSubmit(e, schema, onSubmit)}
