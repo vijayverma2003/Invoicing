@@ -73,19 +73,42 @@ const slice = createSlice({
       state.error = null;
       state.firm[0].address = action.payload;
     },
+
+    bankRequested: (state, action) => {
+      state.loading = true;
+    },
+
+    bankRequestFailed: (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    },
+
+    bankAdded: (state, action) => {
+      state.error = null;
+      state.firm[0].bank = action.payload;
+    },
+
+    bankUpdated: (state, action) => {
+      state.error = null;
+      state.firm[0].bank = action.payload;
+    },
   },
 });
 
 export const {
+  bankAdded,
+  bankRequested,
+  bankRequestFailed,
+  bankUpdated,
   firmAdded,
+  firmAddressAdded,
+  firmAddressRequested,
+  firmAddressRequestFailed,
+  firmAddressUpdated,
   firmRecieved,
   firmRequested,
   firmRequestFailed,
   firmUpdated,
-  firmAddressAdded,
-  firmAddressRequestFailed,
-  firmAddressRequested,
-  firmAddressUpdated,
 } = slice.actions;
 
 export default slice.reducer;
@@ -139,13 +162,13 @@ export const updateFirm =
   };
 
 export const addFirmAddress =
-  (id: string, data: { [key: string]: any }) =>
+  (id: string | number, data: { [key: string]: any }) =>
   (dispatch: Dispatch<AnyAction>) => {
     return dispatch(
       apiCallBegan({
         data,
         method: "post",
-        url: `/firms/${id}/address/${id}/`,
+        url: `/firms/${id}/address/`,
         onStart: firmAddressRequested.type,
         onError: firmAddressRequestFailed.type,
         onSuccess: firmAddressAdded.type,
@@ -154,7 +177,7 @@ export const addFirmAddress =
   };
 
 export const updateFirmAddress =
-  (firmId: string, data: { [key: string]: any }) =>
+  (firmId: string | number, data: { [key: string]: any }) =>
   (dispatch: Dispatch<AnyAction>) => {
     return dispatch(
       apiCallBegan({
@@ -164,6 +187,36 @@ export const updateFirmAddress =
         onStart: firmAddressRequested.type,
         onError: firmAddressRequestFailed.type,
         onSuccess: firmAddressUpdated.type,
+      })
+    );
+  };
+
+export const addBankDetails =
+  (id: string | number, data: { [key: string]: any }) =>
+  (dispatch: Dispatch<AnyAction>) => {
+    return dispatch(
+      apiCallBegan({
+        data,
+        method: "post",
+        url: `/firms/${id}/bank/`,
+        onStart: bankRequested.type,
+        onError: bankRequestFailed.type,
+        onSuccess: bankAdded.type,
+      })
+    );
+  };
+
+export const updateBankDetails =
+  (firmId: string | number, data: { [key: string]: any }) =>
+  (dispatch: Dispatch<AnyAction>) => {
+    return dispatch(
+      apiCallBegan({
+        data,
+        method: "put",
+        url: `/firms/${firmId}/bank/${firmId}/`,
+        onStart: bankRequested.type,
+        onError: bankRequestFailed.type,
+        onSuccess: bankUpdated.type,
       })
     );
   };
