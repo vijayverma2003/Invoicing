@@ -46,15 +46,32 @@ const slice = createSlice({
     },
 
     firmAdded: (state, action) => {
-      console.log(action.payload);
       state.error = null;
       state.firm = action.payload;
-      console.log(state.firm);
     },
 
     firmUpdated: (state, action) => {
       state.error = null;
       state.firm = action.payload;
+    },
+
+    firmAddressRequested: (state, action) => {
+      state.loading = true;
+    },
+
+    firmAddressRequestFailed: (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    },
+
+    firmAddressAdded: (state, action) => {
+      state.error = null;
+      state.firm[0].address = action.payload;
+    },
+
+    firmAddressUpdated: (state, action) => {
+      state.error = null;
+      state.firm[0].address = action.payload;
     },
   },
 });
@@ -65,6 +82,10 @@ export const {
   firmRequested,
   firmRequestFailed,
   firmUpdated,
+  firmAddressAdded,
+  firmAddressRequestFailed,
+  firmAddressRequested,
+  firmAddressUpdated,
 } = slice.actions;
 
 export default slice.reducer;
@@ -113,6 +134,36 @@ export const updateFirm =
         onStart: firmRequested.type,
         onError: firmRequestFailed.type,
         onSuccess: firmUpdated.type,
+      })
+    );
+  };
+
+export const addFirmAddress =
+  (id: string, data: { [key: string]: any }) =>
+  (dispatch: Dispatch<AnyAction>) => {
+    return dispatch(
+      apiCallBegan({
+        data,
+        method: "post",
+        url: `/firms/${id}/address/${id}/`,
+        onStart: firmAddressRequested.type,
+        onError: firmAddressRequestFailed.type,
+        onSuccess: firmAddressAdded.type,
+      })
+    );
+  };
+
+export const updateFirmAddress =
+  (firmId: string, data: { [key: string]: any }) =>
+  (dispatch: Dispatch<AnyAction>) => {
+    return dispatch(
+      apiCallBegan({
+        data,
+        method: "put",
+        url: `/firms/${firmId}/address/${firmId}/`,
+        onStart: firmAddressRequested.type,
+        onError: firmAddressRequestFailed.type,
+        onSuccess: firmAddressUpdated.type,
       })
     );
   };

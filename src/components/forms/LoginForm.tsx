@@ -6,7 +6,6 @@ import { z } from "zod";
 import Input from "../common/Input";
 import queryString from "query-string";
 import useForm from "../../hooks/useForm";
-import { useEffect } from "react";
 
 const schema = z.object({
   username: z
@@ -35,7 +34,7 @@ function LoginForm() {
         if (error.response)
           for (let err in error.response.data)
             copiedErrors[err] = error.response.data[err];
-        console.log(copiedErrors);
+
         setErrors(copiedErrors);
         return;
       }
