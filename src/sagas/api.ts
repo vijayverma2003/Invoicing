@@ -1,7 +1,7 @@
-import { AxiosError, AxiosResponse } from "axios";
-import { put, call, takeEvery } from "redux-saga/effects";
-import http from "../services/http";
 import { API, apiCallBegan, apiCallFailed } from "../store/api";
+import { put, call, takeEvery } from "redux-saga/effects";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import http from "../services/http";
 
 function* handleApiRequests(action: API) {
   const { url, method, data, onSuccess, onStart, onError } = action.payload;

@@ -18,7 +18,6 @@ export async function register(data: User | Data) {
 export async function login(data: LoginFields | Data) {
   const { data: jwt } = await http.post("/jwt/create/", data);
   localStorage.setItem("access-token", jwt.access);
-  localStorage.setItem("refresh-token", jwt.refresh);
 }
 
 export function getJWT() {

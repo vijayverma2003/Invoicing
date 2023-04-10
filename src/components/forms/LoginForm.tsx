@@ -4,7 +4,9 @@ import { login } from "../../services/auth";
 import { LoginFields, loginForm } from "../../models/user";
 import { z } from "zod";
 import Input from "../common/Input";
+import queryString from "query-string";
 import useForm from "../../hooks/useForm";
+import { useEffect } from "react";
 
 const schema = z.object({
   username: z
@@ -21,6 +23,8 @@ function LoginForm() {
   const { data, errors, setErrors, handleChange, handleSubmit } =
     useForm<LoginFields>(loginForm.initialState);
 
+  const { exp } = queryString.parse(window.location.search);
+
   const onSubmit = async () => {
     try {
       await login(data);
@@ -30,12 +34,14 @@ function LoginForm() {
 
         if (error.response)
           for (let err in error.response.data)
-            copiedErrors[err] = error.response.data[err][0];
+            copiedErrors[err] = error.response.data[err];
+        console.log(copiedErrors);
         setErrors(copiedErrors);
+        return;
       }
     }
 
-    window.location.href = "/firm";
+    window.location.href = "/";
   };
 
   return (
@@ -52,7 +58,10 @@ function LoginForm() {
               key={input.name}
               {...input}
               onChange={handleChange}
-              error={errors[input.name]}
+              error={
+                errors[input.name] ||
+                (input.name === "username" ? errors["detail"] : "")
+              }
             />
           ))}
 
@@ -65,6 +74,11 @@ function LoginForm() {
           </Link>
         </p>
       </div>
+      {exp && (
+        <p className="form-end text-warning text-center">
+          Your session has been expired, Please login again!
+        </p>
+      )}
     </section>
   );
 }

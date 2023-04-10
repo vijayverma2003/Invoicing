@@ -403,6 +403,16 @@ p {
   text-align: right;
 }
 
+.text-center {
+  text-align: center;
+}
+
+.text-warning {
+  color: rgb(158, 30, 30);
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
 a {
   text-decoration: none;
   color: #fff;
@@ -456,6 +466,7 @@ button,
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  position: relative;
 }
 
 .form-container {
@@ -512,6 +523,11 @@ button,
 }
 .invoice-product-wrapper h3 {
   margin: 0.6rem 0 1.6rem;
+}
+
+.form-end {
+  position: absolute;
+  bottom: 5rem;
 }
 
 .input-container-wrapper {
