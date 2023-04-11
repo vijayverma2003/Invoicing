@@ -1,16 +1,19 @@
 import { API, apiCallBegan, apiCallFailed } from "../store/api";
 import { put, call, takeEvery } from "redux-saga/effects";
-import { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import http from "../services/http";
 
 function* handleApiRequests(action: API) {
-  const { url, method, data, onSuccess, onStart, onError } = action.payload;
+  const { url, method, data, onSuccess, onStart, onError, completeURL } =
+    action.payload;
 
   if (onStart) yield put({ type: onStart });
 
+  const request = completeURL ? axios.request : http.request;
+
   try {
-    const response: AxiosResponse<any> = yield call(http.request, {
-      url,
+    const response: AxiosResponse<any> = yield call(request, {
+      url: completeURL ? completeURL : url,
       method,
       data,
     });

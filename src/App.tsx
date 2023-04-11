@@ -22,11 +22,13 @@ import ProductDescription from "./components/pages/ProductDescription";
 import Products from "./components/pages/Products";
 import RegisterForm from "./components/forms/RegisterForm";
 import Transports from "./components/pages/Transports";
+import { loadCountries } from "./store/common/countries";
 
 function App() {
   const user = getUserID();
 
   useEffect(() => {
+    store.dispatch(loadCountries());
     if (user) store.dispatch(loadFirm());
   }, [user]);
 

@@ -10,6 +10,7 @@ export interface API {
     onStart?: string;
     onSuccess?: string;
     onError?: string;
+    completeURL?: string;
   };
 }
 
