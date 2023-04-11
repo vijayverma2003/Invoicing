@@ -16,7 +16,8 @@
     background-color: lighten($dark-secondary, 76%);
   }
 
-  input {
+  input,
+  select {
     color: darken($light-secondary, 100%);
   }
 

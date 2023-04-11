@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { FieldError } from "react-hook-form";
+import gsap from "gsap";
 
 interface Props {
   placeholder: string;
@@ -8,8 +9,8 @@ interface Props {
   name: string;
   error: string | FieldError | null | undefined;
   [property: string]: any;
-  options: { name: string; value: string }[];
-  args: React.ReactNode;
+  options: { [key: string]: any }[];
+  args?: React.ReactNode;
 }
 
 function Select({
@@ -71,10 +72,12 @@ function Select({
         autoComplete="off"
         {...args}
         onChange={onChange}
+        name={name}
         id={name}
       >
+        <option value="" />
         {options.map((option) => (
-          <option key={option.name} value={option.value}>
+          <option key={option.name} value={option.id}>
             {option.name}
           </option>
         ))}

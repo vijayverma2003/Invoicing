@@ -6,6 +6,7 @@ export interface Input<T> {
   name: keyof T;
   placeholder: string;
   type: "text" | "email" | "number" | "date" | "tel" | "password";
+  elementtype?: "select";
 }
 
 export default interface Form<T> {

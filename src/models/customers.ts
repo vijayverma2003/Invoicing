@@ -1,12 +1,15 @@
+import Country from "./country";
 import Form from "./form";
 
 export interface Customer {
+  id?: number;
   name: string;
   email: string;
   phone: string;
   street: string;
   city: string;
   state: string;
+  country: string | Country;
 }
 
 export const customerForm: Form<Customer> = {
@@ -17,6 +20,7 @@ export const customerForm: Form<Customer> = {
     street: "",
     city: "",
     state: "",
+    country: "",
   },
   inputs: [
     { name: "name", placeholder: "Name", type: "text" },
@@ -25,5 +29,11 @@ export const customerForm: Form<Customer> = {
     { name: "street", placeholder: "Street Address", type: "text" },
     { name: "city", placeholder: "City", type: "text" },
     { name: "state", placeholder: "State", type: "text" },
+    {
+      name: "country",
+      placeholder: "Country",
+      type: "text",
+      elementtype: "select",
+    },
   ],
 };

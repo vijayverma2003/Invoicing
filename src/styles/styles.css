@@ -274,7 +274,8 @@ html {
 .light .input-container {
   background-color: #f2f2f2;
 }
-.light input {
+.light input,
+.light select {
   color: black;
 }
 .light button {
@@ -564,7 +565,8 @@ label {
   opacity: 0.4;
 }
 
-input {
+input,
+select {
   width: 100%;
   background-color: transparent;
   border: none;
