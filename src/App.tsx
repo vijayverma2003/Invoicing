@@ -18,11 +18,12 @@ import InvoiceForm from "./components/forms/InvoiceForm";
 import Invoices from "./components/pages/Invoices";
 import LoginForm from "./components/forms/LoginForm";
 import Navbar from "./components/Navbar";
-import ProductDescription from "./components/pages/ProductDescription";
+import ProductDescription from "./components/pages/description/ProductDescription";
 import Products from "./components/pages/Products";
 import RegisterForm from "./components/forms/RegisterForm";
 import Transports from "./components/pages/Transports";
 import { loadCountries } from "./store/common/countries";
+import CustomerDescription from "./components/pages/description/CustomerDescription";
 
 function App() {
   const user = getUserID();
@@ -38,6 +39,7 @@ function App() {
       <Provider store={store}>
         <main id={user ? "content" : ""}>
           <Routes>
+            <Route element={<CustomerDescription />} path={"/customers/:id"} />
             <Route element={<ProductDescription />} path={"/products/:id"} />
 
             <Route element={<Transports />} path="/transports" />

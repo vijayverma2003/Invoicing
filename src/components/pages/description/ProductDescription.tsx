@@ -1,16 +1,16 @@
 import { AiOutlineEdit } from "react-icons/ai";
-import { AppDispatch } from "../../store/configureStore";
+import { AppDispatch } from "../../../store/configureStore";
 import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import ProductForm from "../forms/ProductForm";
-import WarningModal from "../common/WarningModal";
+import ProductForm from "../../forms/ProductForm";
+import WarningModal from "../../common/WarningModal";
 import {
   deleteProduct,
   getProduct,
   loadProducts,
-} from "../../store/entities/products";
+} from "../../../store/entities/products";
 
 function ProductDescription() {
   const { id } = useParams();

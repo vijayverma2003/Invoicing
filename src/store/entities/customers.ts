@@ -123,6 +123,7 @@ export const deleteCustomer =
         method: "delete",
         url: `/customers/${id}/`,
         onSuccess: customerDeleted.type,
+        onError: customersRequestFailed.type,
       })
     );
   };
@@ -134,7 +135,7 @@ export const getCustomers = createSelector(
   (customers) => customers.list
 );
 
-export const getProduct = (id: string | undefined) =>
+export const getCustomer = (id: string | undefined) =>
   createSelector(
     (state: RootState) => state.entities.customers,
     (customers) =>

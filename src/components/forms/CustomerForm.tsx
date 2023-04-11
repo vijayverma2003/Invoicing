@@ -44,38 +44,36 @@ const requiredSchema = schema.required({
   country: true,
 });
 
-function CustomerForm(): JSX.Element {
+interface Props {
+  customer?: Customer;
+}
+
+function CustomerForm({ customer }: Props): JSX.Element {
   const countries = useSelector(getCountries);
 
   const handleClose = () => {
     document.querySelector("dialog")?.close();
   };
 
-  const { data, errors, setErrors, handleChange } = useForm<Customer>(
-    customerForm.initialState
-  );
+  const { data, errors, handleChange, handleSubmit, setData } =
+    useForm<Customer>(customerForm.initialState);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  useEffect(() => {
+    if (customer) setData(customer);
+  }, [customer]);
 
-    const result = requiredSchema.safeParse(data);
-    if (!result.success) {
-      const updatedErrors = { ...errors };
-
-      for (let issue of result.error.issues)
-        updatedErrors[issue.path[0]] = issue.message;
-
-      setErrors(updatedErrors);
-    }
-  };
+  const onSubmit = () => {};
 
   return (
-    <dialog>
+    <dialog id="dialog-customer-form">
       <button onClick={handleClose} className="btn-icon dialog-close">
         <MdOutlineClose size={20} color="black" />
       </button>
 
-      <form onSubmit={handleSubmit} className="form-dialog">
+      <form
+        onSubmit={(e) => handleSubmit(e, requiredSchema, onSubmit)}
+        className="form-dialog"
+      >
         <h3 className="form-dialog-heading">Customer</h3>
 
         {customerForm.inputs.map((input) => {
