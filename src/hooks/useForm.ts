@@ -12,7 +12,9 @@ function useForm<T>(initialState: T | Data) {
   const [data, setData] = useState<T | Data>(initialState);
   const [errors, setErrors] = useState<Errors>({});
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const d = { ...data } as Data;
     const { name, value, type } = e.target;
 
@@ -23,7 +25,7 @@ function useForm<T>(initialState: T | Data) {
   };
 
   const handleTabularChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     arr: string,
     index: number
   ) => {
