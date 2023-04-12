@@ -79,7 +79,7 @@ function Select({
         >
           <option value="" />
           {options.map((option) => (
-            <option key={option.name} value={option.id}>
+            <option key={option.id} value={option.id}>
               {option.name}
             </option>
           ))}
