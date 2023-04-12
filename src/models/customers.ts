@@ -9,7 +9,7 @@ export interface Customer {
   street: string;
   city: string;
   state: string;
-  country: string | Country;
+  country: Country | string;
 }
 
 export const customerForm: Form<Customer> = {
@@ -19,8 +19,8 @@ export const customerForm: Form<Customer> = {
     phone: "",
     street: "",
     city: "",
-    state: "",
     country: "",
+    state: "",
   },
   inputs: [
     { name: "name", placeholder: "Name", type: "text" },

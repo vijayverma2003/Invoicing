@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   deleteCustomer,
   getCustomer,
+  getFailedRequestError,
   loadCustomers,
 } from "../../../store/entities/customers";
 import { AppDispatch } from "../../../store/configureStore";
@@ -16,6 +17,8 @@ function CustomerDescription() {
   const { id } = useParams();
   const dispatch = useDispatch<AppDispatch>();
   const customer = useSelector(getCustomer(id));
+  const failedAPIRequestError = useSelector(getFailedRequestError);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(loadCustomers());
@@ -34,8 +37,20 @@ function CustomerDescription() {
   };
 
   const handleDelete = () => {
-    if (id) dispatch(deleteCustomer(id));
-    // window.location.replace("/customers");
+    try {
+      if (id) dispatch(deleteCustomer(id));
+      console.log(failedAPIRequestError);
+    } catch (error) {
+      console.log(error);
+    }
+
+    if (failedAPIRequestError) {
+      const dialog =
+        document.querySelector<HTMLDialogElement>("#dialog-warning");
+      if (dialog) dialog.close();
+      return;
+    }
+    navigate("/customers");
   };
 
   return (
@@ -67,6 +82,9 @@ function CustomerDescription() {
         </header>
 
         <div className="page-content">
+          {failedAPIRequestError && (
+            <p className="alert">{failedAPIRequestError.error}</p>
+          )}
           {customer ? (
             <>
               <p className="page-content-description">

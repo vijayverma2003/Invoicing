@@ -104,7 +104,7 @@ export const addCustomer =
   };
 
 export const updateCustomer =
-  (id: string, data: { [key: string]: any }) =>
+  (id: number | string, data: { [key: string]: any }) =>
   (dispatch: Dispatch<AnyAction>) => {
     return dispatch(
       apiCallBegan({
@@ -112,18 +112,18 @@ export const updateCustomer =
         method: "put",
         url: `/customers/${id}/`,
         onSuccess: customerUpdated.type,
+        onError: customersRequestFailed.type,
       })
     );
   };
 
 export const deleteCustomer =
-  (id: string) => (dispatch: Dispatch<AnyAction>) => {
+  (id: number | string) => (dispatch: Dispatch<AnyAction>) => {
     return dispatch(
       apiCallBegan({
         method: "delete",
         url: `/customers/${id}/`,
         onSuccess: customerDeleted.type,
-        onError: customersRequestFailed.type,
       })
     );
   };

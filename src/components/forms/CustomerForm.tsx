@@ -3,10 +3,16 @@ import { MdOutlineClose } from "react-icons/md";
 import { z } from "zod";
 import Input from "../common/Input";
 import useForm from "../../hooks/useForm";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { getCountries } from "../../store/common/countries";
 import Select from "../common/Select";
+import { AppDispatch } from "../../store/configureStore";
+import {
+  addCustomer,
+  getFailedRequestError,
+  updateCustomer,
+} from "../../store/entities/customers";
 
 const schema = z.object({
   name: z
@@ -29,10 +35,7 @@ const schema = z.object({
     .string()
     .min(1, "State is required")
     .max(55, "State must be less than 55 characters"),
-  country: z
-    .string()
-    .min(1, "State is required")
-    .max(55, "State must be less than 55 characters"),
+  country: z.string(),
 });
 
 const requiredSchema = schema.required({
@@ -49,7 +52,10 @@ interface Props {
 }
 
 function CustomerForm({ customer }: Props): JSX.Element {
+  const dispatch = useDispatch<AppDispatch>();
   const countries = useSelector(getCountries);
+  const failedAPIRequestError = useSelector(getFailedRequestError);
+  const dialog = useRef<HTMLDialogElement>(null);
 
   const handleClose = () => {
     document.querySelector("dialog")?.close();
@@ -59,13 +65,25 @@ function CustomerForm({ customer }: Props): JSX.Element {
     useForm<Customer>(customerForm.initialState);
 
   useEffect(() => {
-    if (customer) setData(customer);
+    if (customer && typeof customer.country !== "string" && customer.country.id)
+      setData({
+        ...customer,
+        country: customer.country.id.toString(),
+      });
   }, [customer]);
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    if (customer?.id) dispatch(updateCustomer(customer.id, data));
+    else dispatch(addCustomer(data as Customer));
+
+    if (failedAPIRequestError) return;
+
+    setData(customerForm.initialState);
+    dialog.current?.close();
+  };
 
   return (
-    <dialog id="dialog-customer-form">
+    <dialog ref={dialog} id="dialog-customer-form">
       <button onClick={handleClose} className="btn-icon dialog-close">
         <MdOutlineClose size={20} color="black" />
       </button>
@@ -95,11 +113,14 @@ function CustomerForm({ customer }: Props): JSX.Element {
               {...input}
               onChange={handleChange}
               error={errors[input.name]}
+              value={data[input.name]}
             />
           );
         })}
 
-        <button className="btn btn-submit btn-primary">Create</button>
+        <button className="btn btn-submit btn-primary">
+          {customer ? "Update" : "Create"}
+        </button>
       </form>
     </dialog>
   );

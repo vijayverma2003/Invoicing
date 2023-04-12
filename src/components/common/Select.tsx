@@ -61,33 +61,36 @@ function Select({
   });
 
   return (
-    <div className="input-container">
-      <label ref={labelRef} htmlFor={name}>
-        {placeholder}
-      </label>
-      <select
-        onFocus={handleFocus}
-        onBlur={handleFocusOut}
-        ref={selectRef}
-        autoComplete="off"
-        {...args}
-        onChange={onChange}
-        name={name}
-        id={name}
-      >
-        <option value="" />
-        {options.map((option) => (
-          <option key={option.name} value={option.id}>
-            {option.name}
-          </option>
-        ))}
-      </select>
+    <>
+      <div className="input-container">
+        <label ref={labelRef} htmlFor={name}>
+          {placeholder}
+        </label>
+        <select
+          onFocus={handleFocus}
+          onBlur={handleFocusOut}
+          ref={selectRef}
+          autoComplete="off"
+          {...args}
+          onChange={onChange}
+          name={name}
+          id={name}
+          value={value}
+        >
+          <option value="" />
+          {options.map((option) => (
+            <option key={option.name} value={option.id}>
+              {option.name}
+            </option>
+          ))}
+        </select>
+      </div>
       {error && (
         <span className="input-error">
           <i>{error.toString()}</i>
         </span>
       )}
-    </div>
+    </>
   );
 }
 

@@ -96,6 +96,18 @@ p {
   font-weight: bold;
 }
 
+// Alerts
+
+.alert {
+  background-color: rgba(255, 0, 0, 0.148);
+  width: max-content;
+  padding: 0.4rem 0.8rem;
+  font-size: 1.4rem;
+  color: $color-danger;
+  margin-bottom: 1.8rem;
+  border-radius: 5px;
+}
+
 // Links
 
 a {
