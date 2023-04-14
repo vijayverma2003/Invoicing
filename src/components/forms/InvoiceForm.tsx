@@ -11,7 +11,7 @@ import { getTransports, loadTransports } from "../../store/entities/transports";
 import { Customer } from "../../models/customers";
 import { showAddress } from "../../services/utils";
 import { getFirm, loadFirm } from "../../store/user-info/firm";
-import { GrFormAdd } from "react-icons/gr";
+import { IoIosAdd } from "react-icons/io";
 
 function InvoiceForm() {
   const [currentCustomer, setCurrentCustomer] = useState<Customer>();
@@ -122,7 +122,7 @@ function InvoiceForm() {
         </div>
         <h3 className="form-heading">Products</h3>
         {data.items.map((item: InvoiceItem, index: number) => (
-          <div key={index} className="grid grid-1x4">
+          <div key={index} className="grid grid-1x4 grid-center">
             <Select
               name="product"
               type="text"
@@ -140,7 +140,6 @@ function InvoiceForm() {
                 onChange={(e) => handleTabularChange(e, "items", index)}
                 value={data["items"][index]["price"]}
                 error={errors[""]}
-                options={products}
               />
               <Input
                 name="quantity"
@@ -149,7 +148,6 @@ function InvoiceForm() {
                 onChange={(e) => handleTabularChange(e, "items", index)}
                 value={data["items"][index]["quantity"]}
                 error={errors[""]}
-                options={products}
               />
             </div>
             <div className="grid grid-1x2">
@@ -160,7 +158,6 @@ function InvoiceForm() {
                 onChange={(e) => handleTabularChange(e, "items", index)}
                 value={data["items"][index]["discount"]}
                 error={errors[""]}
-                options={products}
               />
               <Input
                 name="packing_charges"
@@ -169,14 +166,20 @@ function InvoiceForm() {
                 onChange={(e) => handleTabularChange(e, "items", index)}
                 value={data["items"][index]["packing_charges"]}
                 error={errors[""]}
-                options={products}
               />
             </div>
-            <button onClick={handleAddProduct} className="btn-icon">
-              <GrFormAdd size={30} />
-            </button>
           </div>
         ))}
+        <div className="product-total">
+          <h4>Total: 100</h4>
+          <button
+            onClick={handleAddProduct}
+            className="btn-primary btn-flex mt-high"
+          >
+            <IoIosAdd size={20} color="white" />
+            Add more
+          </button>
+        </div>
       </div>
 
       <button>Add more</button>

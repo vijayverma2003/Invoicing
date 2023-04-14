@@ -160,6 +160,13 @@ button,
   color: $light-primary;
 }
 
+.btn-flex {
+  @include flex-center;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+}
+
 // Form
 
 .form-page {
@@ -222,6 +229,11 @@ button,
   bottom: 5rem;
 }
 
+.product-total {
+  @include flex-space;
+  // width: 100%;
+}
+
 // Inputs
 
 .input-container-wrapper {
@@ -265,6 +277,7 @@ select {
   font-size: 1.6rem;
   font-family: $primary-font;
   font-weight: bold;
+  overflow: hidden;
 }
 
 .input-svg {
@@ -516,6 +529,11 @@ nav {
   gap: 0.4rem;
 }
 
+.grid-center {
+  justify-items: center;
+  align-content: center;
+}
+
 @media screen and (max-width: 680px) {
   .grid-1x4 {
     grid-template: repeat(2, 1fr) / repeat(2, 1fr);
@@ -603,7 +621,18 @@ dialog::backdrop {
 }
 
 // Margins
+.mb-small {
+  margin-bottom: 0.4rem;
+}
 
-.mb2 {
+.mb-mid {
   margin-bottom: 2rem;
+}
+
+.mt-mid {
+  margin-top: 2rem;
+}
+
+.mt-high {
+  margin-top: 4rem;
 }
