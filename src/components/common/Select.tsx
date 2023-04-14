@@ -61,7 +61,7 @@ function Select({
   });
 
   return (
-    <>
+    <div className="input-container-wrapper">
       <div className="input-container">
         <label ref={labelRef} htmlFor={name}>
           {placeholder}
@@ -90,7 +90,7 @@ function Select({
           <i>{error.toString()}</i>
         </span>
       )}
-    </>
+    </div>
   );
 }
 

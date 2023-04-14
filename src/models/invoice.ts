@@ -14,14 +14,17 @@ export interface InvoiceItem {
 }
 
 export interface Invoice {
+  id?: number;
   number: string;
   date: string;
   due_date: string;
   terms: string;
-  customer: Customer | string | number;
-  transport: Transport | string | number;
+  customer: Customer | string;
+  transport: Transport | string;
   firm: Firm | string | number;
   items: InvoiceItem[];
+  total_cost?: number;
+  total_tax?: number;
 }
 
 export const invoiceForm: Form<Invoice> = {
@@ -37,8 +40,8 @@ export const invoiceForm: Form<Invoice> = {
       {
         product: "",
         price: "",
-        discount: "",
-        packing_charges: "",
+        discount: 0,
+        packing_charges: 0,
         quantity: "",
       },
     ],

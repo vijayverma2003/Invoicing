@@ -31,6 +31,10 @@ function useForm<T>(initialState: T | Data) {
   ) => {
     const d: Data = { ...data } as Data;
     d[arr][index][e.target.name] = e.target.value;
+
+    if (e.target.type === "number")
+      d[arr][index][e.target.name] = parseInt(e.target.value);
+
     setData(d as T);
   };
 
@@ -45,6 +49,7 @@ function useForm<T>(initialState: T | Data) {
     if (!result.success) {
       const updatedErrors = { ...errors };
 
+      console.log(result);
       for (let issue of result.error.issues)
         updatedErrors[issue.path[0]] = issue.message;
 

@@ -61,7 +61,7 @@ const Input = ({
   });
 
   return (
-    <>
+    <div className="input-container-wrapper">
       <div className="input-container">
         {svg && <img className="input-img" src={svg} alt="" />}
         {!svg && (
@@ -87,7 +87,7 @@ const Input = ({
           <i>{error.toString()}</i>
         </span>
       )}
-    </>
+    </div>
   );
 };
 export default Input;
