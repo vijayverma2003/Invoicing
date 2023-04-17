@@ -11,6 +11,8 @@ export interface InvoiceItem {
   discount: number | string;
   packing_charges: number | string;
   quantity: number | string;
+  total?: number;
+  total_with_tax?: number;
 }
 
 export interface Invoice {
@@ -43,6 +45,8 @@ export const invoiceForm: Form<Invoice> = {
         discount: 0,
         packing_charges: 0,
         quantity: "",
+        total: 0,
+        total_with_tax: 0,
       },
     ],
   },

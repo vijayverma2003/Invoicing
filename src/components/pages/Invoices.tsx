@@ -39,7 +39,10 @@ function Invoices(): JSX.Element {
               </div>
               <div>
                 <h4 className="list-page-item-heading text-right">
-                  ₹{invoice.total_cost}
+                  ₹
+                  {invoice.total_cost && invoice.total_tax
+                    ? invoice.total_cost + invoice.total_tax
+                    : "Not available"}
                 </h4>
                 <p className="text-lighter list-page-item-description text-right">
                   Recieved

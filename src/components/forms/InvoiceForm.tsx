@@ -105,7 +105,42 @@ function InvoiceForm() {
 
     if (failedAPIRequestError) return;
 
-    console.log("Done");
+    window.location.href = "/invoices/";
+  };
+
+  const handleTotalChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    i: number
+  ) => {
+    const d = { ...data };
+    d.items[i].total = e.target.value;
+    setData(d);
+  };
+
+  const handleProductDetailsChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    i: number
+  ) => {
+    const d = { ...data };
+
+    const index = products.findIndex(
+      (p) => p.id === Number(d.items[i].product)
+    );
+    const product = products[index];
+
+    d.items[i].total = d.items[i].price * d.items[i].quantity;
+
+    const totalDiscount = (d.items[i].total * d.items[i].discount) / 100;
+    d.items[i].total -= totalDiscount;
+
+    if (d.items[i].packing_charges)
+      d.items[i].total += d.items[i].packing_charges;
+
+    if (product.tax)
+      d.items[i].total_with_tax =
+        d.items[i].total + (d.items[i].total * product.tax) / 100;
+
+    setData(d);
   };
 
   return (
@@ -135,7 +170,7 @@ function InvoiceForm() {
             <Input
               name="due_date"
               type="date"
-              placeholder="Date"
+              placeholder="Due Date"
               onChange={handleChange}
               value={data["due_date"]}
               error={errors["due_date"]}
@@ -150,21 +185,23 @@ function InvoiceForm() {
               options={transports}
             />
           </div>
-          <div>
-            <Select
-              name="customer"
-              type="text"
-              placeholder="Customer"
-              onChange={handleChange}
-              value={data["customer"]}
-              error={errors["customer"]}
-              options={customers}
-            />
-            {currentCustomer ? (
-              <h5>
-                <i>{showAddress(currentCustomer)}</i>
-              </h5>
-            ) : null}
+          <div className="grid grid-1x4">
+            <div>
+              <Select
+                name="customer"
+                type="text"
+                placeholder="Customer"
+                onChange={handleChange}
+                value={data["customer"]}
+                error={errors["customer"]}
+                options={customers}
+              />
+              {currentCustomer ? (
+                <h5>
+                  <i>{showAddress(currentCustomer)}</i>
+                </h5>
+              ) : null}
+            </div>
           </div>
           <h3 className="form-heading">Products</h3>
           {data.items.map((item: InvoiceItem, index: number) => (
@@ -183,7 +220,14 @@ function InvoiceForm() {
                   name="price"
                   type="number"
                   placeholder="Price"
-                  onChange={(e) => handleTabularChange(e, "items", index)}
+                  onChange={(e) =>
+                    handleTabularChange(
+                      e,
+                      "items",
+                      index,
+                      handleProductDetailsChange
+                    )
+                  }
                   value={data["items"][index]["price"]}
                   error={errors[""]}
                 />
@@ -191,7 +235,14 @@ function InvoiceForm() {
                   name="quantity"
                   type="number"
                   placeholder="Quantity"
-                  onChange={(e) => handleTabularChange(e, "items", index)}
+                  onChange={(e) =>
+                    handleTabularChange(
+                      e,
+                      "items",
+                      index,
+                      handleProductDetailsChange
+                    )
+                  }
                   value={data["items"][index]["quantity"]}
                   error={errors[""]}
                 />
@@ -201,16 +252,49 @@ function InvoiceForm() {
                   name="discount"
                   type="number"
                   placeholder="Discount"
-                  onChange={(e) => handleTabularChange(e, "items", index)}
+                  onChange={(e) =>
+                    handleTabularChange(
+                      e,
+                      "items",
+                      index,
+                      handleProductDetailsChange
+                    )
+                  }
                   value={data["items"][index]["discount"]}
                   error={errors[""]}
+                  max={99}
                 />
                 <Input
                   name="packing_charges"
                   type="number"
                   placeholder="Pkg. Charges"
-                  onChange={(e) => handleTabularChange(e, "items", index)}
+                  onChange={(e) =>
+                    handleTabularChange(
+                      e,
+                      "items",
+                      index,
+                      handleProductDetailsChange
+                    )
+                  }
                   value={data["items"][index]["packing_charges"]}
+                  error={errors[""]}
+                />
+              </div>
+              <div className="grid grid-1x2">
+                <Input
+                  name="total"
+                  type="number"
+                  placeholder="Total"
+                  onChange={(e) => handleTotalChange(e, index)}
+                  value={data["items"][index]["total"]}
+                  error={errors[""]}
+                />
+                <Input
+                  name="total_with_tax"
+                  type="number"
+                  placeholder="Total incl. tax"
+                  onChange={(e) => handleTabularChange(e, "items", index)}
+                  value={data["items"][index]["total_with_tax"]}
                   error={errors[""]}
                 />
               </div>
