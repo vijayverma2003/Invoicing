@@ -14,6 +14,7 @@ interface InitialState {
   error: null | { [key: string]: any };
   list: Invoice[];
   lastFetch: null | number;
+  customerSales: { [key: string]: any };
 }
 
 const slice = createSlice({
@@ -24,6 +25,7 @@ const slice = createSlice({
     error: null,
     list: [],
     lastFetch: null,
+    customerSales: {},
   } as InitialState,
 
   reducers: {
@@ -41,6 +43,20 @@ const slice = createSlice({
       invoices.error = null;
       invoices.lastFetch = Date.now();
       invoices.loading = false;
+
+      for (let invoice of action.payload) {
+        const customer = invoice.customer;
+        const customerSales: { [key: string]: any } = {};
+
+        if (typeof customer !== "string" && invoice.total_cost) {
+          if (customer.id)
+            customerSales[customer.id] = customerSales[customer.id]
+              ? customerSales[customer.id] + invoice.total_cost
+              : invoice.total_cost;
+        }
+
+        invoices.customerSales = customerSales;
+      }
     },
 
     invoiceAdded: (invoices, action) => {
@@ -140,6 +156,11 @@ export const getInvoice = (id: number | string | undefined) =>
     (invoices) =>
       invoices.list[invoices.list.findIndex((i) => i.id === Number(id))]
   );
+
+export const getCustomerSales = createSelector(
+  (state: RootState) => state.entities.invoices,
+  (invoices) => invoices.customerSales
+);
 
 export const getFailedRequestError = createSelector(
   (state: RootState) => state.entities.invoices,
