@@ -13,7 +13,7 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { MdDeleteOutline } from "react-icons/md";
 import WarningModal from "../../common/WarningModal";
 
-function CustomerDescription() {
+function Customer() {
   const { id } = useParams();
   const dispatch = useDispatch<AppDispatch>();
   const customer = useSelector(getCustomer(id));
@@ -37,12 +37,7 @@ function CustomerDescription() {
   };
 
   const handleDelete = () => {
-    try {
-      if (id) dispatch(deleteCustomer(id));
-      console.log(failedAPIRequestError);
-    } catch (error) {
-      console.log(error);
-    }
+    if (id) dispatch(deleteCustomer(id));
 
     if (failedAPIRequestError) {
       const dialog =
@@ -115,4 +110,4 @@ function CustomerDescription() {
   );
 }
 
-export default CustomerDescription;
+export default Customer;

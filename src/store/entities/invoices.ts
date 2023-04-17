@@ -134,10 +134,11 @@ export const getInvoices = createSelector(
   (invoices) => invoices.list
 );
 
-export const getInvoice = (id: number | string) =>
+export const getInvoice = (id: number | string | undefined) =>
   createSelector(
     (state: RootState) => state.entities.invoices,
-    (invoices) => invoices.list.filter((i) => i.id === id)
+    (invoices) =>
+      invoices.list[invoices.list.findIndex((i) => i.id === Number(id))]
   );
 
 export const getFailedRequestError = createSelector(

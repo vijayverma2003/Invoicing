@@ -1,22 +1,26 @@
-import { useDispatch, useSelector } from "react-redux";
-import useForm from "../../hooks/useForm";
+import { AppDispatch } from "../../store/configureStore";
+import { Customer } from "../../models/customers";
+import { getCustomers, loadCustomers } from "../../store/entities/customers";
+import { getFirm, loadFirm } from "../../store/user-info/firm";
+import { getProducts, loadProducts } from "../../store/entities/products";
+import { getTransports, loadTransports } from "../../store/entities/transports";
 import { Invoice, InvoiceItem, invoiceForm } from "../../models/invoice";
+import { IoIosAdd } from "react-icons/io";
+import { showAddress } from "../../services/utils";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { z } from "zod";
 import Input from "../common/Input";
 import Select from "../common/Select";
-import { AppDispatch } from "../../store/configureStore";
-import { useEffect, useState } from "react";
-import { getProducts, loadProducts } from "../../store/entities/products";
-import { getCustomers, loadCustomers } from "../../store/entities/customers";
-import { getTransports, loadTransports } from "../../store/entities/transports";
-import { Customer } from "../../models/customers";
-import { showAddress } from "../../services/utils";
-import { getFirm, loadFirm } from "../../store/user-info/firm";
-import { IoIosAdd } from "react-icons/io";
-import { z } from "zod";
+import useForm from "../../hooks/useForm";
 import {
   addInvoice,
   getFailedRequestError,
+  getInvoice,
+  loadInvoices,
 } from "../../store/entities/invoices";
+import queryString from "query-string";
+import { useParams } from "react-router-dom";
 
 const schema = z.object({
   number: z
@@ -49,8 +53,8 @@ const requiredSchema = schema.required({
 });
 
 function InvoiceForm() {
+  const { id } = queryString.parse(window.location.search);
   const [currentCustomer, setCurrentCustomer] = useState<Customer>();
-
   const dispatch = useDispatch<AppDispatch>();
 
   const {
@@ -62,11 +66,12 @@ function InvoiceForm() {
     handleTabularChange,
   } = useForm<Invoice>(invoiceForm.initialState);
 
-  const transports = useSelector(getTransports);
   const customers = useSelector(getCustomers);
-  const products = useSelector(getProducts);
-  const firm = useSelector(getFirm);
   const failedAPIRequestError = useSelector(getFailedRequestError);
+  const firm = useSelector(getFirm);
+  const invoice = useSelector(getInvoice(id as string));
+  const products = useSelector(getProducts);
+  const transports = useSelector(getTransports);
 
   useEffect(() => {
     dispatch(loadProducts());
@@ -74,6 +79,11 @@ function InvoiceForm() {
     dispatch(loadTransports());
     dispatch(loadFirm());
   }, [dispatch]);
+
+  useEffect(() => {
+    console.log(id);
+    if (invoice) setData(invoice);
+  }, [invoice]);
 
   useEffect(() => {
     if (firm && firm.id) setData({ ...data, firm: firm.id });

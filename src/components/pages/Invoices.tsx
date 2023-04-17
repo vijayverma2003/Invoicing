@@ -18,7 +18,7 @@ function Invoices(): JSX.Element {
       <header className="page-header">
         <h4>Invoices</h4>
         <div className="page-header-icons">
-          <Link to="/invoices/new" className="btn-icon">
+          <Link to="/invoices/create" className="btn-icon">
             <IoMdAddCircleOutline size={20} color="black" />
           </Link>
         </div>
@@ -26,7 +26,11 @@ function Invoices(): JSX.Element {
       <div className="page-content page-grid">
         <div>
           {invoices.map((invoice) => (
-            <div key={invoice.id} className="list-page-item">
+            <Link
+              to={`/invoices/${invoice.id}`}
+              key={invoice.id}
+              className="list-page-item"
+            >
               <div>
                 <h4 className="list-page-item-heading">
                   {typeof invoice.customer !== "string"
@@ -48,7 +52,7 @@ function Invoices(): JSX.Element {
                   Recieved
                 </p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

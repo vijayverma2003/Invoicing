@@ -3,7 +3,7 @@ import { AppDispatch } from "../../../store/configureStore";
 import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ProductForm from "../../forms/ProductForm";
 import WarningModal from "../../common/WarningModal";
 import {
@@ -12,10 +12,11 @@ import {
   loadProducts,
 } from "../../../store/entities/products";
 
-function ProductDescription() {
+function Product() {
   const { id } = useParams();
   const dispatch = useDispatch<AppDispatch>();
   const product = useSelector(getProduct(id));
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(loadProducts());
@@ -35,7 +36,7 @@ function ProductDescription() {
 
   const handleDelete = () => {
     if (id) dispatch(deleteProduct(id));
-    window.location.replace("/products");
+    navigate("/products");
   };
 
   return (
@@ -91,4 +92,4 @@ function ProductDescription() {
   );
 }
 
-export default ProductDescription;
+export default Product;
