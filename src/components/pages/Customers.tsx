@@ -1,6 +1,5 @@
 import { AppDispatch } from "../../store/configureStore";
 import { getCustomers, loadCustomers } from "../../store/entities/customers";
-import { getCustomerSales, loadInvoices } from "../../store/entities/invoices";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,11 +9,9 @@ import CustomerForm from "../forms/CustomerForm";
 function Customers(): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
   const customers = useSelector(getCustomers);
-  const customerSales = useSelector(getCustomerSales);
 
   useEffect(() => {
     dispatch(loadCustomers());
-    dispatch(loadInvoices());
   }, [dispatch]);
 
   const handleOpenCustomerFormDialog = () => {
@@ -50,7 +47,11 @@ function Customers(): JSX.Element {
                 </div>
                 <div>
                   <h4 className="list-page-item-heading text-right">
-                    {customer.id ? customerSales[customer.id] : "Loading"}
+                    {customer.invoices &&
+                      customer.invoices.reduce(
+                        (a, b) => (a += b.total_cost),
+                        0
+                      )}
                   </h4>
                   <p className="text-lighter list-page-item-description text-right">
                     {(customer.street ? customer.street + ", " : "") +

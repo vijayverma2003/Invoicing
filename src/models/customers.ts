@@ -1,5 +1,6 @@
 import Country from "./country";
 import Form from "./form";
+import { SimpleInvoice } from "./invoice";
 
 export interface Customer {
   id?: number;
@@ -10,6 +11,7 @@ export interface Customer {
   city: string;
   state: string;
   country: Country | string;
+  invoices?: SimpleInvoice[];
 }
 
 export const customerForm: Form<Customer> = {

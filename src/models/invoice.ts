@@ -5,6 +5,13 @@ import { Product } from "./products";
 import { Transport } from "./transports";
 import moment from "moment";
 
+export interface SimpleInvoice {
+  id: number;
+  date: string;
+  total_cost: number;
+  total_tax: number;
+}
+
 export interface InvoiceItem {
   product: Product | string;
   price: number | string;
