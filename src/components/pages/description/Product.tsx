@@ -1,9 +1,9 @@
 import { AiOutlineEdit } from "react-icons/ai";
 import { AppDispatch } from "../../../store/configureStore";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import ProductForm from "../../forms/ProductForm";
 import WarningModal from "../../common/WarningModal";
 import {
@@ -75,7 +75,7 @@ function Product() {
                 {product.unit.toLowerCase()}
               </p>
               <p className="page-content-description">
-                <strong>Tax -</strong> {product.tax}
+                <strong>Tax -</strong> {product.tax}%
               </p>
               <p className="page-content-description">
                 <strong>HSN -</strong> {product.hsn ?? "Doesn't exists"}
@@ -85,6 +85,56 @@ function Product() {
             <p className="page-content-description">
               The product with given ID was not found!
             </p>
+          )}
+
+          {product && product.invoice_items && (
+            <>
+              <h4 className="page-table-heading">Sales of product</h4>
+              <table className="page-table">
+                <thead>
+                  <tr>
+                    <th>S No.</th>
+                    <th>Price</th>
+                    <th>Qty.</th>
+                    <th>Total</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {product.invoice_items?.map((item, index) => (
+                    <tr key={item.invoice}>
+                      <td>{index + 1}</td>
+                      <td>{item.price}</td>
+                      <td>{item.quantity}</td>
+                      <td>{item.quantity * item.price}</td>
+                      <td>
+                        <Link
+                          className="link-primary"
+                          to={`/invoices/${item.invoice}`}
+                        >
+                          View
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                  <tr>
+                    <th>Total</th>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>
+                      {product.invoice_items
+                        .reduce((a, b) => (a += b.price * b.quantity), 0)
+                        .toFixed(1)}
+                    </td>
+                    <td>-</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p className="note text-warning">
+                Note that product can't be deleted because it is associated with
+                one or more invoice items.
+              </p>
+            </>
           )}
         </div>
       </section>
