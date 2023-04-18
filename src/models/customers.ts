@@ -1,6 +1,6 @@
+import { SimpleInvoice } from "./invoice";
 import Country from "./country";
 import Form from "./form";
-import { SimpleInvoice } from "./invoice";
 
 export interface Customer {
   id?: number;

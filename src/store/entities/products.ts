@@ -4,9 +4,9 @@ import { RootState } from "../configureStore";
 import moment from "moment";
 import {
   AnyAction,
-  Dispatch,
   createSelector,
   createSlice,
+  Dispatch,
 } from "@reduxjs/toolkit";
 
 interface InitialState {
@@ -140,7 +140,9 @@ export const getProduct = (id: string | undefined) =>
   createSelector(
     (state: RootState) => state.entities.products,
     (products) =>
-      products.list[products.list.findIndex((product) => product.id == id)]
+      products.list[
+        products.list.findIndex((product) => product.id === Number(id))
+      ]
   );
 
 export const getFailedRequestError = createSelector(

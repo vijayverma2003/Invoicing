@@ -1,4 +1,4 @@
-import Form, { Input } from "./form";
+import Form from "./form";
 import { SimpleInvoiceItem } from "./invoice";
 
 export interface Product {

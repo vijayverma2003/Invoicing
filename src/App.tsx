@@ -16,6 +16,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import FirmAddressForm from "./components/forms/FirmAddressForm";
 import FirmForm from "./components/forms/FirmForm";
 import HomePage from "./components/home/HomePage";
+import Invoice from "./components/pages/description/Invoice";
 import InvoiceForm from "./components/forms/InvoiceForm";
 import Invoices from "./components/pages/Invoices";
 import LoginForm from "./components/forms/LoginForm";
@@ -23,9 +24,8 @@ import Navbar from "./components/Navbar";
 import Product from "./components/pages/description/Product";
 import Products from "./components/pages/Products";
 import RegisterForm from "./components/forms/RegisterForm";
-import Transports from "./components/pages/Transports";
-import Invoice from "./components/pages/description/Invoice";
 import Transport from "./components/pages/description/Transport";
+import Transports from "./components/pages/Transports";
 
 function App() {
   const user = getUserID();
@@ -41,23 +41,22 @@ function App() {
       <Provider store={store}>
         <main id={user ? "content" : ""}>
           <Routes>
-            <Route element={<Transport />} path={"/transports/:id"} />
-            <Route element={<Invoice />} path={"/invoices/:id"} />
             <Route element={<Customer />} path={"/customers/:id"} />
+            <Route element={<Invoice />} path={"/invoices/:id"} />
             <Route element={<Product />} path={"/products/:id"} />
+            <Route element={<Transport />} path={"/transports/:id"} />
 
-            <Route element={<Transports />} path="/transports" />
-            <Route element={<Invoices />} path="/invoices" />
             <Route element={<Customers />} path="/customers" />
+            <Route element={<Invoices />} path="/invoices" />
             <Route element={<Products />} path="/products" />
+            <Route element={<Transports />} path="/transports" />
 
-            <Route element={<InvoiceForm />} path="/invoices/create" />
             <Route element={<BankForm />} path="/firm/bank" />
             <Route element={<FirmAddressForm />} path="/firm/address" />
             <Route element={<FirmForm />} path="/firm" />
-            <Route element={<RegisterForm />} path="/register" />
-
+            <Route element={<InvoiceForm />} path="/invoices/create" />
             <Route element={<LoginForm />} path="/login" />
+            <Route element={<RegisterForm />} path="/register" />
 
             <Route element={user ? <Dashboard /> : <HomePage />} path="/" />
           </Routes>

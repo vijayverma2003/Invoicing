@@ -1,9 +1,9 @@
 import { AiOutlineEdit } from "react-icons/ai";
 import { AppDispatch } from "../../../store/configureStore";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
 import CustomerForm from "../../forms/CustomerForm";
 import WarningModal from "../../common/WarningModal";
 import {
@@ -109,7 +109,7 @@ function Customer() {
             </p>
           )}
 
-          {customer && customer.invoices && (
+          {customer && customer.invoices && customer.invoices.length > 0 && (
             <>
               <h4 className="page-table-heading">Customer's invoices</h4>
               <table className="page-table">
@@ -146,10 +146,6 @@ function Customer() {
                   </tr>
                 </tbody>
               </table>
-              <p className="note text-warning">
-                Note that customer can't be deleted because it is associated
-                with one or more invoices.
-              </p>
             </>
           )}
         </div>

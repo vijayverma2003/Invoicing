@@ -87,55 +87,53 @@ function Product() {
             </p>
           )}
 
-          {product && product.invoice_items && (
-            <>
-              <h4 className="page-table-heading">Sales of product</h4>
-              <table className="page-table">
-                <thead>
-                  <tr>
-                    <th>S No.</th>
-                    <th>Price</th>
-                    <th>Qty.</th>
-                    <th>Total</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {product.invoice_items?.map((item, index) => (
-                    <tr key={item.invoice}>
-                      <td>{index + 1}</td>
-                      <td>{item.price}</td>
-                      <td>{item.quantity}</td>
-                      <td>{item.quantity * item.price}</td>
-                      <td>
-                        <Link
-                          className="link-primary"
-                          to={`/invoices/${item.invoice}`}
-                        >
-                          View
-                        </Link>
-                      </td>
+          {product &&
+            product.invoice_items &&
+            product.invoice_items.length > 0 && (
+              <>
+                <h4 className="page-table-heading">Sales of product</h4>
+                <table className="page-table">
+                  <thead>
+                    <tr>
+                      <th>S No.</th>
+                      <th>Price</th>
+                      <th>Qty.</th>
+                      <th>Total</th>
+                      <th></th>
                     </tr>
-                  ))}
-                  <tr>
-                    <th>Total</th>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>
-                      {product.invoice_items
-                        .reduce((a, b) => (a += b.price * b.quantity), 0)
-                        .toFixed(1)}
-                    </td>
-                    <td>-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <p className="note text-warning">
-                Note that product can't be deleted because it is associated with
-                one or more invoice items.
-              </p>
-            </>
-          )}
+                  </thead>
+                  <tbody>
+                    {product.invoice_items?.map((item, index) => (
+                      <tr key={item.invoice}>
+                        <td>{index + 1}</td>
+                        <td>{item.price}</td>
+                        <td>{item.quantity}</td>
+                        <td>{item.quantity * item.price}</td>
+                        <td>
+                          <Link
+                            className="link-primary"
+                            to={`/invoices/${item.invoice}`}
+                          >
+                            View
+                          </Link>
+                        </td>
+                      </tr>
+                    ))}
+                    <tr>
+                      <th>Total</th>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>
+                        {product.invoice_items
+                          .reduce((a, b) => (a += b.price * b.quantity), 0)
+                          .toFixed(1)}
+                      </td>
+                      <td>-</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </>
+            )}
         </div>
       </section>
     </>

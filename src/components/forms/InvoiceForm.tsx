@@ -11,16 +11,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { z } from "zod";
 import Input from "../common/Input";
+import queryString from "query-string";
 import Select from "../common/Select";
 import useForm from "../../hooks/useForm";
 import {
   addInvoice,
   getFailedRequestError,
   getInvoice,
-  loadInvoices,
 } from "../../store/entities/invoices";
-import queryString from "query-string";
-import { useParams } from "react-router-dom";
 
 const schema = z.object({
   number: z
@@ -81,13 +79,12 @@ function InvoiceForm() {
   }, [dispatch]);
 
   useEffect(() => {
-    console.log(id);
     if (invoice) setData(invoice);
-  }, [invoice]);
+  }, [invoice, setData]);
 
   useEffect(() => {
     if (firm && firm.id) setData({ ...data, firm: firm.id });
-  }, [firm]);
+  }, [firm, setData, data]);
 
   useEffect(() => {
     if (data.customer) {
@@ -96,7 +93,7 @@ function InvoiceForm() {
       );
       setCurrentCustomer(customers[customer]);
     }
-  }, [data.customer]);
+  }, [data.customer, setCurrentCustomer, customers]);
 
   const handleAddProduct = () => {
     const invoice = { ...data };

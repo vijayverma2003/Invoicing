@@ -4,9 +4,9 @@ import { RootState } from "../configureStore";
 import moment from "moment";
 import {
   AnyAction,
-  Dispatch,
   createSelector,
   createSlice,
+  Dispatch,
 } from "@reduxjs/toolkit";
 
 interface InitialState {

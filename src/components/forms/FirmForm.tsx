@@ -1,4 +1,7 @@
+import { AppDispatch } from "../../store/configureStore";
 import { firmForm } from "../../models/firm";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import { z } from "zod";
 import Input from "../common/Input";
 import useForm from "../../hooks/useForm";
@@ -8,9 +11,6 @@ import {
   getFirm,
   updateFirm,
 } from "../../store/user-info/firm";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "../../store/configureStore";
-import { useEffect } from "react";
 
 const schema = z.object({
   name: z

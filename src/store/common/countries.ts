@@ -1,13 +1,13 @@
-import {
-  AnyAction,
-  Dispatch,
-  createSelector,
-  createSlice,
-} from "@reduxjs/toolkit";
-import { RootState } from "../configureStore";
 import { apiCallBegan } from "../api";
+import { RootState } from "../configureStore";
 import Country from "../../models/country";
 import moment from "moment";
+import {
+  AnyAction,
+  createSelector,
+  createSlice,
+  Dispatch,
+} from "@reduxjs/toolkit";
 
 interface InitialState {
   error: null | { [key: string]: any };

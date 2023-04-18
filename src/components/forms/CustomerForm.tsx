@@ -1,13 +1,13 @@
+import { AppDispatch } from "../../store/configureStore";
 import { Customer, customerForm } from "../../models/customers";
+import { getCountries } from "../../store/common/countries";
 import { MdOutlineClose } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useRef } from "react";
 import { z } from "zod";
 import Input from "../common/Input";
-import useForm from "../../hooks/useForm";
-import { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getCountries } from "../../store/common/countries";
 import Select from "../common/Select";
-import { AppDispatch } from "../../store/configureStore";
+import useForm from "../../hooks/useForm";
 import {
   addCustomer,
   getFailedRequestError,
@@ -70,7 +70,7 @@ function CustomerForm({ customer }: Props): JSX.Element {
         ...customer,
         country: customer.country.id.toString(),
       });
-  }, [customer]);
+  }, [customer, setData]);
 
   const onSubmit = () => {
     if (customer?.id) dispatch(updateCustomer(customer.id, data));

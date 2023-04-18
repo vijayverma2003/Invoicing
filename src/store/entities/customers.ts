@@ -1,13 +1,13 @@
-import {
-  AnyAction,
-  Dispatch,
-  createSelector,
-  createSlice,
-} from "@reduxjs/toolkit";
+import { apiCallBegan } from "../api";
 import { Customer } from "../../models/customers";
 import { RootState } from "../configureStore";
 import moment from "moment";
-import { apiCallBegan } from "../api";
+import {
+  AnyAction,
+  createSelector,
+  createSlice,
+  Dispatch,
+} from "@reduxjs/toolkit";
 
 interface InitialState {
   list: Customer[];
@@ -139,7 +139,9 @@ export const getCustomer = (id: string | undefined) =>
   createSelector(
     (state: RootState) => state.entities.customers,
     (customers) =>
-      customers.list[customers.list.findIndex((customer) => customer.id == id)]
+      customers.list[
+        customers.list.findIndex((customer) => customer.id === Number(id))
+      ]
   );
 
 export const getFailedRequestError = createSelector(

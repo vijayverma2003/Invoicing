@@ -1,8 +1,8 @@
 import { API, apiCallBegan, apiCallFailed } from "../store/api";
 import { put, call, takeEvery } from "redux-saga/effects";
+import { toast } from "react-toastify";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import http from "../services/http";
-import { toast } from "react-toastify";
 
 function* handleApiRequests(action: API) {
   const { url, method, data, onSuccess, onStart, onError, completeURL } =

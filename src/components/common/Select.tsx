@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
 import { FieldError } from "react-hook-form";
 import gsap from "gsap";
+import React, { useEffect, useRef } from "react";
 
 interface Props {
   placeholder: string;
