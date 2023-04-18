@@ -7,6 +7,7 @@ import moment from "moment";
 
 export interface SimpleInvoice {
   id: number;
+  number: number;
   date: string;
   total_cost: number;
   total_tax: number;

@@ -1,17 +1,17 @@
-import { useEffect } from "react";
+import { AiOutlineEdit } from "react-icons/ai";
+import { AppDispatch } from "../../../store/configureStore";
+import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import CustomerForm from "../../forms/CustomerForm";
+import WarningModal from "../../common/WarningModal";
 import {
   deleteCustomer,
   getCustomer,
   getFailedRequestError,
   loadCustomers,
 } from "../../../store/entities/customers";
-import { AppDispatch } from "../../../store/configureStore";
-import CustomerForm from "../../forms/CustomerForm";
-import { AiOutlineEdit } from "react-icons/ai";
-import { MdDeleteOutline } from "react-icons/md";
-import WarningModal from "../../common/WarningModal";
 
 function Customer() {
   const { id } = useParams();
@@ -98,11 +98,59 @@ function Customer() {
                   ? customer.country.name
                   : ""}
               </p>
+              <p className="page-content-description">
+                <strong>Number of Invoices -</strong>{" "}
+                {customer.invoices ? customer.invoices?.length : 0}
+              </p>
             </>
           ) : (
             <p className="page-content-description">
               The product with given ID was not found!
             </p>
+          )}
+
+          {customer && customer.invoices && (
+            <>
+              <h4 className="page-table-heading">Customer's invoices</h4>
+              <table className="page-table">
+                <thead>
+                  <tr>
+                    <th>INV</th>
+                    <th>Date</th>
+                    <th>Sale</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {customer.invoices?.map((invoice) => (
+                    <tr key={invoice.id}>
+                      <td>
+                        <Link
+                          className="link-primary"
+                          to={`/invoices/${invoice.id}`}
+                        >
+                          {invoice.number}
+                        </Link>
+                      </td>
+                      <td>{invoice.date}</td>
+                      <td>{invoice.total_cost + invoice.total_tax}</td>
+                    </tr>
+                  ))}
+                  <tr>
+                    <th>Total</th>
+                    <td>-</td>
+                    <td>
+                      {customer.invoices
+                        .reduce((a, b) => (a += b.total_cost), 0)
+                        .toFixed(1)}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <p className="note text-warning">
+                Note that customer can't be deleted because it is associated
+                with one or more invoices.
+              </p>
+            </>
           )}
         </div>
       </section>

@@ -408,9 +408,14 @@ p {
   text-align: center;
 }
 
-.text-warning {
+.text-danger {
   color: rgb(158, 30, 30);
   font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.text-warning {
+  color: #a97c00;
   font-weight: bold;
 }
 
@@ -649,6 +654,11 @@ select {
   margin-bottom: 1.8rem;
 }
 
+.note {
+  font-size: 1.1rem;
+  margin-top: 2rem;
+}
+
 @media screen and (max-width: 1080px) {
   #main-page {
     margin-left: 0;
@@ -667,9 +677,17 @@ select {
   }
 }
 table {
+  border-collapse: collapse;
   width: 100%;
 }
 
+.page-table {
+  border: 1px solid #cbcbcb;
+  max-width: 40%;
+}
+.page-table-heading {
+  margin: 5rem 0 2rem;
+}
 .page-table td,
 .page-table th {
   font-size: 1.25rem;
@@ -683,10 +701,6 @@ table {
   text-align: center;
 }
 
-th {
-  color: #909090;
-}
-
 td {
   text-align: center;
 }
@@ -695,6 +709,10 @@ th,
 td {
   padding: 0.8rem 0;
   font-size: 1.1rem;
+}
+
+tbody tr:nth-child(2n-1) {
+  background-color: rgb(240, 240, 240);
 }
 
 #content {

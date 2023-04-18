@@ -74,7 +74,7 @@ function LoginForm() {
         </p>
       </div>
       {exp && (
-        <p className="form-end text-warning text-center">
+        <p className="form-end text-danger text-center">
           Your session has been expired, Please login again!
         </p>
       )}
