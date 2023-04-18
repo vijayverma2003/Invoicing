@@ -45,12 +45,17 @@ function Products() {
                   <div>
                     <h4 className="list-page-item-heading">{product.name}</h4>
                     <p className="text-lighter list-page-item-description">
-                      Sales - $20,000
+                      Sales -{" "}
+                      {product.invoice_items &&
+                        product.invoice_items.reduce(
+                          (a, b) => (a += b.price * b.quantity),
+                          0
+                        )}
                     </p>
                   </div>
                   <div>
                     <h4 className="list-page-item-heading text-right">
-                      ${product.price}/{product.unit}
+                      {product.price}/{product.unit}
                     </h4>
                     <p className="text-lighter list-page-item-description text-right">
                       Stock - 48

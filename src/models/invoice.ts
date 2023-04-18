@@ -12,6 +12,11 @@ export interface SimpleInvoice {
   total_cost: number;
   total_tax: number;
 }
+export interface SimpleInvoiceItem {
+  invoice: number;
+  price: number;
+  quantity: number;
+}
 
 export interface InvoiceItem {
   product: Product | string;

@@ -1,12 +1,14 @@
 import Form, { Input } from "./form";
+import { SimpleInvoiceItem } from "./invoice";
 
 export interface Product {
+  hsn?: string;
   id?: number;
+  invoice_items?: SimpleInvoiceItem[];
   name: string;
   price: number | "";
   tax: number | "";
   unit: string;
-  hsn?: string;
 }
 
 export const productForm: Form<Product> = {
