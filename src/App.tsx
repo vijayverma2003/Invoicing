@@ -12,7 +12,7 @@ import store from "./store/configureStore";
 import BankForm from "./components/forms/BankForm";
 import Customer from "./components/pages/description/Customer";
 import Customers from "./components/pages/Customers";
-import Dashboard from "./components/pages/Dashboard";
+import Dashboard from "./components/dashboard/Dashboard";
 import FirmAddressForm from "./components/forms/FirmAddressForm";
 import FirmForm from "./components/forms/FirmForm";
 import HomePage from "./components/home/HomePage";

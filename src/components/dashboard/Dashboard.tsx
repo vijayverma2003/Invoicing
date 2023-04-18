@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { MdFilterAlt } from "react-icons/md";
 import { RiSettingsLine } from "react-icons/ri";
 import { VscColorMode } from "react-icons/vsc";
+import MostSellingProducts from "./MostSellingProducts";
+import TopCustomers from "./TopCustomers";
 
 function Dashboard() {
   const handleScreenMode = () => {
@@ -146,25 +148,9 @@ function Dashboard() {
             </div>
           </div>
 
-          <div className="dashboard-box dashboard-side">
-            <h4 className="text-lighter dashboard-side-heading">
-              Most Selling Products
-            </h4>
-            <h4 className="dashboard-side-analytics">Black T Shirt</h4>
-            <h4 className="dashboard-side-analytics">Blue Jeans</h4>
-            <h4 className="dashboard-side-analytics">White Trousers</h4>
-            <h4 className="dashboard-side-analytics">Long Boots</h4>
-            <h4 className="dashboard-side-analytics">Briefs</h4>
-          </div>
+          <MostSellingProducts />
 
-          <div className="dashboard-box dashboard-side">
-            <h4 className="text-lighter dashboard-side-heading">
-              Top Customers
-            </h4>
-            <h4 className="dashboard-side-analytics">Pawan</h4>
-            <h4 className="dashboard-side-analytics">Sunita</h4>
-            <h4 className="dashboard-side-analytics">Suman</h4>
-          </div>
+          <TopCustomers />
 
           <div className="dashboard-box dashboard-side">
             <h4 className="text-lighter dashboard-side-heading">Updates</h4>
