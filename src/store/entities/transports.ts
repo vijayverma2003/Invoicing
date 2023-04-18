@@ -123,7 +123,7 @@ export const updateTransport =
   };
 
 export const deleteTransport =
-  (id: number) => (dispatch: Dispatch<AnyAction>) => {
+  (id: number | string) => (dispatch: Dispatch<AnyAction>) => {
     return dispatch(
       apiCallBegan({
         method: "delete",
@@ -141,11 +141,11 @@ export const getTransports = createSelector(
   (transports) => transports.list
 );
 
-export const getTransport = (id: number) =>
+export const getTransport = (id: number | string | undefined) =>
   createSelector(
     (state: RootState) => state.entities.transports,
     (transports) =>
-      transports.list[transports.list.findIndex((t) => t.id === id)]
+      transports.list[transports.list.findIndex((t) => t.id === Number(id))]
   );
 
 export const getFailedRequestError = createSelector(

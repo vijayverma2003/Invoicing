@@ -25,6 +25,7 @@ import Products from "./components/pages/Products";
 import RegisterForm from "./components/forms/RegisterForm";
 import Transports from "./components/pages/Transports";
 import Invoice from "./components/pages/description/Invoice";
+import Transport from "./components/pages/description/Transport";
 
 function App() {
   const user = getUserID();
@@ -40,6 +41,7 @@ function App() {
       <Provider store={store}>
         <main id={user ? "content" : ""}>
           <Routes>
+            <Route element={<Transport />} path={"/transports/:id"} />
             <Route element={<Invoice />} path={"/invoices/:id"} />
             <Route element={<Customer />} path={"/customers/:id"} />
             <Route element={<Product />} path={"/products/:id"} />

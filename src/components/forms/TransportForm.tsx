@@ -2,7 +2,7 @@ import { AppDispatch } from "../../store/configureStore";
 import { MdOutlineClose } from "react-icons/md";
 import { Transport, transportForm } from "../../models/transports";
 import { useDispatch, useSelector } from "react-redux";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { z } from "zod";
 import Input from "../common/Input";
 import useForm from "../../hooks/useForm";
@@ -52,8 +52,12 @@ function TransportForm({ transport }: Props): JSX.Element {
     dialog.current?.close();
   };
 
+  useEffect(() => {
+    if (transport) setData(transport);
+  }, [transport, setData]);
+
   return (
-    <dialog ref={dialog}>
+    <dialog id="dialog-transport-form" ref={dialog}>
       <button onClick={handleClose} className="btn-icon dialog-close">
         <MdOutlineClose size={20} color="black" />
       </button>
@@ -69,6 +73,7 @@ function TransportForm({ transport }: Props): JSX.Element {
             key={input.name}
             {...input}
             onChange={handleChange}
+            value={data[input.name]}
             error={
               errors[input.name] ||
               (failedAPIRequestError &&
@@ -78,7 +83,9 @@ function TransportForm({ transport }: Props): JSX.Element {
           />
         ))}
 
-        <button className="btn btn-submit btn-primary">Create</button>
+        <button className="btn btn-submit btn-primary">
+          {transport ? "Update" : "Create"}
+        </button>
       </form>
     </dialog>
   );
