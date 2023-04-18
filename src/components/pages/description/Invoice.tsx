@@ -30,7 +30,12 @@ function Invoice() {
 
   const handleDelete = () => {
     if (id) dispatch(deleteInvoice(id));
-    if (failedAPIRequestError) return;
+    if (failedAPIRequestError) {
+      const dialog =
+        document.querySelector<HTMLDialogElement>("#dialog-warning");
+      if (dialog) dialog.close();
+      return;
+    }
     navigate("/invoices");
   };
   return (

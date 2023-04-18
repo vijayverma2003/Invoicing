@@ -2,6 +2,7 @@ import { API, apiCallBegan, apiCallFailed } from "../store/api";
 import { put, call, takeEvery } from "redux-saga/effects";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import http from "../services/http";
+import { toast } from "react-toastify";
 
 function* handleApiRequests(action: API) {
   const { url, method, data, onSuccess, onStart, onError, completeURL } =
@@ -23,6 +24,7 @@ function* handleApiRequests(action: API) {
     if (error instanceof AxiosError) {
       if (onError) yield put({ type: onError, payload: error.response?.data });
       yield put(apiCallFailed(error.message));
+      if (method === "delete") toast.error(error.response?.data["error"]);
     }
   }
 }
