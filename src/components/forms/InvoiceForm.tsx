@@ -19,6 +19,7 @@ import {
   getFailedRequestError,
   getInvoice,
 } from "../../store/entities/invoices";
+import { useNavigate } from "react-router-dom";
 
 const schema = z.object({
   number: z
@@ -51,9 +52,10 @@ const requiredSchema = schema.required({
 });
 
 function InvoiceForm() {
-  const { id } = queryString.parse(window.location.search);
   const [currentCustomer, setCurrentCustomer] = useState<Customer>();
+  const { id } = queryString.parse(window.location.search);
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   const {
     data,
@@ -112,7 +114,7 @@ function InvoiceForm() {
 
     if (failedAPIRequestError) return;
 
-    window.location.href = "/invoices/";
+    navigate("/invoices/");
   };
 
   const handleTotalChange = (

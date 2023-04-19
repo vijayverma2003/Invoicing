@@ -32,7 +32,13 @@ function TopCustomers() {
           });
       }
 
-      setTopCustomers(topCustomers);
+      setTopCustomers(
+        topCustomers.sort((a, b) => {
+          if (a.sale < b.sale) return 1;
+          if (a.sale > b.sale) return -1;
+          else return 0;
+        })
+      );
     }
   }, [customers]);
 

@@ -5,8 +5,67 @@ import { RiSettingsLine } from "react-icons/ri";
 import { VscColorMode } from "react-icons/vsc";
 import MostSellingProducts from "./MostSellingProducts";
 import TopCustomers from "./TopCustomers";
+import { useDispatch, useSelector } from "react-redux";
+import { getInvoices, loadInvoices } from "../../store/entities/invoices";
+import { AppDispatch } from "../../store/configureStore";
+import { useEffect, useState } from "react";
+import moment from "moment";
 
 function Dashboard() {
+  const dispatch = useDispatch<AppDispatch>();
+  const invoices = useSelector(getInvoices);
+  const [totalSales, setTotalSales] = useState(0);
+  const [salesThisYear, setSalesThisYear] = useState(0);
+  const [salesThisMonth, setSalesThisMonth] = useState(0);
+  const [salesToday, setSalesToday] = useState(0);
+  const [invoicesMadeToday, setInvoiceMadeToday] = useState(0);
+
+  useEffect(() => {
+    dispatch(loadInvoices());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (invoices.length > 0) {
+      let invoicesMadeToday = 0;
+      let salesThisMonth = 0;
+      let salesThisYear = 0;
+      let salesToday = 0;
+      let totalSales = 0;
+
+      for (let invoice of invoices) {
+        if (invoice.total_cost && invoice.total_tax) {
+          const total = invoice.total_cost + invoice.total_tax;
+          if (
+            moment(invoice.date).isSameOrAfter(
+              moment(`${moment().year()}-04-01`)
+            )
+          )
+            salesThisYear += total;
+
+          if (
+            moment(invoice.date).isSameOrAfter(
+              moment(`${moment().year()}-${moment().month()}-01`)
+            )
+          )
+            salesThisMonth += total;
+
+          if (moment(invoice.date).date() === moment().date()) {
+            salesToday += total;
+            invoicesMadeToday++;
+          }
+
+          totalSales += total;
+        }
+      }
+
+      setInvoiceMadeToday(invoicesMadeToday);
+      setSalesThisMonth(salesThisMonth);
+      setSalesThisYear(salesThisYear);
+      setSalesToday(salesToday);
+      setTotalSales(totalSales);
+    }
+  }, [invoices]);
+
   const handleScreenMode = () => {
     document.querySelector("body")?.classList.toggle("light");
   };
@@ -33,7 +92,7 @@ function Dashboard() {
           <div className="dashboard-data">
             <div className="dashboard-box">
               <p className="text-lighter dashboard-data-heading">Sales</p>
-              <h3 className="dashboard-data-description">₹35,00,000</h3>
+              <h3 className="dashboard-data-description">₹{salesThisYear}</h3>
             </div>
             <div className="dashboard-box">
               <p className="text-lighter dashboard-data-heading">Recievables</p>
@@ -58,10 +117,12 @@ function Dashboard() {
               alt=""
             />
             <div className="dashboard-box-description">
-              <h5>This Month - ₹40,000</h5>
-              <h5>This Week - ₹20,000</h5>
-              <h5>Average Monthly Sale - ₹40,000</h5>
-              <h5>Total Sales - ₹40,000 (since you joined)</h5>
+              <h5>This Month - ₹{salesThisMonth}</h5>
+              {/* <h5>
+                Average Monthly Sale -{" "}
+                {invoices.length ? totalSales / invoices.length : 0}
+              </h5> */}
+              <h5>Total Sales - ₹{totalSales} (since you joined)</h5>
             </div>
           </div>
 
@@ -132,7 +193,7 @@ function Dashboard() {
             </h4>
             <div className="dashboard-side-analytics">
               <h4>Sales</h4>
-              <h4>₹30,000</h4>
+              <h4>₹{salesToday}</h4>
             </div>
             <div className="dashboard-side-analytics">
               <h4>Dues</h4>
@@ -140,7 +201,7 @@ function Dashboard() {
             </div>
             <div className="dashboard-side-analytics">
               <h4>Invoices</h4>
-              <h4>2</h4>
+              <h4>{invoicesMadeToday}</h4>
             </div>
             <div className="dashboard-side-analytics">
               <h4>Payments</h4>
