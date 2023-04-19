@@ -19,14 +19,17 @@ function TopCustomers() {
       const topCustomers: { [key: string]: any }[] = [];
       for (let customer of customers) {
         if (topCustomers.length >= 5) break;
-        topCustomers.push({
-          id: customer.id,
-          name: customer.name,
-          sale: customer.invoices?.reduce(
-            (a, b) => (a += b.total_cost + b.total_tax),
-            0
-          ),
-        });
+        const sale = customer.invoices?.reduce(
+          (a, b) => (a += b.total_cost + b.total_tax),
+          0
+        );
+
+        if (sale)
+          topCustomers.push({
+            id: customer.id,
+            name: customer.name,
+            sale,
+          });
       }
 
       setTopCustomers(topCustomers);
@@ -37,11 +40,17 @@ function TopCustomers() {
     <div className="dashboard-box dashboard-side">
       <h4 className="text-lighter dashboard-side-heading">Top Customers</h4>
 
-      {topCustomers.map((customer) => (
-        <h4 key={customer.id} className="dashboard-side-analytics">
-          {customer.name}
-        </h4>
-      ))}
+      {topCustomers.length > 0 ? (
+        <>
+          {topCustomers.map((customer) => (
+            <h4 key={customer.id} className="dashboard-side-analytics">
+              {customer.name}
+            </h4>
+          ))}
+        </>
+      ) : (
+        <h5>You must have at-least one invoice to view top customers</h5>
+      )}
     </div>
   );
 }
