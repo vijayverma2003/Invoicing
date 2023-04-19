@@ -1,24 +1,33 @@
+import { AppDispatch } from "../../store/configureStore";
 import { FaRegUserCircle } from "react-icons/fa";
+import { getInvoices, loadInvoices } from "../../store/entities/invoices";
+import { graphDataForInvoice } from "../../services/graph";
 import { Link } from "react-router-dom";
 import { MdFilterAlt } from "react-icons/md";
 import { RiSettingsLine } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { VscColorMode } from "react-icons/vsc";
+import Graph from "./Graph";
+import moment from "moment";
 import MostSellingProducts from "./MostSellingProducts";
 import TopCustomers from "./TopCustomers";
-import { useDispatch, useSelector } from "react-redux";
-import { getInvoices, loadInvoices } from "../../store/entities/invoices";
-import { AppDispatch } from "../../store/configureStore";
-import { useEffect, useState } from "react";
-import moment from "moment";
+import {
+  createdThisFinancialYear,
+  createdThisMonth,
+  createdToday,
+} from "../../services/time";
 
 function Dashboard() {
+  const [graphInvoicesData, setGraphInvoicesData] = useState<any>([]);
+  const [invoicesMadeToday, setInvoiceMadeToday] = useState(0);
+  const [salesThisMonth, setSalesThisMonth] = useState(0);
+  const [salesThisYear, setSalesThisYear] = useState(0);
+  const [salesToday, setSalesToday] = useState(0);
+  const [totalSales, setTotalSales] = useState(0);
+
   const dispatch = useDispatch<AppDispatch>();
   const invoices = useSelector(getInvoices);
-  const [totalSales, setTotalSales] = useState(0);
-  const [salesThisYear, setSalesThisYear] = useState(0);
-  const [salesThisMonth, setSalesThisMonth] = useState(0);
-  const [salesToday, setSalesToday] = useState(0);
-  const [invoicesMadeToday, setInvoiceMadeToday] = useState(0);
 
   useEffect(() => {
     dispatch(loadInvoices());
@@ -32,32 +41,27 @@ function Dashboard() {
       let salesToday = 0;
       let totalSales = 0;
 
+      const graphData = graphDataForInvoice();
+
       for (let invoice of invoices) {
         if (invoice.total_cost && invoice.total_tax) {
           const total = invoice.total_cost + invoice.total_tax;
-          if (
-            moment(invoice.date).isSameOrAfter(
-              moment(`${moment().year()}-04-01`)
-            )
-          )
-            salesThisYear += total;
+          const label = moment(invoice.date).format("MMM YYYY");
 
-          if (
-            moment(invoice.date).isSameOrAfter(
-              moment(`${moment().year()}-${moment().month()}-01`)
-            )
-          )
-            salesThisMonth += total;
+          const index = graphData.data.findIndex((d) => d.x === label);
+          graphData.data[index].y += total;
 
-          if (moment(invoice.date).date() === moment().date()) {
+          if (createdThisFinancialYear(invoice.date)) salesThisYear += total;
+          if (createdThisMonth(invoice.date)) salesThisMonth += total;
+          if (createdToday(invoice.date)) {
             salesToday += total;
             invoicesMadeToday++;
           }
-
           totalSales += total;
         }
       }
 
+      setGraphInvoicesData([graphData]);
       setInvoiceMadeToday(invoicesMadeToday);
       setSalesThisMonth(salesThisMonth);
       setSalesThisYear(salesThisYear);
@@ -96,11 +100,11 @@ function Dashboard() {
             </div>
             <div className="dashboard-box">
               <p className="text-lighter dashboard-data-heading">Recievables</p>
-              <h3 className="dashboard-data-description">₹12,323</h3>
+              <h3 className="dashboard-data-description">tbc...</h3>
             </div>
             <div className="dashboard-box">
               <p className="text-lighter dashboard-data-heading">Stock Value</p>
-              <h3 className="dashboard-data-description">₹20,00,000</h3>
+              <h3 className="dashboard-data-description">tbc...</h3>
             </div>
           </div>
 
@@ -111,11 +115,9 @@ function Dashboard() {
             </button>
           </div>
           <div className="dashboard-box dashboard-sales-chart">
-            <img
-              className="dashboard-sales-chart-image"
-              src={require("../../images/graph.png")}
-              alt=""
-            />
+            <div className="graph">
+              <Graph data={graphInvoicesData} />
+            </div>
             <div className="dashboard-box-description">
               <h5>This Month - ₹{salesThisMonth}</h5>
               {/* <h5>
@@ -126,7 +128,7 @@ function Dashboard() {
             </div>
           </div>
 
-          <div className="dashboard-header">
+          {/* <div className="dashboard-header">
             <h3 className="dashboard-heading">Overdues</h3>
           </div>
           <div className="dashboard-box dashboard-overdues">
@@ -184,7 +186,7 @@ function Dashboard() {
               <h5>Average Monthly Sale - ₹40,000</h5>
               <h5>Total Sales - ₹40,000 (since you joined)</h5>
             </div>
-          </div>
+          </div> */}
         </div>
         <div>
           <div className="dashboard-box dashboard-side">
@@ -195,18 +197,18 @@ function Dashboard() {
               <h4>Sales</h4>
               <h4>₹{salesToday}</h4>
             </div>
-            <div className="dashboard-side-analytics">
+            {/* <div className="dashboard-side-analytics">
               <h4>Dues</h4>
               <h4>₹3,000</h4>
-            </div>
+            </div> */}
             <div className="dashboard-side-analytics">
               <h4>Invoices</h4>
               <h4>{invoicesMadeToday}</h4>
             </div>
-            <div className="dashboard-side-analytics">
+            {/* <div className="dashboard-side-analytics">
               <h4>Payments</h4>
               <h4>₹10,000</h4>
-            </div>
+            </div> */}
           </div>
 
           <MostSellingProducts />
