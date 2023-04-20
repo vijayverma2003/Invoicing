@@ -11,6 +11,8 @@ import {
   getFirm,
   updateFirmAddress,
 } from "../../store/user-info/firm";
+import { getCountries } from "../../store/common/countries";
+import Select from "../common/Select";
 
 const schema = z.object({
   street: z
@@ -34,13 +36,21 @@ const required = schema.required({ city: true, state: true, country: true });
 
 function FirmAddressForm() {
   const dispatch = useDispatch<AppDispatch>();
+  const countries = useSelector(getCountries);
   const firm = useSelector(getFirm);
   const failedRequestError = useSelector(getFailedRequestError);
   const { errors, handleChange, handleSubmit, data, setData } =
     useForm<FirmAddress>(firmAddressForm.initialState);
 
   useEffect(() => {
-    if (firm && firm.address?.city) setData(firm.address);
+    if (firm && firm.address?.city)
+      setData({
+        ...firm.address,
+        country:
+          typeof firm.address.country !== "string"
+            ? firm.address.country.id
+            : firm.address.country,
+      });
   }, [firm, setData]);
 
   const onSubmit = () => {
@@ -61,20 +71,29 @@ function FirmAddressForm() {
         >
           <h3 className="form-heading">Firm Address</h3>
 
-          {firmAddressForm.inputs.map((input) => (
-            <Input
-              key={input.name}
-              {...input}
-              error={
-                errors[input.name] ||
-                (failedRequestError &&
-                  failedRequestError[input.name] &&
-                  failedRequestError[input.name][0])
-              }
-              onChange={handleChange}
-              value={data[input.name]}
-            />
-          ))}
+          {firmAddressForm.inputs.map((input) => {
+            if (input.elementtype === "select")
+              return (
+                <Select
+                  key={input.name}
+                  {...input}
+                  onChange={handleChange}
+                  options={countries}
+                  value={data[input.name]}
+                  error={errors[input.name]}
+                />
+              );
+
+            return (
+              <Input
+                key={input.name}
+                {...input}
+                onChange={handleChange}
+                error={errors[input.name]}
+                value={data[input.name]}
+              />
+            );
+          })}
 
           <button className="btn-primary btn-submit">
             {firm && firm.address?.city ? "Update" : "Add"}

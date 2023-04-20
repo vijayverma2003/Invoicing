@@ -37,8 +37,8 @@ function App() {
 
   return (
     <>
-      {user && <Navbar />}
       <Provider store={store}>
+        {user ? <Navbar /> : null}
         <main id={user ? "content" : ""}>
           <Routes>
             <Route element={<Customer />} path={"/customers/:id"} />

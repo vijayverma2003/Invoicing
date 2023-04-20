@@ -1,9 +1,18 @@
 import { NavLink } from "react-router-dom";
 import { RiMenu3Fill } from "react-icons/ri";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../store/configureStore";
+import { getFirm, loadFirm } from "../store/user-info/firm";
 
 function Navbar() {
   const nav = useRef<HTMLElement>(null);
+  const dispatch = useDispatch<AppDispatch>();
+  const firm = useSelector(getFirm);
+
+  useEffect(() => {
+    dispatch(loadFirm());
+  }, [dispatch]);
 
   const handleNavToggle = () => {
     nav.current?.classList.toggle("nav-expanded");
@@ -21,11 +30,11 @@ function Navbar() {
         <div className="nav-header">
           <img
             className="nav-logo"
-            src="https://images.unsplash.com/photo-1602934445884-da0fa1c9d3b3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGxvZ298ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
+            src={`http://127.0.0.1:8000/media/invoicing/images/Document_5_xuy1oOV.png`}
             alt=""
           />
           <div className="nav-header-description">
-            <h5 className="nav-user">Suman Trading Company</h5>
+            <h5 className="nav-user">{firm ? firm.name : null}</h5>
           </div>
         </div>
         <ul className="nav-items">
