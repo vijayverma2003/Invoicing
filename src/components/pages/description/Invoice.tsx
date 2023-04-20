@@ -1,24 +1,26 @@
 import { AiOutlineEdit } from "react-icons/ai";
 import { AppDispatch } from "../../../store/configureStore";
+import { HiDownload } from "react-icons/hi";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { MdDeleteOutline } from "react-icons/md";
+import { saveAs } from "file-saver";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import WarningModal from "../../common/WarningModal";
-import { HiDownload } from "react-icons/hi";
-import { saveAs } from "file-saver";
 import {
   deleteInvoice,
   getFailedRequestError,
   getInvoice,
   loadInvoices,
 } from "../../../store/entities/invoices";
+import { getCurrency } from "../../../store/user-info/firm";
 
 function Invoice() {
   const { id } = useParams();
   const dispatch = useDispatch<AppDispatch>();
-  const failedAPIRequestError = useSelector(getFailedRequestError);
   const invoice = useSelector(getInvoice(id));
+  const failedAPIRequestError = useSelector(getFailedRequestError);
+  const currency = useSelector(getCurrency);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -94,11 +96,19 @@ function Invoice() {
                   </p>
                 )}
                 <p className="page-content-description">
-                  <strong>Total -</strong> {invoice.total_cost}
+                  <strong>Total -</strong> {currency?.symbol}
+                  {invoice.total_cost}
                 </p>
                 <p className="page-content-description">
-                  <strong>Total Tax -</strong> {invoice.total_tax}
+                  <strong>Total Tax -</strong> {currency?.symbol}
+                  {invoice.total_tax}
                 </p>
+                {invoice.total_cost && invoice.total_tax ? (
+                  <p className="page-content-description">
+                    <strong>Grand Total -</strong> {currency?.symbol}
+                    {invoice.total_tax + invoice.total_cost}
+                  </p>
+                ) : null}
               </div>
             ) : (
               <p className="page-content-description">

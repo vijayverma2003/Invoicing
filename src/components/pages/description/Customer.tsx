@@ -1,5 +1,6 @@
 import { AiOutlineEdit } from "react-icons/ai";
 import { AppDispatch } from "../../../store/configureStore";
+import { getCurrency } from "../../../store/user-info/firm";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +18,7 @@ function Customer() {
   const { id } = useParams();
   const dispatch = useDispatch<AppDispatch>();
   const customer = useSelector(getCustomer(id));
+  const currency = useSelector(getCurrency);
   const failedAPIRequestError = useSelector(getFailedRequestError);
   const navigate = useNavigate();
 
@@ -93,7 +95,7 @@ function Customer() {
                 {customer.street ?? "Doesn't exists"}
               </p>
               <p className="page-content-description">
-                <strong>City -</strong> {(customer.city, customer.state)},{" "}
+                <strong>City -</strong> {customer.city}, {customer.state},{" "}
                 {typeof customer.country !== "string"
                   ? customer.country.name
                   : ""}
@@ -132,13 +134,17 @@ function Customer() {
                         </Link>
                       </td>
                       <td>{invoice.date}</td>
-                      <td>{invoice.total_cost + invoice.total_tax}</td>
+                      <td>
+                        {currency?.symbol}
+                        {invoice.total_cost + invoice.total_tax}
+                      </td>
                     </tr>
                   ))}
                   <tr>
                     <th>Total</th>
                     <td>-</td>
                     <td>
+                      {currency?.symbol}
                       {customer.invoices
                         .reduce((a, b) => (a += b.total_cost), 0)
                         .toFixed(1)}

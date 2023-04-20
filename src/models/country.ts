@@ -9,4 +9,5 @@ export default interface Country {
   id: number;
   idd: string;
   name: string;
+  currency: Currency;
 }

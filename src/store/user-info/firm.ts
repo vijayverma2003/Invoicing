@@ -232,3 +232,14 @@ export const getFailedRequestError = createSelector(
   (state: RootState) => state.userInfo.firm,
   (firm) => firm.error
 );
+
+export const getCurrency = createSelector(
+  (state: RootState) => state.userInfo.firm,
+  (firm) => {
+    if (firm.firm[0] && firm.firm[0].address)
+      return typeof firm.firm[0].address.country !== "string"
+        ? firm.firm[0].address?.country.currency
+        : null;
+    return null;
+  }
+);

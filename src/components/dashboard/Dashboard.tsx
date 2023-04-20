@@ -1,5 +1,6 @@
 import { AppDispatch } from "../../store/configureStore";
 import { FaRegUserCircle } from "react-icons/fa";
+import { getCurrency } from "../../store/user-info/firm";
 import { getInvoices, loadInvoices } from "../../store/entities/invoices";
 import { graphDataForInvoice } from "../../services/graph";
 import { Link } from "react-router-dom";
@@ -19,6 +20,7 @@ import {
 } from "../../services/time";
 
 function Dashboard() {
+  const currency = useSelector(getCurrency);
   const [graphInvoicesData, setGraphInvoicesData] = useState<any>([]);
   const [invoicesMadeToday, setInvoiceMadeToday] = useState(0);
   const [salesThisMonth, setSalesThisMonth] = useState(0);
@@ -96,7 +98,10 @@ function Dashboard() {
           <div className="dashboard-data">
             <div className="dashboard-box">
               <p className="text-lighter dashboard-data-heading">Sales</p>
-              <h3 className="dashboard-data-description">₹{salesThisYear}</h3>
+              <h3 className="dashboard-data-description">
+                {currency?.symbol}
+                {salesThisYear}
+              </h3>
             </div>
             <div className="dashboard-box">
               <p className="text-lighter dashboard-data-heading">Recievables</p>
@@ -119,12 +124,18 @@ function Dashboard() {
               <Graph data={graphInvoicesData} />
             </div>
             <div className="dashboard-box-description">
-              <h5>This Month - ₹{salesThisMonth}</h5>
+              <h5>
+                This Month - {currency?.symbol}
+                {salesThisMonth}
+              </h5>
               {/* <h5>
                 Average Monthly Sale -{" "}
                 {invoices.length ? totalSales / invoices.length : 0}
               </h5> */}
-              <h5>Total Sales - ₹{totalSales} (since you joined)</h5>
+              <h5>
+                Total Sales - {currency?.symbol}
+                {totalSales} (since you joined)
+              </h5>
             </div>
           </div>
 
@@ -181,10 +192,10 @@ function Dashboard() {
               </tbody>
             </table>
             <div className="dashboard-box-description">
-              <h5>This Month - ₹40,000</h5>
-              <h5>This Week - ₹20,000</h5>
-              <h5>Average Monthly Sale - ₹40,000</h5>
-              <h5>Total Sales - ₹40,000 (since you joined)</h5>
+              <h5>This Month - {currency?.symbol}40,000</h5>
+              <h5>This Week - {currency?.symbol}20,000</h5>
+              <h5>Average Monthly Sale - {currency?.symbol}40,000</h5>
+              <h5>Total Sales - {currency?.symbol}40,000 (since you joined)</h5>
             </div>
           </div> */}
         </div>
@@ -195,11 +206,14 @@ function Dashboard() {
             </h4>
             <div className="dashboard-side-analytics">
               <h4>Sales</h4>
-              <h4>₹{salesToday}</h4>
+              <h4>
+                {currency?.symbol}
+                {salesToday}
+              </h4>
             </div>
             {/* <div className="dashboard-side-analytics">
               <h4>Dues</h4>
-              <h4>₹3,000</h4>
+              <h4>{currency?.symbol}3,000</h4>
             </div> */}
             <div className="dashboard-side-analytics">
               <h4>Invoices</h4>
@@ -207,7 +221,7 @@ function Dashboard() {
             </div>
             {/* <div className="dashboard-side-analytics">
               <h4>Payments</h4>
-              <h4>₹10,000</h4>
+              <h4>{currency?.symbol}10,000</h4>
             </div> */}
           </div>
 

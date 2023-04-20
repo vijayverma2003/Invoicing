@@ -1,4 +1,5 @@
 import { AppDispatch } from "../../store/configureStore";
+import { getCurrency } from "../../store/user-info/firm";
 import { getProducts, loadProducts } from "../../store/entities/products";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { Link } from "react-router-dom";
@@ -10,6 +11,7 @@ import ProductForm from "../forms/ProductForm";
 function Products() {
   const dispatch = useDispatch<AppDispatch>();
   const products: Product[] = useSelector(getProducts);
+  const currency = useSelector(getCurrency);
 
   const handleOpenProductFormDialog = () => {
     const dialog = document.querySelector("dialog");
@@ -45,7 +47,7 @@ function Products() {
                   <div>
                     <h4 className="list-page-item-heading">{product.name}</h4>
                     <p className="text-lighter list-page-item-description">
-                      Sales -{" "}
+                      Sales - {currency?.symbol}
                       {product.invoice_items &&
                         product.invoice_items.reduce(
                           (a, b) => (a += b.price * b.quantity),
@@ -55,6 +57,7 @@ function Products() {
                   </div>
                   <div>
                     <h4 className="list-page-item-heading text-right">
+                      {currency?.symbol}
                       {product.price}/{product.unit}
                     </h4>
                     <p className="text-lighter list-page-item-description text-right">

@@ -48,18 +48,18 @@ function FirmAddressForm() {
         ...firm.address,
         country:
           typeof firm.address.country !== "string"
-            ? firm.address.country.id
+            ? firm.address.country.id.toString()
             : firm.address.country,
       });
   }, [firm, setData]);
 
   const onSubmit = () => {
-    if (firm.id && firm.address?.city)
+    if (firm.id && firm.address)
       dispatch(updateFirmAddress(firm.id.toString(), data));
     else if (firm.id) dispatch(addFirmAddress(firm.id.toString(), data));
-    else window.location.href = "/firm";
+    // else window.location.href = "/firm";
 
-    window.location.href = "/bank";
+    // window.location.href = "/firm/bank";
   };
 
   return (

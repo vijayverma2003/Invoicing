@@ -1,5 +1,6 @@
 import { AiOutlineEdit } from "react-icons/ai";
 import { AppDispatch } from "../../../store/configureStore";
+import { getCurrency } from "../../../store/user-info/firm";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +17,7 @@ function Product() {
   const { id } = useParams();
   const dispatch = useDispatch<AppDispatch>();
   const product = useSelector(getProduct(id));
+  const currency = useSelector(getCurrency);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -71,8 +73,8 @@ function Product() {
           {product ? (
             <>
               <p className="page-content-description">
-                <strong>Price -</strong> {product.price} /{" "}
-                {product.unit.toLowerCase()}
+                <strong>Price -</strong> {currency?.symbol}
+                {product.price} / {product.unit.toLowerCase()}
               </p>
               <p className="page-content-description">
                 <strong>Tax -</strong> {product.tax}%

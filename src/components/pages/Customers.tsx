@@ -1,4 +1,5 @@
 import { AppDispatch } from "../../store/configureStore";
+import { getCurrency } from "../../store/user-info/firm";
 import { getCustomers, loadCustomers } from "../../store/entities/customers";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { Link } from "react-router-dom";
@@ -9,6 +10,7 @@ import CustomerForm from "../forms/CustomerForm";
 function Customers(): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
   const customers = useSelector(getCustomers);
+  const currency = useSelector(getCurrency);
 
   useEffect(() => {
     dispatch(loadCustomers());
@@ -47,6 +49,7 @@ function Customers(): JSX.Element {
                 </div>
                 <div>
                   <h4 className="list-page-item-heading text-right">
+                    {currency?.symbol}
                     {customer.invoices &&
                       customer.invoices.reduce(
                         (a, b) => (a += b.total_cost),

@@ -1,4 +1,5 @@
 import { AppDispatch } from "../../store/configureStore";
+import { getCurrency } from "../../store/user-info/firm";
 import { getInvoices, loadInvoices } from "../../store/entities/invoices";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { Link } from "react-router-dom";
@@ -8,6 +9,7 @@ import { useEffect } from "react";
 function Invoices(): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
   const invoices = useSelector(getInvoices);
+  const currency = useSelector(getCurrency);
 
   useEffect(() => {
     dispatch(loadInvoices());
@@ -43,7 +45,7 @@ function Invoices(): JSX.Element {
               </div>
               <div>
                 <h4 className="list-page-item-heading text-right">
-                  ₹
+                  {currency?.symbol}
                   {invoice.total_cost && invoice.total_tax
                     ? invoice.total_cost + invoice.total_tax
                     : "Not available"}
