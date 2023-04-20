@@ -664,6 +664,16 @@ select {
   margin-top: 2rem;
 }
 
+.iframe-pdf {
+  border: 1px solid #dadada;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.toolbar {
+  display: none !important;
+}
+
 @media screen and (max-width: 1080px) {
   #main-page {
     margin-left: 0;

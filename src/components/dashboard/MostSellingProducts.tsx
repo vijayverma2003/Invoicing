@@ -2,8 +2,6 @@ import { AppDispatch } from "../../store/configureStore";
 import { getProducts, loadProducts } from "../../store/entities/products";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { RiH5 } from "react-icons/ri";
-import { Link } from "react-router-dom";
 
 function MostSellingProducts() {
   const dispatch = useDispatch<AppDispatch>();

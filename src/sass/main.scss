@@ -337,6 +337,16 @@ select {
   margin-top: 2rem;
 }
 
+.iframe-pdf {
+  border: 1px solid $light-secondary;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.toolbar {
+  display: none !important;
+}
+
 @media screen and (max-width: 1080px) {
   #main-page {
     margin-left: 0;
@@ -387,13 +397,6 @@ table {
 
 .td-center {
   text-align: center;
-}
-
-tr {
-}
-
-th {
-  // color: #909090;
 }
 
 td {

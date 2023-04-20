@@ -5,6 +5,8 @@ import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import WarningModal from "../../common/WarningModal";
+import { HiDownload } from "react-icons/hi";
+import { saveAs } from "file-saver";
 import {
   deleteInvoice,
   getFailedRequestError,
@@ -38,6 +40,12 @@ function Invoice() {
     }
     navigate("/invoices");
   };
+
+  const handleDownload = () => {
+    if (id) saveAs(`${process.env.REACT_APP_API_URL}/pdf/${id}/`, "invoice");
+    else console.log("ID not found");
+  };
+
   return (
     <>
       <WarningModal
@@ -56,6 +64,9 @@ function Invoice() {
               >
                 <AiOutlineEdit color="black" size={20} />
               </Link>
+              <button onClick={handleDownload} className="btn-icon">
+                <HiDownload size={20} color="dodgerblue" />
+              </button>
               <button onClick={handleShowWarning} className="btn-icon">
                 <MdDeleteOutline size={20} color="red" />
               </button>
@@ -67,31 +78,45 @@ function Invoice() {
           {failedAPIRequestError && (
             <p className="alert">{failedAPIRequestError.error}</p>
           )}
-          {invoice ? (
-            <>
-              <p className="page-content-description">
-                <strong>Date -</strong> {invoice.date}
-              </p>
-              <p className="page-content-description">
-                <strong>Street Address -</strong> {invoice.due_date}
-              </p>
-              {typeof invoice.customer !== "string" && (
+
+          <div className="grid grid-1x2">
+            {invoice ? (
+              <div>
                 <p className="page-content-description">
-                  <strong>Customer -</strong> {invoice.customer.name}
+                  <strong>Date -</strong> {invoice.date}
                 </p>
+                <p className="page-content-description">
+                  <strong>Street Address -</strong> {invoice.due_date}
+                </p>
+                {typeof invoice.customer !== "string" && (
+                  <p className="page-content-description">
+                    <strong>Customer -</strong> {invoice.customer.name}
+                  </p>
+                )}
+                <p className="page-content-description">
+                  <strong>Total -</strong> {invoice.total_cost}
+                </p>
+                <p className="page-content-description">
+                  <strong>Total Tax -</strong> {invoice.total_tax}
+                </p>
+              </div>
+            ) : (
+              <p className="page-content-description">
+                The invoice with given ID was not found!
+              </p>
+            )}
+            <div>
+              {id && (
+                <iframe
+                  className="iframe-pdf"
+                  src={`https://mozilla.github.io/pdf.js/web/viewer.html?file=${process.env.REACT_APP_API_URL}/pdf/${id}/#toolbar=0`}
+                  title="PDF Viewer"
+                  width="500px"
+                  height="700px"
+                />
               )}
-              <p className="page-content-description">
-                <strong>Total -</strong> {invoice.total_cost}
-              </p>
-              <p className="page-content-description">
-                <strong>Total Tax -</strong> {invoice.total_tax}
-              </p>
-            </>
-          ) : (
-            <p className="page-content-description">
-              The invoice with given ID was not found!
-            </p>
-          )}
+            </div>
+          </div>
         </div>
       </section>
     </>
