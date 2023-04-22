@@ -7,6 +7,7 @@ import { saveAs } from "file-saver";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import WarningModal from "../../common/WarningModal";
+import { MdPayment } from "react-icons/md";
 import {
   deleteInvoice,
   getFailedRequestError,
@@ -14,6 +15,7 @@ import {
   loadInvoices,
 } from "../../../store/entities/invoices";
 import { getCurrency } from "../../../store/user-info/firm";
+import PaymentForm from "../../forms/PaymentForm";
 
 function Invoice() {
   const { id } = useParams();
@@ -48,12 +50,20 @@ function Invoice() {
     else console.log("ID not found");
   };
 
+  const openPaymentForm = () => {
+    const dialog = document.querySelector<HTMLDialogElement>(
+      "#dialog-payment-form"
+    );
+    if (dialog) dialog.showModal();
+  };
+
   return (
     <>
       <WarningModal
         onClick={handleDelete}
         description="Are you sure that you want to permanently delete this invoice?"
       />
+      <PaymentForm />
       <section className="page">
         <header className="page-header">
           <h4>{invoice?.number ? `INV-${invoice.number}` : "Not found"}</h4>
@@ -66,6 +76,9 @@ function Invoice() {
               >
                 <AiOutlineEdit color="black" size={20} />
               </Link>
+              <button onClick={openPaymentForm} className="btn-icon">
+                <MdPayment size={20} color="black" />
+              </button>
               <button onClick={handleDownload} className="btn-icon">
                 <HiDownload size={20} color="dodgerblue" />
               </button>

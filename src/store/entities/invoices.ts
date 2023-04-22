@@ -1,5 +1,5 @@
 import { apiCallBegan } from "../api";
-import { Invoice } from "../../models/invoice";
+import { Invoice, InvoiceResponse } from "../../models/invoice";
 import { RootState } from "../configureStore";
 import moment from "moment";
 import {
@@ -8,11 +8,12 @@ import {
   createSlice,
   Dispatch,
 } from "@reduxjs/toolkit";
+import Payment from "../../models/payment";
 
 interface InitialState {
   loading: boolean;
   error: null | { [key: string]: any };
-  list: Invoice[];
+  list: InvoiceResponse[];
   lastFetch: null | number;
 }
 
@@ -56,6 +57,50 @@ const slice = createSlice({
       const index = invoices.list.findIndex((i) => i.id === action.payload.id);
       invoices.list.splice(index, 1);
     },
+
+    paymentAdded: (invoices, action) => {
+      const index = invoices.list.findIndex(
+        (i) => i.id === action.payload.invoice
+      );
+
+      invoices.list[index].payments.push(action.payload);
+      invoices.error = null;
+    },
+
+    paymentDeleted: (invoices, action) => {
+      const index = invoices.list.findIndex(
+        (i) => i.id === action.payload.invoice
+      );
+
+      const invoice = invoices.list[index];
+
+      if (invoice.payments) {
+        const paymentIndex = invoice.payments?.findIndex(
+          (p) => p.id === action.payload.id
+        );
+
+        invoice.payments.splice(paymentIndex, 1);
+      }
+      invoices.list[index] = invoice;
+      invoices.error = null;
+    },
+
+    paymentUpdated: (invoices, action) => {
+      const index = invoices.list.findIndex(
+        (i) => i.id === action.payload.invoice
+      );
+
+      const invoice = invoices.list[index];
+
+      if (invoice.payments) {
+        const paymentIndex = invoice.payments?.findIndex(
+          (p) => p.id === action.payload.id
+        );
+        delete action.payload.invoice;
+        invoice.payments[paymentIndex] = action.payload;
+      }
+      invoices.error = null;
+    },
   },
 });
 
@@ -66,6 +111,9 @@ export const {
   invoicesRecieved,
   invoicesRequestFailed,
   invoicesRequested,
+  paymentAdded,
+  paymentDeleted,
+  paymentUpdated,
 } = slice.actions;
 
 export default slice.reducer;
@@ -123,6 +171,47 @@ export const deleteInvoice =
         url: `/invoices/${id}/`,
         onError: invoicesRequestFailed.type,
         onSuccess: invoiceDeleted.type,
+      })
+    );
+  };
+
+export const addPayment =
+  (invoiceId: number | string, data: Payment) =>
+  (dispatch: Dispatch<AnyAction>) => {
+    return dispatch(
+      apiCallBegan({
+        method: "post",
+        data,
+        url: `/invoices/${invoiceId}/payments/`,
+        onError: invoicesRequestFailed.type,
+        onSuccess: paymentAdded.type,
+      })
+    );
+  };
+
+export const updatePayment =
+  (invoiceId: number | string, id: number | string, data: Payment) =>
+  (dispatch: Dispatch<AnyAction>) => {
+    return dispatch(
+      apiCallBegan({
+        method: "put",
+        data,
+        url: `/invoices/${invoiceId}/payments/${id}/`,
+        onError: invoicesRequestFailed.type,
+        onSuccess: paymentUpdated.type,
+      })
+    );
+  };
+
+export const deletePayment =
+  (invoiceId: number | string, id: number | string) =>
+  (dispatch: Dispatch<AnyAction>) => {
+    return dispatch(
+      apiCallBegan({
+        method: "delete",
+        url: `/invoices/${invoiceId}/payments/${id}/`,
+        onError: invoicesRequestFailed.type,
+        onSuccess: paymentDeleted.type,
       })
     );
   };

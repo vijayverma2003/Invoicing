@@ -5,6 +5,7 @@ export default interface Payment {
   amount: number | string;
   datetime?: string;
   mode: string;
+  invoice?: string | number;
 }
 
 export const paymentForm: Form<Payment> = {

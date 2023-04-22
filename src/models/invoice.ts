@@ -4,6 +4,7 @@ import { Product } from "./products";
 import { Transport } from "./transports";
 import Form from "./form";
 import moment from "moment";
+import Payment from "./payment";
 
 export interface SimpleInvoice {
   id: number;
@@ -40,6 +41,22 @@ export interface Invoice {
   items: InvoiceItem[];
   total_cost?: number;
   total_tax?: number;
+  payments?: Payment[];
+}
+
+export interface InvoiceResponse {
+  id: number;
+  number: string;
+  date: string;
+  due_date: string;
+  terms: string;
+  customer: Customer | string;
+  transport: Transport | string;
+  firm: Firm | string | number;
+  items: InvoiceItem[];
+  total_cost: number;
+  total_tax: number;
+  payments: Payment[];
 }
 
 export const invoiceForm: Form<Invoice> = {
