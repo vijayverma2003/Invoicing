@@ -60,45 +60,45 @@ const slice = createSlice({
 
     paymentAdded: (invoices, action) => {
       const index = invoices.list.findIndex(
-        (i) => i.id === action.payload.invoice
+        (i) => i.id === Number(action.payload.invoice)
       );
 
-      invoices.list[index].payments.push(action.payload);
+      const invoice = invoices.list[index];
+      delete action.payload.invoice;
+      invoice.payments.push(action.payload);
+      invoices.list[index] = invoice;
       invoices.error = null;
     },
 
     paymentDeleted: (invoices, action) => {
       const index = invoices.list.findIndex(
-        (i) => i.id === action.payload.invoice
+        (i) => i.id === Number(action.payload.invoice)
       );
 
       const invoice = invoices.list[index];
 
-      if (invoice.payments) {
-        const paymentIndex = invoice.payments?.findIndex(
-          (p) => p.id === action.payload.id
-        );
+      const paymentIndex = invoice.payments?.findIndex(
+        (p) => p.id === action.payload.id
+      );
+      invoice.payments.splice(paymentIndex, 1);
 
-        invoice.payments.splice(paymentIndex, 1);
-      }
       invoices.list[index] = invoice;
       invoices.error = null;
     },
 
     paymentUpdated: (invoices, action) => {
       const index = invoices.list.findIndex(
-        (i) => i.id === action.payload.invoice
+        (i) => i.id === Number(action.payload.invoice)
       );
 
       const invoice = invoices.list[index];
 
-      if (invoice.payments) {
-        const paymentIndex = invoice.payments?.findIndex(
-          (p) => p.id === action.payload.id
-        );
-        delete action.payload.invoice;
-        invoice.payments[paymentIndex] = action.payload;
-      }
+      const paymentIndex = invoice.payments?.findIndex(
+        (p) => p.id === action.payload.id
+      );
+      delete action.payload.invoice;
+      invoice.payments[paymentIndex] = action.payload;
+
       invoices.error = null;
     },
   },
