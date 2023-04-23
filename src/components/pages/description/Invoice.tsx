@@ -129,7 +129,7 @@ function Invoice() {
                   </p>
                 ) : null}
 
-                {invoice.payments && (
+                {invoice.payments && invoice.payments.length > 0 && (
                   <table className="payments-table">
                     <thead>
                       <tr>
@@ -169,6 +169,7 @@ function Invoice() {
                             0
                           )}
                         </td>
+                        <td></td>
                       </tr>
                     </tbody>
                   </table>

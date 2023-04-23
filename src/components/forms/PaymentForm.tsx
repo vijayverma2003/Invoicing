@@ -25,6 +25,7 @@ function PaymentForm() {
 
   const onSubmit = () => {
     if (id) dispatch(addPayment(id, data as Payment));
+    dialog.current?.close();
   };
 
   return (
