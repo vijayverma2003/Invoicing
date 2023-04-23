@@ -491,6 +491,10 @@ button,
   gap: 0.8rem;
 }
 
+.btn-small {
+  font-size: 0.8rem;
+}
+
 .form-page {
   height: 100vh;
   display: flex;

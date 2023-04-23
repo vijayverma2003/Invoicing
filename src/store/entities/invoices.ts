@@ -72,16 +72,14 @@ const slice = createSlice({
 
     paymentDeleted: (invoices, action) => {
       const index = invoices.list.findIndex(
-        (i) => i.id === Number(action.payload.invoice)
+        (i) => i.id === Number(action.payload.invoiceId)
       );
 
       const invoice = invoices.list[index];
-
-      const paymentIndex = invoice.payments?.findIndex(
-        (p) => p.id === action.payload.id
+      const paymentIndex = invoice.payments.findIndex(
+        (p) => p.id === Number(action.payload.id)
       );
       invoice.payments.splice(paymentIndex, 1);
-
       invoices.list[index] = invoice;
       invoices.error = null;
     },
@@ -171,6 +169,7 @@ export const deleteInvoice =
         url: `/invoices/${id}/`,
         onError: invoicesRequestFailed.type,
         onSuccess: invoiceDeleted.type,
+        props: { id },
       })
     );
   };
@@ -212,6 +211,7 @@ export const deletePayment =
         url: `/invoices/${invoiceId}/payments/${id}/`,
         onError: invoicesRequestFailed.type,
         onSuccess: paymentDeleted.type,
+        props: { invoiceId, id },
       })
     );
   };

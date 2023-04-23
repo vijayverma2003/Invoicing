@@ -125,6 +125,7 @@ export const deleteProduct =
         method: "delete",
         url: `/products/${id}/`,
         onSuccess: productDeleted.type,
+        props: { id },
       })
     );
   };

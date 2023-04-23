@@ -124,6 +124,7 @@ export const deleteCustomer =
         method: "delete",
         url: `/customers/${id}/`,
         onSuccess: customerDeleted.type,
+        props: { id },
       })
     );
   };

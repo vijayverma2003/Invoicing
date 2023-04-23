@@ -10,12 +10,14 @@ import WarningModal from "../../common/WarningModal";
 import { MdPayment } from "react-icons/md";
 import {
   deleteInvoice,
+  deletePayment,
   getFailedRequestError,
   getInvoice,
   loadInvoices,
 } from "../../../store/entities/invoices";
 import { getCurrency } from "../../../store/user-info/firm";
 import PaymentForm from "../../forms/PaymentForm";
+import moment from "moment";
 
 function Invoice() {
   const { id } = useParams();
@@ -55,6 +57,10 @@ function Invoice() {
       "#dialog-payment-form"
     );
     if (dialog) dialog.showModal();
+  };
+
+  const handleDeletePayment = (paymentId: number | string | undefined) => {
+    if (id && paymentId) dispatch(deletePayment(id, paymentId));
   };
 
   return (
@@ -122,6 +128,51 @@ function Invoice() {
                     {invoice.total_tax + invoice.total_cost}
                   </p>
                 ) : null}
+
+                {invoice.payments && (
+                  <table className="payments-table">
+                    <thead>
+                      <tr>
+                        <th>INV</th>
+                        <th>Date</th>
+                        <th>Sale</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {invoice.payments.map((payment) => (
+                        <tr key={payment.id}>
+                          <td>
+                            {moment(payment.datetime).format("DD-MM-YYYY")}
+                          </td>
+                          <td>
+                            {currency?.symbol}
+                            {payment.amount}
+                          </td>
+                          <td>{payment.mode}</td>
+                          <td>
+                            <button
+                              onClick={() => handleDeletePayment(payment.id)}
+                              className="btn btn-danger btn-small"
+                            >
+                              Delete
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                      <tr>
+                        <th>Total</th>
+                        <td>-</td>
+                        <td>
+                          {currency?.symbol}
+                          {invoice.payments.reduce(
+                            (a, b) => (a += Number(b.amount)),
+                            0
+                          )}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                )}
               </div>
             ) : (
               <p className="page-content-description">

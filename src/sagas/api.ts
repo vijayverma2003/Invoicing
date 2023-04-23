@@ -5,7 +5,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import http from "../services/http";
 
 function* handleApiRequests(action: API) {
-  const { url, method, data, onSuccess, onStart, onError, completeURL } =
+  const { url, method, data, onSuccess, onStart, onError, completeURL, props } =
     action.payload;
 
   if (onStart) yield put({ type: onStart });
@@ -19,7 +19,10 @@ function* handleApiRequests(action: API) {
       data,
     });
 
-    if (onSuccess) yield put({ type: onSuccess, payload: response.data });
+    if (onSuccess) {
+      if (method === "delete") yield put({ type: onSuccess, payload: props });
+      else yield put({ type: onSuccess, payload: response.data });
+    }
   } catch (error: any) {
     if (error instanceof AxiosError) {
       if (onError) yield put({ type: onError, payload: error.response?.data });

@@ -130,6 +130,7 @@ export const deleteTransport =
         url: `/transports/${id}`,
         onSuccess: transportDeleted.type,
         onError: transportsRequestFailed.type,
+        props: { id },
       })
     );
   };

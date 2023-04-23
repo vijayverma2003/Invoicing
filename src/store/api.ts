@@ -11,6 +11,7 @@ export interface API {
     onSuccess?: string;
     onError?: string;
     completeURL?: string;
+    props?: any;
   };
 }
 
