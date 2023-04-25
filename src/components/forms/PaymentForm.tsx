@@ -1,20 +1,28 @@
-import React, { useRef } from "react";
+import { AppDispatch } from "../../store/configureStore";
+import { Invoice } from "../../models/invoice";
 import { MdOutlineClose } from "react-icons/md";
-import { z } from "zod";
-import useForm from "../../hooks/useForm";
-import Payment, { paymentForm } from "../../models/payment";
+import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { z } from "zod";
+import Input from "../common/Input";
+import Payment, { paymentForm } from "../../models/payment";
+import { useRef } from "react";
+import useForm from "../../hooks/useForm";
 import {
   addPayment,
   getFailedRequestError,
 } from "../../store/entities/invoices";
-import Input from "../common/Input";
-import { AppDispatch } from "../../store/configureStore";
-import { useParams } from "react-router-dom";
-import { Invoice } from "../../models/invoice";
-import { toast } from "react-toastify";
 
-const schema = z.object({});
+const schema = z.object({
+  amount: z
+    .number({ invalid_type_error: "Amount is required" })
+    .min(0, "Amount must be atleast 0"),
+  mode: z
+    .string()
+    .min(1, "Mode of payment is required")
+    .max(55, "Mode of payment must be less than 55 characters"),
+});
 
 interface Props {
   invoice: Invoice;
