@@ -21,3 +21,9 @@ export function getGrandTotal(invoice: Invoice) {
     return invoice.total_cost + invoice.total_tax;
   return 0;
 }
+
+export function getRecievables(invoice: Invoice, totalPayment: number) {
+  if (invoice.total_cost && invoice.total_tax)
+    return invoice.total_cost + invoice.total_tax - totalPayment;
+  return 0;
+}

@@ -18,6 +18,8 @@ import {
   createdThisMonth,
   createdToday,
 } from "../../services/time";
+import { getRecievables, getTotalPayment } from "../../services/utils";
+import { Invoice } from "../../models/invoice";
 
 function Dashboard() {
   const currency = useSelector(getCurrency);
@@ -27,6 +29,8 @@ function Dashboard() {
   const [salesThisYear, setSalesThisYear] = useState(0);
   const [salesToday, setSalesToday] = useState(0);
   const [totalSales, setTotalSales] = useState(0);
+  const [recievables, setRecievables] = useState(0);
+  const [overdueInvoices, setOverdueInvoices] = useState<Invoice[]>([]);
 
   const dispatch = useDispatch<AppDispatch>();
   const invoices = useSelector(getInvoices);
@@ -42,6 +46,8 @@ function Dashboard() {
       let salesThisYear = 0;
       let salesToday = 0;
       let totalSales = 0;
+      let recievables = 0;
+      let overdues: Invoice[] = [];
 
       const graphData = graphDataForInvoice();
 
@@ -60,6 +66,14 @@ function Dashboard() {
             invoicesMadeToday++;
           }
           totalSales += total;
+
+          const totalPayment = getTotalPayment(invoice.payments);
+
+          if (totalPayment < invoice.total_cost + invoice.total_tax) {
+            recievables += getRecievables(invoice, totalPayment);
+            if (moment(invoice.due_date).isSameOrAfter(moment()))
+              overdues.push(invoice);
+          }
         }
       }
 
@@ -69,6 +83,8 @@ function Dashboard() {
       setSalesThisYear(salesThisYear);
       setSalesToday(salesToday);
       setTotalSales(totalSales);
+      setRecievables(recievables);
+      setOverdueInvoices(overdues);
     }
   }, [invoices]);
 
@@ -105,19 +121,22 @@ function Dashboard() {
             </div>
             <div className="dashboard-box">
               <p className="text-lighter dashboard-data-heading">Recievables</p>
-              <h3 className="dashboard-data-description">tbc...</h3>
+              <h3 className="dashboard-data-description">
+                {currency?.symbol}
+                {recievables}
+              </h3>
             </div>
             <div className="dashboard-box">
               <p className="text-lighter dashboard-data-heading">Stock Value</p>
-              <h3 className="dashboard-data-description">tbc...</h3>
+              <h3 className="dashboard-data-description">Coming soon...</h3>
             </div>
           </div>
 
           <div className="dashboard-header">
             <h3 className="dashboard-heading">Sales Analytics</h3>
-            <button className="btn-icon">
+            {/* <button className="btn-icon">
               <MdFilterAlt size={20} color="black" />
-            </button>
+            </button> */}
           </div>
           <div className="dashboard-box dashboard-sales-chart">
             <div className="graph">
@@ -128,10 +147,6 @@ function Dashboard() {
                 This Month - {currency?.symbol}
                 {salesThisMonth}
               </h5>
-              {/* <h5>
-                Average Monthly Sale -{" "}
-                {invoices.length ? totalSales / invoices.length : 0}
-              </h5> */}
               <h5>
                 Total Sales - {currency?.symbol}
                 {totalSales} (since you joined)
@@ -139,7 +154,7 @@ function Dashboard() {
             </div>
           </div>
 
-          {/* <div className="dashboard-header">
+          <div className="dashboard-header">
             <h3 className="dashboard-heading">Overdues</h3>
           </div>
           <div className="dashboard-box dashboard-overdues">
@@ -154,50 +169,37 @@ function Dashboard() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td className="td-left">INV</td>
-                  <td className="td-left">Customer</td>
-                  <td className="td-center">Date</td>
-                  <td className="td-center">Due Date</td>
-                  <td className="td-center">Pending</td>
-                </tr>
-                <tr>
-                  <td className="td-left">INV</td>
-                  <td className="td-left">Customer</td>
-                  <td className="td-center">Date</td>
-                  <td className="td-center">Due Date</td>
-                  <td className="td-center">Pending</td>
-                </tr>
-                <tr>
-                  <td className="td-left">INV</td>
-                  <td className="td-left">Customer</td>
-                  <td className="td-center">Date</td>
-                  <td className="td-center">Due Date</td>
-                  <td className="td-center">Pending</td>
-                </tr>
-                <tr>
-                  <td className="td-left">INV</td>
-                  <td className="td-left">Customer</td>
-                  <td className="td-center">Date</td>
-                  <td className="td-center">Due Date</td>
-                  <td className="td-center">Pending</td>
-                </tr>
-                <tr>
-                  <td className="td-left">INV</td>
-                  <td className="td-left">Customer</td>
-                  <td className="td-center">Date</td>
-                  <td className="td-center">Due Date</td>
-                  <td className="td-center">Pending</td>
-                </tr>
+                {overdueInvoices.map((invoice) => (
+                  <tr key={invoice.id}>
+                    <td className="td-left">
+                      <Link
+                        className="link-primary"
+                        to={`/invoices/${invoice.id}`}
+                      >
+                        #{invoice.number}
+                      </Link>
+                    </td>
+                    <td className="td-left">
+                      {typeof invoice.customer !== "string"
+                        ? invoice.customer.name
+                        : ""}
+                    </td>
+                    <td className="td-center">{invoice.date}</td>
+                    <td className="td-center">{invoice.due_date}</td>
+                    <td className="td-center">
+                      {currency?.symbol}
+                      {invoice.payments &&
+                        invoice.total_cost &&
+                        invoice.total_tax &&
+                        invoice.total_cost +
+                          invoice.total_tax -
+                          getTotalPayment(invoice.payments)}
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
-            <div className="dashboard-box-description">
-              <h5>This Month - {currency?.symbol}40,000</h5>
-              <h5>This Week - {currency?.symbol}20,000</h5>
-              <h5>Average Monthly Sale - {currency?.symbol}40,000</h5>
-              <h5>Total Sales - {currency?.symbol}40,000 (since you joined)</h5>
-            </div>
-          </div> */}
+          </div>
         </div>
         <div>
           <div className="dashboard-box dashboard-side">
@@ -211,18 +213,10 @@ function Dashboard() {
                 {salesToday}
               </h4>
             </div>
-            {/* <div className="dashboard-side-analytics">
-              <h4>Dues</h4>
-              <h4>{currency?.symbol}3,000</h4>
-            </div> */}
             <div className="dashboard-side-analytics">
               <h4>Invoices</h4>
               <h4>{invoicesMadeToday}</h4>
             </div>
-            {/* <div className="dashboard-side-analytics">
-              <h4>Payments</h4>
-              <h4>{currency?.symbol}10,000</h4>
-            </div> */}
           </div>
 
           <MostSellingProducts />
@@ -231,18 +225,16 @@ function Dashboard() {
 
           <div className="dashboard-box dashboard-side">
             <h4 className="text-lighter dashboard-side-heading">Updates</h4>
-            <h5 className="dashboard-side-analytics">
-              Added new layout and features.
-            </h5>
             <div className="dashboard-side-analytics">
-              <h5>
+              <h5>Coming soon...</h5>
+              {/* <h5>
                 Do you have any recommendations? We would love to hear that,
                 Share your recommendations{" "}
                 <Link className="link-primary" to="#">
                   here
                 </Link>
                 .
-              </h5>
+              </h5> */}
             </div>
           </div>
 
@@ -250,11 +242,12 @@ function Dashboard() {
             <h4 className="text-lighter dashboard-side-heading">Guide</h4>
             <div className="dashboard-side-analytics">
               <h5>
-                Got stuck or don’t know how to use this app. Click{" "}
+                Coming soon...
+                {/* Got stuck or don’t know how to use this app. Click{" "}
                 <Link className="link-primary" to="#">
                   here
                 </Link>{" "}
-                to check how to create your first invoice.
+                to check how to create your first invoice. */}
               </h5>
             </div>
           </div>

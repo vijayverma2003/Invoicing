@@ -22,10 +22,10 @@ export function createdThisFinancialYear(date: string) {
 export function createdThisMonth(date: string) {
   return (
     moment(date).isSameOrAfter(
-      moment(`${moment().year()}-${moment().month()}-01`)
+      moment(`${moment().year()}-${moment().month() + 1}-01`)
     ) &&
     moment(date).isSameOrBefore(
-      moment(`${moment().year()}-${moment().month() + 1}-01`)
+      moment(`${moment().year()}-${moment().month() + 2}-01`)
     )
   );
 }

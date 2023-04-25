@@ -9,7 +9,7 @@ function Graph({ data }: Props) {
   return (
     <ResponsiveLine
       data={data}
-      margin={{ top: 30, right: 60, bottom: 30, left: 60 }}
+      margin={{ top: 30, right: 60, bottom: 60, left: 60 }}
       xScale={{ type: "point" }}
       yScale={{
         type: "linear",
@@ -20,12 +20,14 @@ function Graph({ data }: Props) {
       }}
       enableGridX={false}
       enableGridY={false}
-      colors={{ scheme: "set1" }}
+      colors={{ scheme: "category10" }}
       pointColor={{ theme: "background" }}
       pointBorderWidth={2}
       pointBorderColor={{ from: "serieColor" }}
       pointLabelYOffset={-12}
+      lineWidth={3}
       useMesh={true}
+      curve="natural"
     />
   );
 }
