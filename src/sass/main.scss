@@ -101,6 +101,10 @@ p {
   font-weight: bold;
 }
 
+.text-safe {
+  color: $color-safe;
+}
+
 // Alerts
 
 .alert {
@@ -332,6 +336,12 @@ select {
     &-description {
       font-size: 1.4rem;
       margin-bottom: 1.8rem;
+      position: relative;
+    }
+
+    &-icon {
+      margin-left: 1rem;
+      position: absolute;
     }
   }
 }

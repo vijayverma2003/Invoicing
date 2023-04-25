@@ -1,13 +1,12 @@
-import { AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineEdit, AiOutlineCheckCircle } from "react-icons/ai";
 import { AppDispatch } from "../../../store/configureStore";
 import { HiDownload } from "react-icons/hi";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { MdDeleteOutline } from "react-icons/md";
+import { MdDeleteOutline, MdPayment } from "react-icons/md";
 import { saveAs } from "file-saver";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import WarningModal from "../../common/WarningModal";
-import { MdPayment } from "react-icons/md";
 import {
   deleteInvoice,
   deletePayment,
@@ -18,6 +17,7 @@ import {
 import { getCurrency } from "../../../store/user-info/firm";
 import PaymentForm from "../../forms/PaymentForm";
 import moment from "moment";
+import { getGrandTotal, getTotalPayment } from "../../../services/utils";
 
 function Invoice() {
   const { id } = useParams();
@@ -69,7 +69,7 @@ function Invoice() {
         onClick={handleDelete}
         description="Are you sure that you want to permanently delete this invoice?"
       />
-      <PaymentForm />
+      <PaymentForm invoice={invoice} />
       <section className="page">
         <header className="page-header">
           <h4>{invoice?.number ? `INV-${invoice.number}` : "Not found"}</h4>
@@ -107,6 +107,9 @@ function Invoice() {
                   <strong>Date -</strong> {invoice.date}
                 </p>
                 <p className="page-content-description">
+                  <strong>Due Date -</strong> {invoice.due_date}
+                </p>
+                <p className="page-content-description">
                   <strong>Street Address -</strong> {invoice.due_date}
                 </p>
                 {typeof invoice.customer !== "string" && (
@@ -128,14 +131,30 @@ function Invoice() {
                     {invoice.total_tax + invoice.total_cost}
                   </p>
                 ) : null}
+                {invoice.payments && invoice.payments.length > 0 ? (
+                  <p className="page-content-description">
+                    <strong>Payment Recieved -</strong> {currency?.symbol}
+                    {getTotalPayment(invoice.payments)}
+                    {getTotalPayment(invoice.payments) >=
+                      getGrandTotal(invoice) && (
+                      <span>
+                        <AiOutlineCheckCircle
+                          className="page-content-icon"
+                          color="green"
+                          size={18}
+                        />
+                      </span>
+                    )}
+                  </p>
+                ) : null}
 
                 {invoice.payments && invoice.payments.length > 0 && (
                   <table className="payments-table">
                     <thead>
                       <tr>
-                        <th>INV</th>
                         <th>Date</th>
-                        <th>Sale</th>
+                        <th>Mode</th>
+                        <th>Amount</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -144,11 +163,11 @@ function Invoice() {
                           <td>
                             {moment(payment.datetime).format("DD-MM-YYYY")}
                           </td>
+                          <td>{payment.mode}</td>
                           <td>
                             {currency?.symbol}
                             {payment.amount}
                           </td>
-                          <td>{payment.mode}</td>
                           <td>
                             <button
                               onClick={() => handleDeletePayment(payment.id)}

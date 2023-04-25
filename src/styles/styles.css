@@ -424,6 +424,10 @@ p {
   font-weight: bold;
 }
 
+.text-safe {
+  color: #3bed6b;
+}
+
 .alert {
   background-color: rgba(255, 0, 0, 0.148);
   width: max-content;
@@ -661,6 +665,11 @@ select {
 .page-content-description {
   font-size: 1.4rem;
   margin-bottom: 1.8rem;
+  position: relative;
+}
+.page-content-icon {
+  margin-left: 1rem;
+  position: absolute;
 }
 
 .note {

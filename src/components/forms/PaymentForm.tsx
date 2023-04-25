@@ -11,10 +11,16 @@ import {
 import Input from "../common/Input";
 import { AppDispatch } from "../../store/configureStore";
 import { useParams } from "react-router-dom";
+import { Invoice } from "../../models/invoice";
+import { toast } from "react-toastify";
 
 const schema = z.object({});
 
-function PaymentForm() {
+interface Props {
+  invoice: Invoice;
+}
+
+function PaymentForm({ invoice }: Props) {
   const { id } = useParams();
   const dialog = useRef<HTMLDialogElement>(null);
   const failedAPIRequestError = useSelector(getFailedRequestError);
@@ -24,7 +30,31 @@ function PaymentForm() {
     useForm<Payment>(paymentForm.initialState);
 
   const onSubmit = () => {
-    if (id) dispatch(addPayment(id, data as Payment));
+    const { payments, total_cost, total_tax } = invoice;
+    const paymentData = { ...data };
+    if (invoice && total_cost && total_tax) {
+      const totalPaymentRecieved = payments?.reduce(
+        (a, b) => (a += Number(b.amount)),
+        0
+      );
+      if (
+        invoice &&
+        totalPaymentRecieved &&
+        totalPaymentRecieved >= total_cost + total_tax
+      ) {
+        toast.error("Payment is already recieved!");
+        dialog.current?.close();
+        return;
+      }
+
+      if (
+        totalPaymentRecieved &&
+        paymentData.amount > total_cost + total_tax - totalPaymentRecieved
+      )
+        paymentData.amount = total_cost + total_tax - totalPaymentRecieved;
+    }
+
+    if (id) dispatch(addPayment(id, paymentData as Payment));
     dialog.current?.close();
   };
 

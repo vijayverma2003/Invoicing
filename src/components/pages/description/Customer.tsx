@@ -47,7 +47,8 @@ function Customer() {
       if (dialog) dialog.close();
       return;
     }
-    // navigate("/customers");
+
+    navigate("/customers");
   };
 
   return (
