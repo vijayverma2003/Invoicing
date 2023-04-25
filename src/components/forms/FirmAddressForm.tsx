@@ -43,12 +43,14 @@ function FirmAddressForm() {
     useForm<FirmAddress>(firmAddressForm.initialState);
 
   useEffect(() => {
-    if (firm && firm.address?.city)
+    if (firm && firm.address?.city && firm.address.country)
       setData({
         ...firm.address,
         country:
           typeof firm.address.country !== "string"
-            ? firm.address.country.id.toString()
+            ? firm.address.country.id
+              ? firm.address.country.id.toString()
+              : firm.address.country.id
             : firm.address.country,
       });
   }, [firm, setData]);
@@ -57,9 +59,8 @@ function FirmAddressForm() {
     if (firm.id && firm.address)
       dispatch(updateFirmAddress(firm.id.toString(), data));
     else if (firm.id) dispatch(addFirmAddress(firm.id.toString(), data));
-    // else window.location.href = "/firm";
 
-    // window.location.href = "/firm/bank";
+    window.location.href = "/";
   };
 
   return (
