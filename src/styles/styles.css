@@ -933,7 +933,11 @@ dialog::backdrop {
   flex-direction: column;
   padding: 2.4rem 1rem;
   max-width: 320px;
-  gap: 4rem;
+  gap: 2rem;
+  min-width: 280px;
+}
+.dialog-warning-heading {
+  margin: 0;
 }
 .dialog-warning-buttons {
   width: 100%;
@@ -942,6 +946,7 @@ dialog::backdrop {
   align-items: center;
   flex-direction: row;
   padding: 0 2rem;
+  margin-top: 2rem;
 }
 
 .dialog-description {

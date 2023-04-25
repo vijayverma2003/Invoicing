@@ -629,12 +629,18 @@ dialog::backdrop {
   @include flex-center(column);
   padding: 2.4rem 1rem;
   max-width: 320px;
-  gap: 4rem;
+  gap: 2rem;
+  min-width: 280px;
+
+  &-heading {
+    margin: 0;
+  }
 
   &-buttons {
     width: 100%;
     @include flex-space(row);
     padding: 0 2rem;
+    margin-top: 2rem;
   }
 }
 

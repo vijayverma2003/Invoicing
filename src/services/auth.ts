@@ -20,6 +20,10 @@ export async function login(data: LoginFields | Data) {
   localStorage.setItem("access-token", jwt.access);
 }
 
+export function logout() {
+  localStorage.removeItem("access-token");
+}
+
 export function getJWT() {
   return localStorage.getItem("access-token");
 }

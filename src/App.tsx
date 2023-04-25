@@ -26,6 +26,7 @@ import Products from "./components/pages/Products";
 import RegisterForm from "./components/forms/RegisterForm";
 import Transport from "./components/pages/description/Transport";
 import Transports from "./components/pages/Transports";
+import Settings from "./components/pages/Settings";
 
 function App() {
   const user = getUserID();
@@ -58,6 +59,7 @@ function App() {
             <Route element={<LoginForm />} path="/login" />
             <Route element={<RegisterForm />} path="/register" />
 
+            <Route element={<Settings />} path={"/settings"} />
             <Route element={user ? <Dashboard /> : <HomePage />} path="/" />
           </Routes>
         </main>
