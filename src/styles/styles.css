@@ -425,7 +425,8 @@ p {
 }
 
 .text-safe {
-  color: #3bed6b;
+  color: #44a832;
+  font-weight: bold;
 }
 
 .alert {

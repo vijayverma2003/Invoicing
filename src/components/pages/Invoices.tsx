@@ -5,6 +5,7 @@ import { IoMdAddCircleOutline } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { getTotalPayment } from "../../services/utils";
 
 function Invoices(): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
@@ -50,9 +51,17 @@ function Invoices(): JSX.Element {
                     ? invoice.total_cost + invoice.total_tax
                     : "Not available"}
                 </h4>
-                <p className="text-lighter list-page-item-description text-right">
-                  Recieved
-                </p>
+
+                {getTotalPayment(invoice.payments) >=
+                invoice.total_tax + invoice.total_tax ? (
+                  <p className="list-page-item-description text-right text-safe">
+                    Recieved
+                  </p>
+                ) : (
+                  <p className="list-page-item-description text-right text-danger">
+                    Pending
+                  </p>
+                )}
               </div>
             </Link>
           ))}

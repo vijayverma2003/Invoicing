@@ -76,17 +76,17 @@ function Invoice() {
 
           {invoice && (
             <div className="page-header-icons">
-              <Link
+              {/* <Link
                 to={`/invoices/create?id=${invoice.id}`}
                 className="btn-icon"
               >
                 <AiOutlineEdit color="black" size={20} />
-              </Link>
+              </Link> */}
               <button onClick={openPaymentForm} className="btn-icon">
                 <MdPayment size={20} color="black" />
               </button>
               <button onClick={handleDownload} className="btn-icon">
-                <HiDownload size={20} color="dodgerblue" />
+                <HiDownload size={20} color="black" />
               </button>
               <button onClick={handleShowWarning} className="btn-icon">
                 <MdDeleteOutline size={20} color="red" />
