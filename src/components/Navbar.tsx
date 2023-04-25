@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../store/configureStore";
 import { getFirm, loadFirm } from "../store/user-info/firm";
+import Logo from "./common/Logo";
 
 function Navbar() {
   const nav = useRef<HTMLElement>(null);
@@ -28,11 +29,7 @@ function Navbar() {
       </div>
       <nav ref={nav}>
         <div className="nav-header">
-          <img
-            className="nav-logo"
-            src={`http://127.0.0.1:8000/media/invoicing/images/Document_5_xuy1oOV.png`}
-            alt=""
-          />
+          <Logo className="nav-logo" />
           <div className="nav-header-description">
             <h5 className="nav-user">{firm ? firm.name : null}</h5>
           </div>
