@@ -37,7 +37,7 @@ h5 {
 }
 
 p {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   line-height: 1.4;
 }
 
@@ -684,4 +684,37 @@ dialog::backdrop {
 
 .mt-high {
   margin-top: 4rem;
+}
+
+// Settings
+
+.settings {
+  &-header {
+    @include flex-center;
+    border-bottom: 1px solid $light-secondary;
+    gap: 4rem;
+    justify-content: flex-start;
+    padding-bottom: 1.4rem;
+  }
+
+  &-info-description {
+    margin-top: 1.4rem;
+  }
+
+  &-info-container {
+    background-color: rgba(0, 0, 0, 0.03);
+    padding: 1.4rem;
+    border-radius: 8px;
+    margin: 1.4rem 0;
+
+    header {
+      @include flex-space;
+    }
+  }
+}
+
+.firm-logo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
 }
