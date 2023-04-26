@@ -52,7 +52,7 @@ function FirmForm() {
             <Input
               key={input.name}
               {...input}
-              value={data.name}
+              value={data[input.name]}
               onChange={handleChange}
               error={
                 errors[input.name] ||

@@ -5,12 +5,15 @@ import Form from "./form";
 export interface Firm {
   id?: number;
   name: string;
-  gstin?: string;
+  gstin: null | string;
   address?: FirmAddress;
   bank?: Bank;
 }
 
 export const firmForm: Form<Firm> = {
   initialState: { name: "", gstin: "" },
-  inputs: [{ name: "name", type: "text", placeholder: "Name" }],
+  inputs: [
+    { name: "name", type: "text", placeholder: "Name" },
+    { name: "gstin", type: "text", placeholder: "GSTIN" },
+  ],
 };
