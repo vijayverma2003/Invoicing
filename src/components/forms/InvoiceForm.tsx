@@ -86,7 +86,7 @@ function InvoiceForm() {
 
   useEffect(() => {
     if (firm && firm.id) setData({ ...data, firm: firm.id });
-  }, [firm, setData, data]);
+  }, [firm, setData]);
 
   useEffect(() => {
     if (data.customer) {
