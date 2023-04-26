@@ -11,6 +11,7 @@ import {
   getFirm,
   updateFirm,
 } from "../../store/user-info/firm";
+import { Link } from "react-router-dom";
 
 const schema = z.object({
   name: z
@@ -36,7 +37,9 @@ function FirmForm() {
     else dispatch(addFirm(data));
 
     if (failedAPIRequestError) return;
-    window.location.href = "/firm/address";
+
+    if (firm) window.location.href = "/";
+    else window.location.href = "/firm/address";
   };
 
   return (
@@ -64,8 +67,15 @@ function FirmForm() {
             />
           ))}
 
-          <button className="btn-primary btn-submit">Create</button>
+          <button className="btn-primary btn-submit">
+            {firm ? "Update" : "Create"}
+          </button>
         </form>
+        <p className="form-end text-center">
+          <Link className="link-primary" to="/firm/address">
+            <strong>Update firm address</strong>
+          </Link>
+        </p>
       </div>
     </section>
   );

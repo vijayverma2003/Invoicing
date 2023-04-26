@@ -60,7 +60,8 @@ function FirmAddressForm() {
       dispatch(updateFirmAddress(firm.id.toString(), data));
     else if (firm.id) dispatch(addFirmAddress(firm.id.toString(), data));
 
-    window.location.href = "/";
+    if (firm.id && firm.address) window.location.href = "/";
+    else window.location.href = "/firm/bank";
   };
 
   return (

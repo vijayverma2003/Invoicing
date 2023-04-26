@@ -1,14 +1,14 @@
 import { AppDispatch } from "../../store/configureStore";
-import { FaRegUserCircle } from "react-icons/fa";
+// import { FaRegUserCircle } from "react-icons/fa";
 import { getCurrency } from "../../store/user-info/firm";
 import { getInvoices, loadInvoices } from "../../store/entities/invoices";
 import { graphDataForInvoice } from "../../services/graph";
 import { Link } from "react-router-dom";
-import { MdFilterAlt } from "react-icons/md";
+// import { MdFilterAlt } from "react-icons/md";
 import { RiSettingsLine } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { VscColorMode } from "react-icons/vsc";
+// import { VscColorMode } from "react-icons/vsc";
 import Graph from "./Graph";
 import moment from "moment";
 import MostSellingProducts from "./MostSellingProducts";
@@ -88,9 +88,9 @@ function Dashboard() {
     }
   }, [invoices]);
 
-  const handleScreenMode = () => {
-    document.querySelector("body")?.classList.toggle("light");
-  };
+  // const handleScreenMode = () => {
+  //   document.querySelector("body")?.classList.toggle("light");
+  // };
 
   return (
     <section className="page">
