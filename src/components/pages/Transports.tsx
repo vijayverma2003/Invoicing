@@ -51,8 +51,11 @@ function Transports() {
                   </div>
                   <div>
                     <h4 className="list-page-item-heading text-right">
-                      {transport.transporter_id}
+                      {transport.vehicle_number}
                     </h4>
+                    <p className="text-lighter list-page-item-description text-right">
+                      {transport.transporter_id}
+                    </p>
                   </div>
                 </div>
               </Link>
