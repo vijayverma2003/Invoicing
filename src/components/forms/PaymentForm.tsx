@@ -47,7 +47,7 @@ function PaymentForm({ invoice }: Props) {
       );
       if (
         invoice &&
-        totalPaymentRecieved &&
+        totalPaymentRecieved !== undefined &&
         totalPaymentRecieved >= total_cost + total_tax
       ) {
         toast.error("Payment is already recieved!");
@@ -56,7 +56,7 @@ function PaymentForm({ invoice }: Props) {
       }
 
       if (
-        totalPaymentRecieved &&
+        totalPaymentRecieved !== undefined &&
         paymentData.amount > total_cost + total_tax - totalPaymentRecieved
       )
         paymentData.amount = total_cost + total_tax - totalPaymentRecieved;
