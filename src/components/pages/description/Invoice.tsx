@@ -103,34 +103,53 @@ function Invoice() {
           <div className="grid grid-1x2">
             {invoice ? (
               <div>
+                {invoice.ewaybill && (
+                  <p className="page-content-description">
+                    <strong>E-Way Bill -</strong> {invoice.ewaybill}
+                  </p>
+                )}
+
+                {invoice.order_number && (
+                  <p className="page-content-description">
+                    <strong>Order Number -</strong> {invoice.order_number}
+                  </p>
+                )}
+
                 <p className="page-content-description">
                   <strong>Date -</strong> {invoice.date}
                 </p>
+
                 <p className="page-content-description">
                   <strong>Due Date -</strong> {invoice.due_date}
                 </p>
+
                 <p className="page-content-description">
                   <strong>Street Address -</strong> {invoice.due_date}
                 </p>
+
                 {typeof invoice.customer !== "string" && (
                   <p className="page-content-description">
                     <strong>Customer -</strong> {invoice.customer.name}
                   </p>
                 )}
+
                 <p className="page-content-description">
                   <strong>Total -</strong> {currency?.symbol}
                   {invoice.total_cost}
                 </p>
+
                 <p className="page-content-description">
                   <strong>Total Tax -</strong> {currency?.symbol}
                   {invoice.total_tax}
                 </p>
+
                 {invoice.total_cost && invoice.total_tax ? (
                   <p className="page-content-description">
                     <strong>Grand Total -</strong> {currency?.symbol}
                     {invoice.total_tax + invoice.total_cost}
                   </p>
                 ) : null}
+
                 {invoice.payments && invoice.payments.length > 0 ? (
                   <p className="page-content-description">
                     <strong>Payment Recieved -</strong> {currency?.symbol}

@@ -169,6 +169,14 @@ function InvoiceForm() {
               error={errors["number"]}
             />
             <Input
+              name="order_number"
+              type="text"
+              placeholder="Order Number"
+              onChange={handleChange}
+              value={data["order_number"]}
+              error={errors["order_number"]}
+            />
+            <Input
               name="date"
               type="date"
               placeholder="Date"
@@ -183,6 +191,14 @@ function InvoiceForm() {
               onChange={handleChange}
               value={data["due_date"]}
               error={errors["due_date"]}
+            />
+            <Input
+              name="ewaybill"
+              type="text"
+              placeholder="E-Way Bill"
+              onChange={handleChange}
+              value={data["ewaybill"]}
+              error={errors["ewaybill"]}
             />
             <Select
               name="transport"

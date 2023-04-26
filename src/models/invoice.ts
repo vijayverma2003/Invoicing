@@ -42,6 +42,8 @@ export interface Invoice {
   total_cost?: number;
   total_tax?: number;
   payments?: Payment[];
+  order_number: null | string;
+  ewaybill: null | string;
 }
 
 export interface InvoiceResponse {
@@ -57,6 +59,8 @@ export interface InvoiceResponse {
   total_cost: number;
   total_tax: number;
   payments: Payment[];
+  order_number: null | string;
+  ewaybill: null | string;
 }
 
 export const invoiceForm: Form<Invoice> = {
@@ -68,6 +72,8 @@ export const invoiceForm: Form<Invoice> = {
     customer: "",
     firm: "",
     transport: "",
+    ewaybill: "",
+    order_number: "",
     items: [
       {
         product: "",
@@ -86,6 +92,8 @@ export const invoiceForm: Form<Invoice> = {
     { name: "date", type: "date", placeholder: "Date" },
     { name: "due_date", type: "date", placeholder: "Due Date" },
     { name: "terms", type: "text", placeholder: "Terms & Conditions" },
+    { name: "ewaybill", type: "text", placeholder: "E-way Bill" },
+    { name: "order_number", type: "text", placeholder: "Order Number" },
     {
       name: "customer",
       type: "text",
