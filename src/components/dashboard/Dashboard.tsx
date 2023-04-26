@@ -97,15 +97,15 @@ function Dashboard() {
       <header className="page-header">
         <h4>Dashboard</h4>
         <div className="page-header-icons">
-          <button onClick={handleScreenMode} className="btn-icon">
+          {/* <button onClick={handleScreenMode} className="btn-icon">
             <VscColorMode color="black" size={20} />
-          </button>
-          <button className="btn-icon">
+          </button> */}
+          <Link to="/settings" className="btn-icon">
             <RiSettingsLine color="black" size={20} />
-          </button>
-          <button className="btn-icon">
+          </Link>
+          {/* <button className="btn-icon">
             <FaRegUserCircle color="black" size={19.5} />
-          </button>
+          </button> */}
         </div>
       </header>
 

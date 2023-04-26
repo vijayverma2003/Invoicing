@@ -13,12 +13,14 @@ import {
   getFailedRequestError,
   updateCustomer,
 } from "../../store/entities/customers";
+import { getFirm } from "../../store/user-info/firm";
 
 const schema = z.object({
   name: z
     .string()
     .min(3, "Name should be atleast 3 characters long")
     .max(255, "Name must be less than 255 characters"),
+  gstin: z.string().max(55, "GST Number must be less than 55 characters"),
   phone: z
     .string()
     .min(1, "Phone is required")
@@ -52,10 +54,12 @@ interface Props {
 }
 
 function CustomerForm({ customer }: Props): JSX.Element {
+  const dialog = useRef<HTMLDialogElement>(null);
   const dispatch = useDispatch<AppDispatch>();
+
   const countries = useSelector(getCountries);
   const failedAPIRequestError = useSelector(getFailedRequestError);
-  const dialog = useRef<HTMLDialogElement>(null);
+  const firm = useSelector(getFirm);
 
   const handleClose = () => {
     document.querySelector("dialog")?.close();
@@ -71,6 +75,13 @@ function CustomerForm({ customer }: Props): JSX.Element {
         country: customer.country.id.toString(),
       });
   }, [customer, setData]);
+
+  useEffect(() => {
+    const customerData = { ...data };
+    if (firm && firm.address && typeof firm.address.country !== "string")
+      customerData.country = firm.address.country.id.toString();
+    setData(customerData);
+  }, [firm]);
 
   const onSubmit = () => {
     if (customer?.id) dispatch(updateCustomer(customer.id, data));

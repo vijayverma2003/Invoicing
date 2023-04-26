@@ -12,6 +12,7 @@ export interface Customer {
   state: string;
   country: Country | string;
   invoices?: SimpleInvoice[];
+  gstin: null | string;
 }
 
 export const customerForm: Form<Customer> = {
@@ -23,9 +24,11 @@ export const customerForm: Form<Customer> = {
     city: "",
     country: "",
     state: "",
+    gstin: "",
   },
   inputs: [
     { name: "name", placeholder: "Name", type: "text" },
+    { name: "gstin", placeholder: "GSTIN", type: "text" },
     { name: "phone", placeholder: "Phone", type: "tel" },
     { name: "email", placeholder: "Email", type: "email" },
     { name: "street", placeholder: "Street Address", type: "text" },

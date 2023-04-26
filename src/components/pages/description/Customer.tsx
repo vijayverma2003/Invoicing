@@ -88,19 +88,29 @@ function Customer() {
               <p className="page-content-description">
                 <strong>Phone -</strong> {customer.phone}
               </p>
+
               <p className="page-content-description">
                 <strong>Email -</strong> {customer.email}
               </p>
+
+              {customer.gstin && (
+                <p className="page-content-description">
+                  <strong>GSTIN -</strong> {customer.gstin}
+                </p>
+              )}
+
               <p className="page-content-description">
                 <strong>Street Address -</strong>{" "}
                 {customer.street ?? "Doesn't exists"}
               </p>
+
               <p className="page-content-description">
                 <strong>City -</strong> {customer.city}, {customer.state},{" "}
                 {typeof customer.country !== "string"
                   ? customer.country.name
                   : ""}
               </p>
+
               <p className="page-content-description">
                 <strong>Number of Invoices -</strong>{" "}
                 {customer.invoices ? customer.invoices?.length : 0}
