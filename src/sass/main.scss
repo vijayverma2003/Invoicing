@@ -4,6 +4,7 @@
 @import "./animations";
 @import "./home";
 @import "./dashboard";
+@import "./form";
 @import "./light";
 
 // Main
@@ -165,6 +166,11 @@ button,
   color: $dark-primary;
 }
 
+.btn-accent {
+  background-color: $color-accent;
+  color: $light-primary;
+}
+
 .btn-danger {
   background-color: $color-danger;
   color: $light-primary;
@@ -319,6 +325,7 @@ select {
 
 .page {
   min-height: 100vh;
+  position: relative;
 
   &-header {
     @include flex-space;
@@ -345,6 +352,14 @@ select {
       position: absolute;
     }
   }
+}
+
+.page-footer {
+  padding: 2.4rem 4rem;
+  @include flex-space;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .note {
@@ -383,6 +398,10 @@ select {
     &-grid {
       display: block;
     }
+  }
+
+  .page-footer {
+    padding: 2.4rem 1rem;
   }
 }
 

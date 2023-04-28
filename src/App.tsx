@@ -27,6 +27,7 @@ import RegisterForm from "./components/forms/RegisterForm";
 import Transport from "./components/pages/description/Transport";
 import Transports from "./components/pages/Transports";
 import Settings from "./components/pages/Settings";
+import LogoForm from "./components/forms/LogoForm";
 
 function App() {
   const user = getUserID();
@@ -52,6 +53,7 @@ function App() {
             <Route element={<Products />} path="/products" />
             <Route element={<Transports />} path="/transports" />
 
+            <Route element={<LogoForm />} path="/firm/logo" />
             <Route element={<BankForm />} path="/firm/bank" />
             <Route element={<FirmAddressForm />} path="/firm/address" />
             <Route element={<FirmForm />} path="/firm" />

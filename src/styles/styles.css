@@ -264,6 +264,30 @@ html {
     padding: 1.4rem;
   }
 }
+.logo-form-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.logo-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.drop-box {
+  border: 1px dotted dodgerblue;
+  border-radius: 12px;
+  height: 400px;
+  width: 400px;
+  overflow: hidden;
+}
+
 .light {
   color: black;
   color: black;
@@ -293,6 +317,10 @@ html {
 }
 .light .btn-danger {
   background-color: rgb(158, 30, 30);
+  color: #fff;
+}
+.light .btn-accent {
+  background-color: dodgerblue;
   color: #fff;
 }
 .light a {
@@ -481,6 +509,11 @@ button,
   color: #101010;
 }
 
+.btn-accent {
+  background-color: dodgerblue;
+  color: #fff;
+}
+
 .btn-danger {
   background-color: rgb(158, 30, 30);
   color: #fff;
@@ -647,6 +680,7 @@ select {
 
 .page {
   min-height: 100vh;
+  position: relative;
 }
 .page-header {
   display: flex;
@@ -671,6 +705,17 @@ select {
 .page-content-icon {
   margin-left: 1rem;
   position: absolute;
+}
+
+.page-footer {
+  padding: 2.4rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .note {
@@ -704,6 +749,9 @@ select {
   }
   .page-grid {
     display: block;
+  }
+  .page-footer {
+    padding: 2.4rem 1rem;
   }
 }
 table {

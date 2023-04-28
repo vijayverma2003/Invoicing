@@ -1,0 +1,19 @@
+// Logo Page
+
+.logo-form-page {
+  height: 100vh;
+  @include flex-center;
+}
+
+.logo-form-container {
+  @include flex-center(column);
+  gap: 5rem;
+}
+
+.drop-box {
+  border: 1px dotted $color-accent;
+  border-radius: 12px;
+  height: 400px;
+  width: 400px;
+  overflow: hidden;
+}
