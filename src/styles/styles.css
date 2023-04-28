@@ -681,7 +681,8 @@ select {
 .iframe-pdf {
   border: 1px solid #dadada;
   border-radius: 12px;
-  overflow: hidden;
+  overflow-x: scroll;
+  width: 100%;
 }
 
 .toolbar {
@@ -712,7 +713,8 @@ table {
 
 .page-table {
   border: 1px solid #cbcbcb;
-  max-width: 40%;
+  max-width: 50%;
+  overflow-x: scroll;
 }
 .page-table-heading {
   margin: 5rem 0 2rem;
@@ -744,6 +746,16 @@ tbody tr:nth-child(2n-1) {
   background-color: rgb(240, 240, 240);
 }
 
+@media screen and (max-width: 1024px) {
+  .page-table {
+    max-width: 70%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .page-table {
+    max-width: 100%;
+  }
+}
 #content {
   margin-left: 180px;
 }
@@ -891,6 +903,18 @@ nav {
   .grid-1x4 {
     grid-template: repeat(4, 1fr)/repeat(1, 1fr);
     gap: 0.4rem;
+  }
+}
+@media screen and (max-width: 900px) {
+  .page-grid {
+    grid-template: repeat(2, max-content)/repeat(1, 1fr);
+    gap: 8rem;
+  }
+  .invoice-page-content {
+    order: 2;
+  }
+  .iframe-pdf {
+    order: 1;
   }
 }
 dialog {

@@ -57,12 +57,7 @@ function Customers(): JSX.Element {
                       )}
                   </h4>
                   <p className="text-lighter list-page-item-description text-right">
-                    {(customer.street ? customer.street + ", " : "") +
-                      `${customer.city}, ${customer.state}, ${
-                        typeof customer.country !== "string"
-                          ? customer.country.name
-                          : ""
-                      }`}
+                    {customer.gstin}
                   </p>
                 </div>
               </Link>

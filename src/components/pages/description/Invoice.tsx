@@ -100,9 +100,9 @@ function Invoice() {
             <p className="alert">{failedAPIRequestError.error}</p>
           )}
 
-          <div className="grid grid-1x2">
+          <div className="grid grid-1x2 page-grid">
             {invoice ? (
-              <div>
+              <div className="invoice-page-content">
                 {invoice.ewaybill && (
                   <p className="page-content-description">
                     <strong>E-Way Bill -</strong> {invoice.ewaybill}
