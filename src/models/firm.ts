@@ -8,6 +8,11 @@ export interface Firm {
   gstin: null | string;
   address?: FirmAddress;
   bank?: Bank;
+  logo?: FirmLogo | null;
+}
+
+export interface FirmLogo {
+  image: "string";
 }
 
 export const firmForm: Form<Firm> = {

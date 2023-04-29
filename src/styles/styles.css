@@ -533,6 +533,10 @@ button,
   font-size: 0.8rem;
 }
 
+.logo {
+  object-fit: cover;
+}
+
 .form-page {
   height: 100vh;
   display: flex;
@@ -716,6 +720,7 @@ select {
   position: absolute;
   bottom: 0;
   width: 100%;
+  border-top: 1px solid #dadada;
 }
 
 .note {

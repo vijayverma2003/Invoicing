@@ -86,11 +86,40 @@ const slice = createSlice({
     bankAdded: (state, action) => {
       state.error = null;
       state.firm[0].bank = action.payload;
+      state.loading = false;
     },
 
     bankUpdated: (state, action) => {
       state.error = null;
       state.firm[0].bank = action.payload;
+      state.loading = false;
+    },
+
+    logoRequested: (state, action) => {
+      state.loading = true;
+    },
+
+    logoAdded: (state, action) => {
+      state.error = null;
+      state.firm[0].logo = action.payload;
+      state.loading = false;
+    },
+
+    logoUpdated: (state, action) => {
+      state.error = null;
+      state.firm[0].logo = action.payload;
+      state.loading = false;
+    },
+
+    logoRequestFailed: (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    },
+
+    logoDeleted: (state, action) => {
+      state.firm[0].logo = null;
+      state.error = null;
+      state.loading = false;
     },
   },
 });
@@ -109,6 +138,11 @@ export const {
   firmRequested,
   firmRequestFailed,
   firmUpdated,
+  logoAdded,
+  logoDeleted,
+  logoRequestFailed,
+  logoRequested,
+  logoUpdated,
 } = slice.actions;
 
 export default slice.reducer;
@@ -221,6 +255,50 @@ export const updateBankDetails =
     );
   };
 
+export const addLogo =
+  (firmId: number | string, data: FormData) =>
+  (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
+    return dispatch(
+      apiCallBegan({
+        data,
+        method: "post",
+        onStart: logoRequested.type,
+        onError: logoRequestFailed.type,
+        onSuccess: logoAdded.type,
+        url: `/firms/${firmId}/logo/`,
+      })
+    );
+  };
+
+export const updateLogo =
+  (firmId: number | string, data: FormData) =>
+  (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
+    return dispatch(
+      apiCallBegan({
+        data,
+        method: "put",
+        onStart: logoRequested.type,
+        onError: logoRequestFailed.type,
+        onSuccess: logoUpdated.type,
+        url: `/firms/${firmId}/logo/${firmId}/`,
+      })
+    );
+  };
+
+export const deleteLogo =
+  (firmId: number | string) =>
+  (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
+    return dispatch(
+      apiCallBegan({
+        method: "delete",
+        onStart: logoRequested.type,
+        onError: logoRequestFailed.type,
+        onSuccess: logoUpdated.type,
+        url: `/firms/${firmId}/logo/${firmId}/`,
+      })
+    );
+  };
+
 // Selectors
 
 export const getFirm = createSelector(
@@ -240,6 +318,18 @@ export const getCurrency = createSelector(
       return typeof firm.firm[0].address.country !== "string"
         ? firm.firm[0].address?.country.currency
         : null;
+    return null;
+  }
+);
+
+export const getLogoURL = createSelector(
+  (state: RootState) => state.userInfo.firm,
+  (firm) => {
+    if (firm.firm[0] && firm.firm[0].logo) {
+      if (firm.firm[0].logo.image)
+        return `${process.env.REACT_APP_API_BASE_URL}${firm.firm[0].logo.image}`;
+    }
+
     return null;
   }
 );

@@ -2,13 +2,22 @@ import React, { useRef, useState } from "react";
 import uploadSVG from "../../svg/upload.svg";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { getFirm } from "../../store/user-info/firm";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getFailedRequestError,
+  getFirm,
+  updateLogo,
+} from "../../store/user-info/firm";
+import { AppDispatch } from "../../store/configureStore";
+import { addProduct } from "../../store/entities/products";
+import { Link } from "react-router-dom";
 
 function LogoForm() {
   const inputRef = useRef<HTMLInputElement>(null);
   const dropBoxRef = useRef<HTMLDivElement>(null);
   const firm = useSelector(getFirm);
+  const dispatch = useDispatch<AppDispatch>();
+  const failedRequestError = useSelector(getFailedRequestError);
 
   let file: any;
 
@@ -58,16 +67,16 @@ function LogoForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    console.log(!file);
     if (!file) return;
 
     const formData = new FormData();
+
     formData.append("image", file);
 
-    const response = await axios.post(
-      process.env.REACT_APP_API_URL + "/firms/" + firm.id + "/logo/",
-      formData
-    );
+    if (firm.id && firm.logo) dispatch(updateLogo(firm.id, formData));
+    else dispatch(addProduct(formData));
+
+    if (failedRequestError) return;
 
     window.location.href = "/";
   };
@@ -107,7 +116,12 @@ function LogoForm() {
       </div>
 
       <footer className="page-footer">
-        <h4>Upload Logo</h4>
+        <h4>
+          Upload Logo or{" "}
+          <Link className="link-primary" to="/">
+            Skip
+          </Link>
+        </h4>
         <button form="logo-form" type="submit" className="btn btn-accent">
           Continue
         </button>

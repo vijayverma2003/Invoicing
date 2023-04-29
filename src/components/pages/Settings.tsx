@@ -49,7 +49,9 @@ function Settings() {
         </header>
         <div className="page-content">
           <header className="settings-header">
-            <Logo className="firm-logo" />
+            <Link to="/firm/logo">
+              <Logo className="firm-logo" />
+            </Link>
             <div>
               <p>@{user.username}</p>
               <p className="settings-text">{user.email}</p>
