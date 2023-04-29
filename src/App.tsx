@@ -29,6 +29,7 @@ import Transports from "./components/pages/Transports";
 import Settings from "./components/pages/Settings";
 import LogoForm from "./components/forms/LogoForm";
 import ProtectedRoute from "./components/common/ProtectedRoute";
+import NotFound from "./components/pages/NotFound";
 
 function App() {
   const user = getUserID();
@@ -166,6 +167,7 @@ function App() {
 
             <Route element={<Settings />} path={"/settings"} />
             <Route element={user ? <Dashboard /> : <HomePage />} path="/" />
+            <Route element={<NotFound />} path="*" />
           </Routes>
         </main>
       </Provider>

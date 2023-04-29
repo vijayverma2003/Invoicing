@@ -786,3 +786,10 @@ dialog::backdrop {
   height: 100px;
   border-radius: 50%;
 }
+
+// Not found
+
+.not-found-page {
+  @include flex-center(column);
+  gap: 2rem;
+}

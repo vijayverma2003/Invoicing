@@ -1217,4 +1217,12 @@ dialog::backdrop {
   border-radius: 50%;
 }
 
+.not-found-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 /*# sourceMappingURL=styles.css.map */
