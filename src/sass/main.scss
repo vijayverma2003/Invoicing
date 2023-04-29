@@ -258,7 +258,15 @@ button,
 
 .product-total {
   @include flex-space;
-  // width: 100%;
+  margin: 2rem 0;
+}
+
+@media screen and (max-width: 400px) {
+  .product-total {
+    @include flex-space(column);
+    margin: 2rem 0;
+    gap: 2rem;
+  }
 }
 
 // Inputs
@@ -640,6 +648,11 @@ nav {
 @media screen and (max-width: 380px) {
   .grid-1x4 {
     grid-template: repeat(4, 1fr) / repeat(1, 1fr);
+    gap: 0.4rem;
+  }
+
+  .grid-max-1x4 {
+    grid-template: repeat(4, max-content) / repeat(1, 1fr);
     gap: 0.4rem;
   }
 }

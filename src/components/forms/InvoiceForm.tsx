@@ -1,7 +1,7 @@
 import { AppDispatch } from "../../store/configureStore";
 import { Customer } from "../../models/customers";
 import { getCustomers, loadCustomers } from "../../store/entities/customers";
-import { getFirm, loadFirm } from "../../store/user-info/firm";
+import { getCurrency, getFirm, loadFirm } from "../../store/user-info/firm";
 import { getProducts, loadProducts } from "../../store/entities/products";
 import { getTransports, loadTransports } from "../../store/entities/transports";
 import { Invoice, InvoiceItem, invoiceForm } from "../../models/invoice";
@@ -56,6 +56,7 @@ function InvoiceForm() {
   const { id } = queryString.parse(window.location.search);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
+  const currency = useSelector(getCurrency);
 
   const {
     data,
@@ -105,6 +106,8 @@ function InvoiceForm() {
       discount: 0,
       packing_charges: 0,
       quantity: "",
+      total: 0,
+      total_with_tax: 0,
     });
     setData(invoice);
   };
@@ -210,7 +213,7 @@ function InvoiceForm() {
               options={transports}
             />
           </div>
-          <div className="grid grid-1x4">
+          <div className="grid grid-1x4 grid-max-1x4">
             <div>
               <Select
                 name="customer"
@@ -230,107 +233,146 @@ function InvoiceForm() {
           </div>
           <h3 className="form-heading">Products</h3>
           {data.items.map((item: InvoiceItem, index: number) => (
-            <div key={index} className="grid grid-1x4 grid-center">
-              <Select
-                name="product"
-                type="text"
-                placeholder="Product"
-                onChange={(e) => handleTabularChange(e, "items", index)}
-                value={data["items"][index]["product"]}
-                error={errors[""]}
-                options={products}
-              />
-              <div className="grid grid-1x2">
-                <Input
-                  name="price"
-                  type="number"
-                  placeholder="Price"
-                  onChange={(e) =>
-                    handleTabularChange(
-                      e,
-                      "items",
-                      index,
-                      handleProductDetailsChange
-                    )
-                  }
-                  value={data["items"][index]["price"]}
-                  error={errors[""]}
-                />
-                <Input
-                  name="quantity"
-                  type="number"
-                  placeholder="Quantity"
-                  onChange={(e) =>
-                    handleTabularChange(
-                      e,
-                      "items",
-                      index,
-                      handleProductDetailsChange
-                    )
-                  }
-                  value={data["items"][index]["quantity"]}
-                  error={errors[""]}
-                />
-              </div>
-              <div className="grid grid-1x2">
-                <Input
-                  name="discount"
-                  type="number"
-                  placeholder="Discount"
-                  onChange={(e) =>
-                    handleTabularChange(
-                      e,
-                      "items",
-                      index,
-                      handleProductDetailsChange
-                    )
-                  }
-                  value={data["items"][index]["discount"]}
-                  error={errors[""]}
-                  max={99}
-                />
-                <Input
-                  name="packing_charges"
-                  type="number"
-                  placeholder="Pkg. Charges"
-                  onChange={(e) =>
-                    handleTabularChange(
-                      e,
-                      "items",
-                      index,
-                      handleProductDetailsChange
-                    )
-                  }
-                  value={data["items"][index]["packing_charges"]}
-                  error={errors[""]}
-                />
-              </div>
-              <div className="grid grid-1x2">
-                <Input
-                  name="total"
-                  type="number"
-                  placeholder="Total"
-                  onChange={(e) => handleTotalChange(e, index)}
-                  value={data["items"][index]["total"]}
-                  error={errors[""]}
-                />
-                <Input
-                  name="total_with_tax"
-                  type="number"
-                  placeholder="Total incl. tax"
+            <div key={index}>
+              <div className="grid grid-1x4 grid-center">
+                <Select
+                  name="product"
+                  type="text"
+                  placeholder="Product"
                   onChange={(e) => handleTabularChange(e, "items", index)}
-                  value={data["items"][index]["total_with_tax"]}
+                  value={data["items"][index]["product"]}
                   error={errors[""]}
+                  options={products}
                 />
+                <div className="grid grid-1x2">
+                  <Input
+                    name="price"
+                    type="number"
+                    placeholder="Price"
+                    onChange={(e) =>
+                      handleTabularChange(
+                        e,
+                        "items",
+                        index,
+                        handleProductDetailsChange
+                      )
+                    }
+                    value={data["items"][index]["price"]}
+                    error={errors[""]}
+                  />
+                  <Input
+                    name="quantity"
+                    type="number"
+                    placeholder="Quantity"
+                    onChange={(e) =>
+                      handleTabularChange(
+                        e,
+                        "items",
+                        index,
+                        handleProductDetailsChange
+                      )
+                    }
+                    value={data["items"][index]["quantity"]}
+                    error={errors[""]}
+                  />
+                </div>
+                <div className="grid grid-1x2">
+                  <Input
+                    name="discount"
+                    type="number"
+                    placeholder="Discount"
+                    onChange={(e) =>
+                      handleTabularChange(
+                        e,
+                        "items",
+                        index,
+                        handleProductDetailsChange
+                      )
+                    }
+                    value={data["items"][index]["discount"]}
+                    error={errors[""]}
+                    max={99}
+                  />
+                  <Input
+                    name="packing_charges"
+                    type="number"
+                    placeholder="Pkg. Charges"
+                    onChange={(e) =>
+                      handleTabularChange(
+                        e,
+                        "items",
+                        index,
+                        handleProductDetailsChange
+                      )
+                    }
+                    value={data["items"][index]["packing_charges"]}
+                    error={errors[""]}
+                  />
+                </div>
+                <div className="grid grid-1x2">
+                  <Input
+                    name="total"
+                    type="number"
+                    placeholder="Total"
+                    onChange={(e) => handleTotalChange(e, index)}
+                    value={data["items"][index]["total"]}
+                    error={errors[""]}
+                  />
+                  <Input
+                    name="total_with_tax"
+                    type="number"
+                    placeholder="Total incl. tax"
+                    onChange={(e) => handleTabularChange(e, "items", index)}
+                    value={data["items"][index]["total_with_tax"]}
+                    error={errors[""]}
+                  />
+                </div>
               </div>
+              <p className="product-total">
+                Total: {currency?.symbol}
+                {data["items"][index]["total"].toFixed(2)} | Total Tax:{" "}
+                {currency?.symbol}
+                {(
+                  data["items"][index]["total_with_tax"] -
+                  data["items"][index]["total"]
+                ).toFixed(2)}
+              </p>
             </div>
           ))}
           <div className="product-total">
-            <h4>Total: 100</h4>
+            <h4>
+              Total: {currency?.symbol}
+              {data.items
+                .reduce(
+                  (a: number, b: InvoiceItem) => (a += b.total ? b.total : 0),
+                  0
+                )
+                .toFixed(2)}{" "}
+              | Total Tax: {currency?.symbol}
+              {(
+                data.items.reduce(
+                  (a: number, b: InvoiceItem) =>
+                    (a += b.total_with_tax ? b.total_with_tax : 0),
+                  0
+                ) -
+                data.items.reduce(
+                  (a: number, b: InvoiceItem) => (a += b.total ? b.total : 0),
+                  0
+                )
+              ).toFixed(2)}{" "}
+              | Grand Total: {currency?.symbol}
+              {data.items
+                .reduce(
+                  (a: number, b: InvoiceItem) =>
+                    (a += b.total_with_tax ? b.total_with_tax : 0),
+                  0
+                )
+                .toFixed(2)}
+            </h4>
             <button
               type="button"
               onClick={handleAddProduct}
-              className="btn-primary btn-flex mt-high"
+              className="btn-primary btn-flex"
             >
               <IoIosAdd size={20} color="white" />
               Add more
