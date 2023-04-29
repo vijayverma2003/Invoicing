@@ -1,7 +1,13 @@
 // Home
 
 .home-page {
-  padding: $home-page-padding;
+  padding: 0 4.4rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .home-page {
+    padding: 0 2.4rem;
+  }
 }
 
 .home-header {
@@ -21,6 +27,16 @@
   }
 }
 
+@media screen and (max-width: 520px) {
+  .home-header {
+    padding: 2.4rem 1rem;
+
+    &-button:nth-child(n) {
+      margin-left: 2rem;
+    }
+  }
+}
+
 .hero {
   @include flex-center(column);
   height: 100vh;
@@ -28,6 +44,18 @@
 
   &-description {
     font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .hero {
+    &-heading {
+      font-size: 4rem;
+    }
+
+    &-description {
+      font-size: 1.4rem;
+    }
   }
 }
 
@@ -42,6 +70,12 @@
     left: 14.4rem;
     width: 360px;
     box-shadow: $primary-shadow;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .home-invoice-showcase {
+    display: none;
   }
 }
 
@@ -72,6 +106,34 @@
   }
 }
 
+@media screen and (max-width: 900px) {
+  .home-dashboard {
+    img {
+      width: 70%;
+    }
+
+    &-description {
+      width: 80%;
+    }
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .home-dashboard {
+    &-heading {
+      font-size: 2.4rem;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    &-description {
+      width: 100%;
+    }
+  }
+}
+
 .home-features {
   margin: 12rem auto;
   @include flex-center(column);
@@ -80,7 +142,6 @@
     display: grid;
     grid-template: repeat(1, 1fr) / repeat(3, 1fr);
     gap: 6rem;
-    width: 100%;
     margin: 8rem auto;
     width: 70%;
   }
@@ -106,6 +167,40 @@
   }
 }
 
+@media screen and (max-width: 1240px) {
+  .home-features {
+    margin: 12rem auto;
+    @include flex-center(column);
+
+    &-grid {
+      gap: 3rem;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .home-features {
+    margin: 12rem auto;
+    @include flex-center(column);
+
+    &-grid {
+      width: 100%;
+      gap: 1.8rem;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .home-features {
+    margin: 12rem auto;
+    @include flex-center(column);
+
+    &-grid {
+      grid-template: repeat(3, 1fr) / repeat(1, 1fr);
+    }
+  }
+}
+
 .home-more-features {
   margin: 8rem auto;
   padding: 14.4rem;
@@ -118,6 +213,29 @@
       font-size: 1.6rem;
       margin-top: 2.4rem;
       letter-spacing: 1.2px;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .home-more-features {
+    padding: 2rem;
+  }
+}
+@media screen and (max-width: 900px) {
+  .home-more-features {
+    margin: 8rem auto;
+    padding: 1rem;
+
+    &-list {
+      padding-left: 1rem;
+      margin-top: 6rem;
+
+      li {
+        font-size: 1.4rem;
+        margin-top: 2.4rem;
+        letter-spacing: 1px;
+      }
     }
   }
 }

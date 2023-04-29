@@ -44,9 +44,7 @@ function HomePage(): JSX.Element {
       </section>
 
       <section className="home-dashboard">
-        <h1 className="home-dashboard-heading text-gradient">
-          User Friendly Dashboard
-        </h1>
+        <h2 className="text-gradient text-center">User Friendly Dashboard</h2>
         <img src={require("../../images/dashboard.png")} alt="" />
         <p className="home-dashboard-description">
           Easily manage your <span className="text-gradient">invoices</span>{" "}
@@ -56,7 +54,7 @@ function HomePage(): JSX.Element {
       </section>
 
       <section className="home-features">
-        <h2 className="text-gradient">
+        <h2 className="text-gradient text-center">
           Empower your invoicing with comprehensive Features
         </h2>
 

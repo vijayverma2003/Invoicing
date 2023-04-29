@@ -61,6 +61,12 @@
     box-shadow: $light-shadow;
   }
 
+  @media screen and (max-width: 400px) {
+    .form-container {
+      box-shadow: none;
+    }
+  }
+
   dialog {
     background-color: lighten($dark-primary, 100%);
   }

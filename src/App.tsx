@@ -28,6 +28,7 @@ import Transport from "./components/pages/description/Transport";
 import Transports from "./components/pages/Transports";
 import Settings from "./components/pages/Settings";
 import LogoForm from "./components/forms/LogoForm";
+import ProtectedRoute from "./components/common/ProtectedRoute";
 
 function App() {
   const user = getUserID();
@@ -43,21 +44,123 @@ function App() {
         {user ? <Navbar /> : null}
         <main id={user ? "content" : ""}>
           <Routes>
-            <Route element={<Customer />} path={"/customers/:id"} />
-            <Route element={<Invoice />} path={"/invoices/:id"} />
-            <Route element={<Product />} path={"/products/:id"} />
-            <Route element={<Transport />} path={"/transports/:id"} />
+            <Route
+              element={
+                <ProtectedRoute>
+                  <Customer />
+                </ProtectedRoute>
+              }
+              path={"/customers/:id"}
+            />
 
-            <Route element={<Customers />} path="/customers" />
-            <Route element={<Invoices />} path="/invoices" />
-            <Route element={<Products />} path="/products" />
-            <Route element={<Transports />} path="/transports" />
+            <Route
+              element={
+                <ProtectedRoute>
+                  <Invoice />
+                </ProtectedRoute>
+              }
+              path={"/invoices/:id"}
+            />
 
-            <Route element={<LogoForm />} path="/firm/logo" />
-            <Route element={<BankForm />} path="/firm/bank" />
-            <Route element={<FirmAddressForm />} path="/firm/address" />
-            <Route element={<FirmForm />} path="/firm" />
-            <Route element={<InvoiceForm />} path="/invoices/create" />
+            <Route
+              element={
+                <ProtectedRoute>
+                  <Product />
+                </ProtectedRoute>
+              }
+              path={"/products/:id"}
+            />
+
+            <Route
+              element={
+                <ProtectedRoute>
+                  <Transport />
+                </ProtectedRoute>
+              }
+              path={"/transports/:id"}
+            />
+
+            <Route
+              element={
+                <ProtectedRoute>
+                  <Customers />
+                </ProtectedRoute>
+              }
+              path="/customers"
+            />
+
+            <Route
+              element={
+                <ProtectedRoute>
+                  <Invoices />
+                </ProtectedRoute>
+              }
+              path="/invoices"
+            />
+
+            <Route
+              element={
+                <ProtectedRoute>
+                  <Products />
+                </ProtectedRoute>
+              }
+              path="/products"
+            />
+
+            <Route
+              element={
+                <ProtectedRoute>
+                  <Transports />
+                </ProtectedRoute>
+              }
+              path="/transports"
+            />
+
+            <Route
+              element={
+                <ProtectedRoute>
+                  <LogoForm />
+                </ProtectedRoute>
+              }
+              path="/firm/logo"
+            />
+
+            <Route
+              element={
+                <ProtectedRoute>
+                  <BankForm />
+                </ProtectedRoute>
+              }
+              path="/firm/bank"
+            />
+
+            <Route
+              element={
+                <ProtectedRoute>
+                  <FirmAddressForm />
+                </ProtectedRoute>
+              }
+              path="/firm/address"
+            />
+
+            <Route
+              element={
+                <ProtectedRoute>
+                  <FirmForm />
+                </ProtectedRoute>
+              }
+              path="/firm"
+            />
+
+            <Route
+              element={
+                <ProtectedRoute>
+                  <InvoiceForm />
+                </ProtectedRoute>
+              }
+              path="/invoices/create"
+            />
+
             <Route element={<LoginForm />} path="/login" />
             <Route element={<RegisterForm />} path="/register" />
 
