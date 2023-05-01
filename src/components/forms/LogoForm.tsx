@@ -13,6 +13,7 @@ import { addProduct } from "../../store/entities/products";
 import { Link } from "react-router-dom";
 
 function LogoForm() {
+  const uploadTextRef = useRef<HTMLHeadingElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const dropBoxRef = useRef<HTMLDivElement>(null);
   const firm = useSelector(getFirm);
@@ -81,8 +82,35 @@ function LogoForm() {
     window.location.href = "/";
   };
 
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    if (uploadTextRef.current && dropBoxRef.current) {
+      uploadTextRef.current.textContent = "Drop to upload logo!";
+      dropBoxRef.current.classList.add("drop-box-active");
+    }
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    if (uploadTextRef.current && dropBoxRef.current) {
+      uploadTextRef.current.textContent = "Drag & drop to upload logo!";
+      dropBoxRef.current.classList.remove("drop-box-active");
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    file = e.dataTransfer.files[0];
+    readFile();
+  };
+
   return (
-    <section className="page">
+    <section
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
+      className="page"
+    >
       <div className="logo-form-page">
         <div>
           <form
@@ -99,7 +127,7 @@ function LogoForm() {
               name="logo"
             />
             <div ref={dropBoxRef} className="logo-form-container drop-box">
-              <h3>Upload your logo</h3>
+              <h3 ref={uploadTextRef}>Drag &amp; drop to upload logo</h3>
               <div className="upload-image">
                 <img src={uploadSVG} />
               </div>

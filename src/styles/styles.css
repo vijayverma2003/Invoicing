@@ -382,11 +382,18 @@ html {
 }
 
 .drop-box {
-  border: 1px dotted dodgerblue;
   border-radius: 12px;
   height: 400px;
   width: 400px;
   overflow: hidden;
+  transition: background-color 0.8s ease-out;
+  box-shadow: 0 0 20px 5px rgba(30, 143, 255, 0.1);
+}
+
+.drop-box-active {
+  border: none;
+  background-color: rgba(30, 143, 255, 0.1);
+  transition: background-color 0.8s ease-out;
 }
 
 .light {
