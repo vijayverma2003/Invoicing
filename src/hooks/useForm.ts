@@ -38,7 +38,9 @@ function useForm<T>(initialState: T | Data) {
     d[arr][index][e.target.name] = e.target.value;
 
     if (e.target.type === "number")
-      d[arr][index][e.target.name] = parseInt(e.target.value);
+      d[arr][index][e.target.name] = e.target.value
+        ? parseFloat(e.target.value)
+        : "";
 
     setData(d as T);
     if (onChange) onChange(e as React.ChangeEvent<HTMLInputElement>, index);

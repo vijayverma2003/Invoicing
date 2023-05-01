@@ -138,6 +138,9 @@ function InvoiceForm() {
     const index = products.findIndex(
       (p) => p.id === Number(d.items[i].product)
     );
+
+    if (index < 0) return;
+
     const product = products[index];
 
     d.items[i].total = d.items[i].price * d.items[i].quantity;
@@ -250,7 +253,8 @@ function InvoiceForm() {
                     }
                     value={data["items"][index]["price"]}
                     error={errors[""]}
-                    min={0}
+                    // min={0}
+                    step={0.01}
                   />
                   <Input
                     name="quantity"
@@ -267,6 +271,7 @@ function InvoiceForm() {
                     value={data["items"][index]["quantity"]}
                     error={errors[""]}
                     min={0}
+                    step="any"
                   />
                 </div>
                 <div className="grid grid-1x2">
@@ -286,6 +291,7 @@ function InvoiceForm() {
                     error={errors[""]}
                     max={99}
                     min={0}
+                    step="any"
                   />
                   <Input
                     name="packing_charges"
@@ -302,6 +308,7 @@ function InvoiceForm() {
                     value={data["items"][index]["packing_charges"]}
                     error={errors[""]}
                     min={0}
+                    step="any"
                   />
                 </div>
                 <div className="grid grid-1x2">
@@ -313,6 +320,7 @@ function InvoiceForm() {
                     value={data["items"][index]["total"]}
                     error={errors[""]}
                     min={0}
+                    step="any"
                   />
                   <Input
                     name="total_with_tax"
@@ -322,6 +330,7 @@ function InvoiceForm() {
                     value={data["items"][index]["total_with_tax"]}
                     error={errors[""]}
                     min={0}
+                    step="any"
                   />
                 </div>
               </div>
