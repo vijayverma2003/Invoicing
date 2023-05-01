@@ -44,6 +44,7 @@ export interface Invoice {
   payments?: Payment[];
   order_number: null | string;
   ewaybill: null | string;
+  transportation_charges: number | null | "";
 }
 
 export interface InvoiceResponse {
@@ -61,6 +62,7 @@ export interface InvoiceResponse {
   payments: Payment[];
   order_number: null | string;
   ewaybill: null | string;
+  transportation_charges: number | null | "";
 }
 
 export const invoiceForm: Form<Invoice> = {
@@ -74,6 +76,7 @@ export const invoiceForm: Form<Invoice> = {
     transport: "",
     ewaybill: "",
     order_number: "",
+    transportation_charges: "",
     items: [
       {
         product: "",

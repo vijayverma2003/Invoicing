@@ -171,14 +171,7 @@ function InvoiceForm() {
               value={data["number"]}
               error={errors["number"]}
             />
-            <Input
-              name="order_number"
-              type="text"
-              placeholder="Order Number"
-              onChange={handleChange}
-              value={data["order_number"]}
-              error={errors["order_number"]}
-            />
+
             <Input
               name="date"
               type="date"
@@ -203,16 +196,8 @@ function InvoiceForm() {
               value={data["ewaybill"]}
               error={errors["ewaybill"]}
             />
-            <Select
-              name="transport"
-              type="text"
-              placeholder="Transport"
-              onChange={handleChange}
-              value={data["transport"]}
-              error={errors["transport"]}
-              options={transports}
-            />
           </div>
+
           <div className="grid grid-1x4 grid-max-1x4">
             <div>
               <Select
@@ -225,9 +210,14 @@ function InvoiceForm() {
                 options={customers}
               />
               {currentCustomer ? (
-                <h5>
-                  <i>{showAddress(currentCustomer)}</i>
-                </h5>
+                <div>
+                  <h5>
+                    <i>{showAddress(currentCustomer)}</i>
+                  </h5>
+                  <h5>
+                    <i>GSTIN: {currentCustomer.gstin || "-"}</i>
+                  </h5>
+                </div>
               ) : null}
             </div>
           </div>
@@ -238,12 +228,13 @@ function InvoiceForm() {
                 <Select
                   name="product"
                   type="text"
-                  placeholder="Product"
+                  placeholder={`Product ${index + 1}`}
                   onChange={(e) => handleTabularChange(e, "items", index)}
                   value={data["items"][index]["product"]}
                   error={errors[""]}
                   options={products}
                 />
+
                 <div className="grid grid-1x2">
                   <Input
                     name="price"
@@ -259,6 +250,7 @@ function InvoiceForm() {
                     }
                     value={data["items"][index]["price"]}
                     error={errors[""]}
+                    min={0}
                   />
                   <Input
                     name="quantity"
@@ -274,6 +266,7 @@ function InvoiceForm() {
                     }
                     value={data["items"][index]["quantity"]}
                     error={errors[""]}
+                    min={0}
                   />
                 </div>
                 <div className="grid grid-1x2">
@@ -292,6 +285,7 @@ function InvoiceForm() {
                     value={data["items"][index]["discount"]}
                     error={errors[""]}
                     max={99}
+                    min={0}
                   />
                   <Input
                     name="packing_charges"
@@ -307,6 +301,7 @@ function InvoiceForm() {
                     }
                     value={data["items"][index]["packing_charges"]}
                     error={errors[""]}
+                    min={0}
                   />
                 </div>
                 <div className="grid grid-1x2">
@@ -317,6 +312,7 @@ function InvoiceForm() {
                     onChange={(e) => handleTotalChange(e, index)}
                     value={data["items"][index]["total"]}
                     error={errors[""]}
+                    min={0}
                   />
                   <Input
                     name="total_with_tax"
@@ -325,6 +321,7 @@ function InvoiceForm() {
                     onChange={(e) => handleTabularChange(e, "items", index)}
                     value={data["items"][index]["total_with_tax"]}
                     error={errors[""]}
+                    min={0}
                   />
                 </div>
               </div>
@@ -377,6 +374,35 @@ function InvoiceForm() {
               <IoIosAdd size={20} color="white" />
               Add more
             </button>
+          </div>
+          <h3 className="form-heading">Other</h3>
+          <div className="grid grid-1x4">
+            <Select
+              name="transport"
+              type="text"
+              placeholder="Transport"
+              onChange={handleChange}
+              value={data["transport"]}
+              error={errors["transport"]}
+              options={transports}
+            />
+            <Input
+              name="transportation_charges"
+              type="number"
+              placeholder="Transport Charges"
+              onChange={handleChange}
+              value={data["transportation_charges"]}
+              error={errors["transportation_charges"]}
+              min={0}
+            />
+            <Input
+              name="order_number"
+              type="text"
+              placeholder="Order Number"
+              onChange={handleChange}
+              value={data["order_number"]}
+              error={errors["order_number"]}
+            />
           </div>
           <button className="btn-submit btn-primary">Submit</button>
         </form>
