@@ -116,7 +116,7 @@ function Dashboard() {
               <p className="text-lighter dashboard-data-heading">Sales</p>
               <h3 className="dashboard-data-description">
                 {currency?.symbol}
-                {salesThisYear}
+                {salesThisYear.toFixed(2)}
               </h3>
             </div>
             <div className="dashboard-box">
@@ -134,9 +134,6 @@ function Dashboard() {
 
           <div className="dashboard-header">
             <h3 className="dashboard-heading">Sales Analytics</h3>
-            {/* <button className="btn-icon">
-              <MdFilterAlt size={20} color="black" />
-            </button> */}
           </div>
           <div className="dashboard-box dashboard-sales-chart">
             <div className="graph">

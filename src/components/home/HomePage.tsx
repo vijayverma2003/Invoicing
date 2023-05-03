@@ -45,7 +45,7 @@ function HomePage(): JSX.Element {
 
       <section className="home-dashboard">
         <h2 className="text-gradient text-center">User Friendly Dashboard</h2>
-        <img src={require("../../images/dashboard.png")} alt="" />
+        <img src={require("../../images/dashboard.webp")} alt="" />
         <p className="home-dashboard-description">
           Easily manage your <span className="text-gradient">invoices</span>{" "}
           with our user-friendly dashboard. Stay organized and in control with
